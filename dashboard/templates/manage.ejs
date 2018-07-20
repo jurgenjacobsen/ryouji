@@ -1,0 +1,112 @@
+<%- include('blocks/header', {bot:bot, user: user, auth: auth, moment: moment}) %>
+
+<head>
+<title>
+DashBoard - <%= guild.name %>
+</title>
+    <meta name="theme-color" content="#23272A">
+  <meta property="og:title" content="Ryouji Bot">
+  <meta property="og:url" content="https://ryouji.glitch.me">
+  <meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+  <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+</head>
+
+
+<h1 class="display-4">Informações</h1>
+<div class="card" style="width: 100%">
+  <% if (guild.icon) { %>
+    <img class="card-img-top" style="width: 25%; border-radius: 0px 0px 8px 0px; border : solid #7289DA" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=512` %>" alt="<%= guild.name %>"> 
+  <% } else { %>
+    <img class="card-img-top" style="widget: 25%; border-radius: 0px 0px 0px 0px; border: solid #7289DA" src=""/>
+  <% } %>
+<hr>
+   <div class="card-body">
+   <% if(guild.id == ['391269244274212866']) { %>
+     <h4 class="card-title"><%= guild.name %></h4>
+   <% } else { %>
+      <h4 class="card-title"><%= guild.name %></h4>
+   <% } %>
+      <p class="card-text" id="guildCreate"><%= moment.utc(guild.createdAt).format('LLLL') %></p>
+      <ul class="list-group list-group-flush" style="width: 100%">
+        <li class="list-group-item" style="width: 100%"><strong>Dono(a)</strong> : <i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i> <%= guild.owner.username %></li>
+        <li class="list-group-item"><strong>Membros</strong> : <i class="fa fa-fw fa-users" aria-hidden="true"></i> <%= `${guild.memberCount}` %> (<i class="fa fa-fw fa-android" aria-hidden="true"></i> <%= `${guild.members.filter(m => m.user.bot).size}` %> Bots )</li>
+        <li class="list-group-item"><strong>Cargos</strong> : <i class="fa fa-fw fa-users" aria-hidden="true"></i> <%= guild.roles.size %></li>
+        <li class="list-group-item"><strong>Canais</strong> : <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> <%= `${guild.channels.filter(c => c.type === 'text').size}`%> <i class="fa fa-fw fa-microphone" aria-hidden="true"></i> <%= `${guild.channels.filter(c => c.type === 'voice').size}`%></li>
+      </ul>
+  <br>
+      <a class="btn btn-danger" data-toggle="modal" data-target="#serverLeaveModal" role="button">Sair <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i></a>
+    </div>
+</div>
+    <div class="col-sm-8 mx-auto" style="margin-top: 15px;">
+
+    </div>
+  <hr>
+<div class="card" style="width: 100%;">
+<h1 class="display-4">Opções</h1>
+<div class="col col-8">
+<form method="post">
+  <% const settings = bot.settings.get(guild.id); %>
+  <% for (const key in settings) { %>
+  <div class="form-group">
+    <label for="<%= key %>"><%= key %></label>
+    <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" placeholder="Indique <%= key %>" value="<%= settings[key] %>">
+  </div>
+  <% } %>
+  <button type="submit" class="btn btn-primary">Confirmar</button>
+  <a class="btn btn-secondary" data-toggle="modal" data-target="#settingsResetModal" role="button">Restabelecer <i class="fa fa-cogs" aria-hidden="true"></i></a>
+</form>
+<br>
+</div>
+</div>
+
+
+
+<!-- Manage Page Modals -->
+<div class="modal fade" id="serverLeaveModal" tabindex="-1" role="dialog" aria-labelledby="serverLeaveModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="serverLeaveModalLabel">Sair do Servidor?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Você tem certeza que deseja  retirar <a href="">Meramente Ilustrativo</a> do seu servidor?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-primary" href="/leave/<%= guild.id %>" role="button">Sair</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Manage Page Modals -->
+<div class="modal fade" id="settingsResetModal" tabindex="-1" role="dialog" aria-labelledby="settingsResetModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="settingsResetModalLabel">Restabelecer Opções ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Tem certeza de que deseja redefinir as configurações padrão?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-primary" href="/reset/<%= guild.id %>" role="button">Confirmar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<% include ./blocks/footer %>

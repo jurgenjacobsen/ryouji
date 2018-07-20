@@ -1,0 +1,60 @@
+<title>ChangeLog - <%= bot.user.username %></title>
+  <meta name="theme-color" content="#23272A">
+  <meta property="og:title" content="Ryouji Bot - ChnageLog">
+  <meta property="og:url" content="https://ryouji.glitch.me">
+  <meta property="og:description" content="Versão Atual <%= version %>">
+  <meta property="og:image" content="<%= bot.user.avatarURL %>?size=512">
+
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, version: version}) %>
+
+<head>
+<style>
+
+img {
+    border: 3px solid #23272A;
+    border-radius: 5px;
+};
+
+
+</style>
+
+</head>
+<body>
+  <div class="jumbotron text-center">
+    
+<!-- 3.1.1 -->
+   <img src="https://media.discordapp.net/attachments/462814218576723968/466777108862074894/unknown.png">
+   <hr>
+
+<!-- 2.1.8 -->
+   <img src="https://media.discordapp.net/attachments/462814218576723968/464828022290120717/unknown.png">
+   <hr>
+
+<!-- 2.1.7-->
+
+   <img src="https://cdn.discordapp.com/attachments/462824592055205889/463155513992019968/unknown.png">
+   <hr>
+
+<!-- 2.1.6 -->
+   
+
+    <img src="https://media.discordapp.net/attachments/462814218576723968/462817300052049920/unknown.png">
+
+    <hr>
+
+<!-- 2.1.5-->
+
+    <img src="https://cdn.discordapp.com/attachments/454695478165241878/462813117244768257/unknown.png">
+
+    <hr>
+
+<!-- 2.1.4 -->
+
+    <img src="https://cdn.discordapp.com/attachments/458008053439004693/462808459004346369/unknown.png">
+
+
+
+  </div>
+
+</body>
+<%- include('blocks/footer')%>

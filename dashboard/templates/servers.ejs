@@ -1,0 +1,465 @@
+<title>Servidores - Ryouji </title>
+
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, stats: stats}) %>
+
+  <link rel="stylesheet" type="text/css" href="public/servers/main.css">
+  <meta name="theme-color" content="#23272A">
+  <meta property="og:title" content="Ryouji Bot">
+  <meta property="og:url" content="https://ryouji.glitch.me">
+  <meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+  <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.css">
+
+
+
+<style>
+
+article, body, html{
+    background:none !important;
+}
+html{
+    background:#2a2d32 !important;
+}
+footer{
+    color:white;
+}
+.shapes-background{
+    filter:invert(1) grayscale();
+    transform:scale(1.1) !important;
+    z-index:-1;
+}
+
+.bot-card .content{
+    background:#27292e !important;
+    box-shadow:0px 0px 16px -8px rgba(0,0,0,0.8) !important;
+    opacity:0.9;
+}
+.bot-card:hover .content{
+    background:#24262b !important;
+    box-shadow:0px 4px 8px -2px rgba(0,0,0,0.6) !important;
+    opacity:1;
+}
+.bot-list-section .bot-img {
+    background:#090909;
+    box-shadow:none !important;
+    border:none !important;
+}
+.tooltip{
+    filter:invert(1);
+}
+.blog_card {
+    background:#222428;
+    color:white;
+    border:1px solid #353535;
+}
+.blog_card:hover {
+    background:#222428;
+    color:white;
+}
+.blog_card:after{
+    background:#0e0e0e !important;
+}
+
+.blog_card:hover:after{
+    background:#0e0e0e !important;
+}
+.bot-list-section .bot-name {
+    color:white;
+    font-size:1.2em;
+}
+.bot-list-section .bot-description {
+    color:rgba(255,255,255,0.7);
+}
+.bot-list-section .btn-like {
+    color:white;
+    border:1px solid #3c435d;
+}
+.bot-list-section .lib {
+    color:#687dc6;
+}
+.bot-card div .bot-btns .btn{
+    color:#7187dd !important;
+}
+#home-page .section-title h4 {
+    color:white;
+}
+#home-page .section-title p {
+    color:#7f8083;
+}
+.exploremorebots .tagbutton {
+    color:white;
+}
+#wrapperrr {
+    background:#262626;
+    box-shadow:0px 0px 0px 2px#7f8083;
+}
+.tagbutton {
+    color:white;
+}
+
+
+.bot-card .partnered{
+    background:#231e26 !important;
+}
+
+.bot-card:hover .partnered{
+    background:#242126 !important;
+}
+.partnered .bot-name {
+    color:gold;
+}
+.partnered .bot-description {
+    color:white !important;
+}
+.bot-card .partnered .bot-btns .btn:hover{
+    background:#3e1f54;
+    color:#e7c302 !important;
+}
+.bottom-bar {
+    background:#677bc8 !important;
+}
+
+footer a:hover{
+    color:#ceac9e;
+}
+.maincon .content {
+    background:#222428;
+    color:rgba(255,255,255,0.8);
+}
+.content h2 {
+    color:white !important;
+}
+.input {
+    background:#34363a !important;
+    border:1px solid #2a2d32 !important;
+    color:white !important;
+}
+.taginput {
+    background:none;
+    color:white;
+}
+.suggestedtags{
+    background:#2a2d32;
+}
+.suggestedtags p:hover{
+    background:rgba(0,0,0,0.1);
+}
+.atag {
+    background:#34363a;
+}
+.atag:after{
+    border-left-color:#34363a;
+}
+.atag:before{
+    background:#222428;
+}
+.content select {
+    color:white;
+    background:#34363a;
+}
+footer {
+    background:#262626;
+}
+.bottom-bar {
+    background:black !important;
+}
+.label {
+    color:white !important;
+}
+.control .checkbox:hover{
+    color:#9790a2 !important;
+}
+.control .checkbox strong {
+    color:red !important;
+}
+header {
+    background:#1d1f21 !important;    
+}
+#menu {
+    background:#1d1f21 !important;
+}
+#menu .menu ul li a:hover, #menu .menu ul li span:hover{
+    background:#35373b;
+}
+.content .textarea {     background:#34363a !important;     color:white !important;     border:1px solid black !important; } 
+.content select {     background:#34363a !important;     color:white !important;     border:1px solid black !important; } 
+.maincon .button {     filter:invert(1) !important; }
+
+#bot-details-page .bot-name{
+    color:gainsboro !important;
+}
+#createdby {
+    color:grey !important;
+}
+.content a:hover{
+    color:#334dad !important;
+}
+
+.darkthemeee h1 {
+    color: white!important;
+}
+
+.darkthemeee h4 {
+    color: white!important;
+}
+
+
+
+</style>
+
+
+
+
+
+
+
+<body style="background-color: WHITE;">
+
+<h1 style="color: WHITE; font-size: 30px;">
+  <i class="fa fa-check-square-o"></i> Parceiros
+  </h1>
+  <p style="color: WHITE; font-size: 16px;">
+    Para fazer parcerias e ter seu servidor no topo da lista entre em contato com meu dono.
+  </p>
+
+<br>
+<div id="guild-list-partnered">
+
+                <div class="bot-list-section">
+                    <ul class="columns is-multiline is-tablet">
+                        
+                        
+                        <li class="column bot-card is-one-quarter" style="opacity: 1; transform: translateY(0px);">
+
+                            <div class="content partnered">
+                                <div class="top is-flex"><span class="img-container"><div class="bot-img">
+
+                                  <img style="cursor:pointer" alt="<%= bot.guilds.get('391269244274212866').name%>" src="https://cdn.discordapp.com/icons/391269244274212866/<%=bot.guilds.get('391269244274212866').icon%>.png?size=512">
+
+                          </div></span>
+                                    <span class="stats">
+                             <br>
+                            <span class="servers btn btn-orange btn-1x">
+                                
+                                <%= bot.guilds.get('391269244274212866').channels.size %>
+                                Canais
+                                
+                            </span>
+                            <span class="servers btn btn-orange btn-1x">
+                                
+                                <%= bot.guilds.get('391269244274212866').memberCount %>
+                                Membros
+                                
+                            </span>
+                                        </span>
+                                </div>
+                                <div class="info">       
+                                <img src="https://cdn.glitch.com/4a4f105d-84dd-4709-8bfb-16428e054a2d%2Fcertified.svg?1529543784705" alt="" title="Servidor Certificado" width="14px" height="14px" style="transform: translate(0px, 6px) scale(0.8);">
+                                <p class="bot-name" id="bot-307998818547531777-campaign" href="/servers/<%= bot.guilds.get('391269244274212866').id%>"><%= bot.guilds.get('391269244274212866').name%></p>
+                                    
+                                    
+
+                                    <p class="bot-description">
+                                        
+                                    </p><span class="lib">
+                                        
+                                        Bate-Papo 
+
+                                        Música 
+
+                                        Geek
+                                        
+                                    </span></div>
+                                <div class="bottom is-flex bot-btns">
+                                  <a style="font-size: 16px;" href="/servers/<%= bot.guilds.get('391269244274212866').id%>"><span class="color-medium-blue btn">Ver</span></a><a style="font-size: 16px;" href="https://discord.gg/NrFYz7W"><span class="color-medium-blue btn">Entrar</span></a>
+                                </div>
+                            </div>
+                        </li>
+                        
+
+                        
+                        <li class="column bot-card is-one-quarter" style="opacity: 1; transform: translateY(0px);">
+
+                            <div class="content partnered">
+                                <div class="top is-flex"><span class="img-container"><div class="bot-img">
+
+                                  <img onload="" onclick="" style="cursor:pointer" alt="<%= bot.guilds.get('454695478165241876').name%>" src="https://cdn.discordapp.com/icons/454695478165241876/<%= bot.guilds.get('454695478165241876').icon%>.png?size=512">
+
+                          </div></span>
+                                  <span class="stats"> 
+                            <br>
+                            <span class="servers btn btn-orange btn-1x">
+                                
+                                <%= bot.guilds.get('454695478165241876').channels.size%>
+                                Canais
+                                
+                            </span>
+                            <span class="servers btn btn-orange btn-1x">
+                                
+                                <%= bot.guilds.get('454695478165241876').memberCount%>
+                                Membros
+                                
+                            </span>
+                                        </span>
+                                </div>
+                                <div class="info">       <p class="bot-name" id="" href="/servers/<%= bot.guilds.get('454695478165241876').id%>"><%= bot.guilds.get('454695478165241876').name %></p>
+                                    <img src="https://cdn.glitch.com/4a4f105d-84dd-4709-8bfb-16428e054a2d%2Fcertified.svg?1529543784705" alt="" title="Servidor Certificado" width="14px" height="14px" style="transform: translate(0px, 6px) scale(0.8);">
+                                    <p class="bot-description">
+
+                                    </p><span class="lib">
+                                        
+                                        Desenvolvimento
+                                        
+                                        Bate-Papo
+
+                                        Suporte
+                                           
+                                    </span></div>
+                                <div class="bottom is-flex bot-btns">
+                                  <a style="font-size: 16px;" href="/servers/<%= bot.guilds.get('454695478165241876').id %>"><span class="color-medium-blue btn">Ver</span></a><a style="font-size: 16px;" href="https://discord.gg/hFCSqpM"><span class="color-medium-blue btn">Entrar</span></a>
+                                </div>
+                            </div>
+                        </li>
+                        
+
+                        
+
+
+                      <li class="column bot-card is-one-quarter" style="opacity: 1; transform: translateY(0px);">
+
+                            <div class="content partnered">
+                                <div class="top is-flex"><span class="img-container"><div class="bot-img">
+
+                                  <img onload="" onclick="" style="cursor:pointer" alt="<%= bot.guilds.get('427511571774701578').name%>" src="https://cdn.discordapp.com/icons/427511571774701578/<%= bot.guilds.get('427511571774701578').icon%>.png?size=512">
+
+                          </div></span>
+                                  <span class="stats">
+                          <br>
+                          <span class="servers btn btn-orange btn-1x">
+                                
+                                <%= bot.guilds.get('427511571774701578').channels.size%>
+                                Canais
+                                
+                            </span>
+                            <span class="servers btn btn-orange btn-1x">
+                                
+                                <%= bot.guilds.get('427511571774701578').memberCount%>
+                                Membros
+                                
+                            </span>
+                                        </span>
+                                </div>
+                              <div class="info">       <p class="bot-name" href="/servers/<%= bot.guilds.get('427511571774701578').id%>"><%= bot.guilds.get('427511571774701578').name %></p>
+                                    <img src="https://cdn.glitch.com/4a4f105d-84dd-4709-8bfb-16428e054a2d%2Fcertified.svg?1529543784705" alt="" title="Servidor Certificado" width="14px" height="14px" style="transform: translate(0px, 6px) scale(0.8);">
+                                    <p class="bot-description">
+
+                                    </p><span class="lib">
+                                        
+                                     Gaming
+         
+                                     Músicas
+
+                                     Anime
+
+                                     Emotes
+
+                                     Stream
+
+                                    </span></div>
+                                <div onclick="" class="bottom is-flex bot-btns">
+                                  <a style="font-size: 16px;" href="/servers/<%= bot.guilds.get('427511571774701578').id%>"><span class="color-medium-blue btn">Ver</span></a><a style="font-size: 16px;" href="https://discord.gg/NuXxSHY"><span class="color-medium-blue btn">Entrar</span></a>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+<br>
+<h1 style="color: WHITE; font-size: 30px;">
+  <i class="fa fa-server"></i> Servidores
+  </h1>
+<br>
+
+<div id="guild-list-default">
+
+                <div class="bot-list-section">
+                    <ul class="columns is-multiline is-tablet">
+                        
+<% 
+
+bot.guilds.forEach(guild => {
+  
+%>
+  
+                        <li class="column bot-card is-one-quarter" style="opacity: 1; transform: translateY(0px);">
+
+                            <div class="content ">
+                                <div class="top is-flex"><span class="img-container"><div class="bot-img">
+                          <% if(guild.iconURL) {%>
+                           <img onload="" onclick="" style="cursor:pointer" alt="<%= guild.name %>" src="<%= guild.iconURL%>?size=512">
+                          <% } else {%>
+
+                           <img onload="" onclick="" style="cursor:pointer" alt="<%= guild.name%>" src="https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png">
+
+                          <% } %>
+                          </div></span>
+                                  <span class="stats">
+                            <br>
+                            <span class="servers btn btn-orange btn-1x">
+                                
+                                <%= guild.channels.size%>
+                                Canais
+                                
+                            </span>
+                            <span class="servers btn btn-orange btn-1x">
+                                
+                                <%= guild.memberCount%>
+                                Membros
+                                
+                            </span>
+                                        </span>
+                                </div>
+                                <div class="info"><p class="bot-name" style="color: WHITE;"><%= guild.name %></p>
+                                 <span class="lib">
+                                        <%= guild.owner.user.tag %>
+                                    </span>
+                                    
+                                 </div>
+                                <div onclick="" class="bottom is-flex bot-btns">
+                                  <a style="font-size: 16px;" href="/servers/<%= guild.id%>"><span class="color-medium-blue btn">Ver</span></a>
+                                </div>
+                            </div>
+                        </li>
+
+
+
+<%
+})
+%>
+           </ul>
+       </div>
+  </div>
+<script>
+ $(document).keypress(function(e){
+    if (e.which == 87){
+        $("#d-up").click(function(){alert('UP')});
+    }
+ });
+
+let count = 0;
+function myFunction() {
+  count+=1;
+  document.getElementById("btn").innerHTML = count;
+
+ }
+
+</script> 
+
+
+</body>
+   
+    <% include ./blocks/footer %> 
