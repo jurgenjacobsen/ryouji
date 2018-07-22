@@ -138,9 +138,16 @@ if (mentioned) {
 		if (level >= cmd.conf.permLevel) {
 			if (cmd.conf.enabled) {
 				cmd.run(client, message, args, level);
-				if (client.config.defaultSettings.logCommandUsage === 'true') {client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content}`, 'CMD');}
-			} else if (client.config.defaultSettings.logCommandUsage === 'true') {client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`, 'CMD');}
-		} else if (client.config.defaultSettings.logCommandUsage === 'true') {client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`, 'CMD');}
+				if (client.config.defaultSettings.logCommandUsage === 'true') {
+        client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content}`, 'CMD');
+        }
+			} else if (client.config.defaultSettings.logCommandUsage === 'true') {
+      client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`, 'CMD');
+      }
+		} else if (client.config.defaultSettings.logCommandUsage === 'true') {
+    client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`, 'CMD');
+    message.reply('Você não tem permissão para isso!')
+   }
 	}
 
 

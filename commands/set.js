@@ -95,6 +95,6 @@ exports.help = {
 	usage: `
   r!config [get] [key]
   r!set [edit] [key] [value]
-  r!set [add] [key] [value] r!set [del] [key]
+  r!set [add] [key] {value} r!set [del] [key]
  `
 };

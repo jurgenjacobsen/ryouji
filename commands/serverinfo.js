@@ -47,11 +47,11 @@ exports.run = async (client, message, args, level) => {
 		.addField(":calendar: Criado em:", `${moment.utc(guild.createdAt).format('LLLL')}`, true)
 		.addField(":star2: Entrei em:", moment.utc(client.user.joinedAt).format('LLLL'), true)
 		.addField(`Membros: (${guild.memberCount})`,
-			`:busts_in_silhouette: Pessoas: ${guild.members.filter(member => !member.user.bot).size} | <:bot:454695663742222348> Bots: ${guild.members.filter(member => member.user.bot).size} \n<:online:454695663549022220> **${guild.members.filter(o => o.presence.status === 'online').size}** Online <:idle:454695663532507157> **${guild.members.filter(i => i.presence.status === 'idle').size}** Ausente <:donotdisturb:454695663352152076> **${guild.members.filter(dnd => dnd.presence.status === 'dnd').size}** Ocupado <:offline:454695663582576642> **${guild.members.filter(off => off.presence.status === 'offline').size}** Offline`
+			`:busts_in_silhouette: Pessoas: ${guild.members.filter(member => !member.user.bot).size} | <:bot:470365210423722015> Bots: ${guild.members.filter(member => member.user.bot).size} \n<:online:470363783605256225> **${guild.members.filter(o => o.presence.status === 'online').size}** Online <:idle:470363783563444225> **${guild.members.filter(i => i.presence.status === 'idle').size}** Ausente <:donotdisturb:470363783538409472> **${guild.members.filter(dnd => dnd.presence.status === 'dnd').size}** Ocupado <:offline:470363783630684160> **${guild.members.filter(off => off.presence.status === 'offline').size}** Offline`
 		)
-		.addField('Região', `${serverRegion}`)
-		.addField('Convite:', `${invite}`)
-		.addField('Página:', `https://ryouji.glitch.me/servers/${guild.id}`)
+		.addField(':map: Região', `${serverRegion}`)
+		.addField(':incoming_envelope: Convite:', `${invite}`)
+		.addField(':desktop: Página:', `https://ryouji.glitch.me/servers/${guild.id}`)
 	msg.channel.send({
 		embed
 	});

@@ -47,6 +47,27 @@ switch (args[0]) {
    });
    break;
   }
+
+  case 'bonus': {
+   const pagar = 750;
+   db.fetch(`userBalance_${message.author.id}`).then(bucks => {
+    if(!bucks >= pagar) {
+      message.reply('Você não tem dinheiro suficiente');
+    } else if(bucks >= pagar) {
+     db.fetch(`userItems_${message.author.id}_bonus`).then(i => {
+      if(i == null || i == 0) {
+        const desconto = parseInt(bucks) - parseInt(pagar);
+				db.set(`userBalance_${message.author.id}`, desconto);
+        db.set(`userItems_${message.author.id}_bonus`, 1);
+        message.channel.send('Você comprou o Bonus de XP!');
+      } else {
+        message.channel.send('Você já possui o Bonus');
+      }
+     });
+    }
+   });
+  break;
+  }
 }
 };
 

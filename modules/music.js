@@ -4,10 +4,10 @@ const Discord = require('discord.js');
 module.exports = (client) => {
   
 	client.handleVideo = async function handleVideo(video, msg, voiceChannel, playlist = false) {
-    const canal = client.channels.get('468155982812545069');
+    const canal = client.channels.get('470355176251850754');
     const logMusicEmbed = new Discord.RichEmbed()
     .setTitle('Música Tocando')
-    .setColor('')
+    .setColor('#23272A')
     .setDescription(`**${video.title}**`);
     canal.send(logMusicEmbed);
     

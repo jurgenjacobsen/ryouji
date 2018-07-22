@@ -13,6 +13,10 @@ exports.run = async (client, message, args, level) => {
 		user = message.mentions.users.first();
 	};
 
+  if(user == message.author) {
+    message.reply('Você não pode pagar uma conta a si mesmo')
+  } else {
+
 	if (!args[1]) return message.reply('Não consegui obter um usuário para depositar R$' + pagar);
 
 	db.fetch(`userBalance_${message.author.id}`).then(bucks => {
@@ -48,8 +52,8 @@ exports.run = async (client, message, args, level) => {
 
 		};
 
-	});
-
+	 });
+  }
 };
 
 exports.conf = {
