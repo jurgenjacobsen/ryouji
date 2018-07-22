@@ -39,18 +39,18 @@ var reps = await db.fetch(`userRep1_${user.id}`);
 		.setTitle(`${user.username}#${user.discriminator}`)
 		.addField(":clipboard: ID:", `${user.id}`, true)
 		.addField(":calendar_spiral:  Conta criada:", `${moment.utc(user.createdAt).format('LLLL')}`, true)
-		.addField("<:bot:454695663742222348> Bot:", `${isBot}`)
+		.addField("<:bot:470365210423722015> Bot:", `${isBot}`)
 		.addField(":battery: Status:", `${userStats}`, true)
 		.addField(":joystick: Jogando:", `${user.presence.game ? user.presence.game.name : 'Não está jogando nada'}`, true)
     .addField(":link: Perfil:", `https://ryouji.glitch.me/user/${user.id}`)
-    .addField("<:rp:469263260336652320> Pontos de Reputação:", reps)
+    .addField("<:rp:470364256832061442> Pontos de Reputação:", reps)
 		.setFooter(`Respondendo para ${message.author.username}#${message.author.discriminator}`)
 
 	if (message.channel.type !== 'dm') {
    const member = message.guild.member(user);
     embed.addField(":calendar: Entrou no servidor:", `${moment.utc(member.joinedAt).format('LLLL')}`, true)
-    .addField(":pen_ballpoint: Nickname:", `${member.nickname !== null ? `${member.nickname}` : 'Nenhum'}`, true)
-		.addField(":briefcase: Cargos:", message.member.roles.map(cargo => cargo.name).join(', ').replace('@everyone, ', ''), true)  
+    .addField(":pen_ballpoint: Nickname:", `ㅤ${member.nickname !== null ? `${member.nickname}` : 'ㅤNenhum'}`, true)
+		.addField(":briefcase: Cargos:", message.guild.members.get(user.id).roles.filter(r => r.position !== 0).map(R => R.name).join(', ') || 'Sem Cargos'.replace('@everyone, ', ''), true)  
 
 }
 

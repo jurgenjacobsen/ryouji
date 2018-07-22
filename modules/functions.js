@@ -50,16 +50,25 @@ module.exports = (client) => {
 	};
 
 	client.pointsMonitor = (client, message) => {
+    const db = require('quick.db');
+    let amount;
+    db.fetch(`userItems_${message.author.id}_bonus`).then(i => {
+     if(i >= 1) {
+      amount = 0.5;
+     } else {
+      amount = 0.01
+     }
 		if (message.channel.type !== 'text') return;
 		const settings = client.settings.get(message.guild.id);
 		const score = client.points.get(`${message.guild.id}-${message.author.id}`) || { points: 0, level: 0 };
 		score.points++;
-		const curLevel = Math.floor(0.01 * Math.sqrt(score.points));
+		const curLevel = Math.floor(amount * Math.sqrt(score.points));
 		if (score.level < curLevel) {
 			message.reply(`Você upou para o nível **${curLevel}**!`);
 			score.level = curLevel;
 		}
 		client.points.set(`${message.guild.id}-${message.author.id}`, score);
+   })
 	};
 
 	client.log = (type, msg, title) => {

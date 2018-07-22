@@ -1,5 +1,5 @@
 module.exports = async client => {
-
+  const moment = require('moment');
 
 	if (!client.user.bot) {
 		client.log('ERROR', '', 'INFO');
@@ -40,6 +40,18 @@ setInterval(function() {
   
 }, 8000);
 
+setInterval(function() {
+ let usersCh = client.channels.get('470350592825622548')
+ let guildsCh = client.channels.get('470350687537201163')
+ let channelsCh = client.channels.get('470350643664650260')
+
+ usersCh.setName(`🚹Usuários ${client.users.size}`)
+ guildsCh.setName(`👥Servidores ${client.guilds.size}`)
+ channelsCh.setName(`📳Canais ${client.channels.size}`)
+
+
+}, 10000)
+
 const Discord = require('discord.js');
 
 const canal = client.channels.get('466040811453153300')
@@ -49,5 +61,19 @@ const readyOwnEmbed = new Discord.RichEmbed()
 .setFooter(client.user.username, client.user.avatarURL);
 
 canal.send(readyOwnEmbed);
+
+const request = require('request-promise-native');
+function postServerCount() {
+    return request.post({
+        uri: `https://discordbots.org/api/bots/${client.user.id}/stats`,
+        headers: {
+            Authorization: process.env.DBLTOKEN, // Insert token here
+        },
+        json: true,
+        body: {
+            server_count: client.guilds.size,
+        },
+    });
+}
 
 }

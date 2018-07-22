@@ -31,8 +31,8 @@ if(!args[0]) return message.reply('O que você quer que eu faça ? **send** = En
     .addField('Conta criada em', moment.utc(message.author.createdAt).format('LLLL'))
     .setTimestamp()
     .setFooter(message.author.tag, message.author.avatarURL);
-    client.channels.get('467122860532563979').send(`==========================================\nㅤㅤㅤㅤㅤㅤ${message.author}\n==========================================`);
-    client.channels.get('467122860532563979').send(supportBugEmbed)
+    client.channels.get('470355257965150238').send(`==========================================\nㅤㅤㅤㅤㅤㅤ${message.author}\n==========================================`);
+    client.channels.get('470355257965150238').send(supportBugEmbed)
    break;
   
    case 'save':
@@ -49,8 +49,8 @@ if(!args[0]) return message.reply('O que você quer que eu faça ? **send** = En
     .addField('Conta criada em', moment.utc(message.author.createdAt).format('LLLL'))
     .setTimestamp()
     .setFooter(message.author.tag, message.author.avatarURL);
-    client.channels.get('467122860532563979').send(`==========================================\nㅤㅤㅤㅤㅤㅤ${message.author}\n ㅤㅤㅤㅤ${message.id}\n==========================================`);
-    client.channels.get('467122860532563979').send(supportBugEmbeded)
+    client.channels.get('470355257965150238').send(`==========================================\nㅤㅤㅤㅤㅤㅤ${message.author}\n ㅤㅤㅤㅤ${message.id}\n==========================================`);
+    client.channels.get('470355257965150238').send(supportBugEmbeded)
    break;
 
 

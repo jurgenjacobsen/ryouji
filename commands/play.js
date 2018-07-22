@@ -19,8 +19,8 @@ exports.run = async (client, message, args, level) => {
 		const playlist = await client.YouTube.getPlaylist(url);
 		const videos = await playlist.getVideos();
 		for (const video of Object.values(videos)) {
-			const video2 = await client.YouTube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-			await client.handleVideo(video2, message, voiceChannel, true); // eslint-disable-line no-await-in-loop
+			const video2 = await client.YouTube.getVideoByID(video.id);
+			await client.handleVideo(video2, message, voiceChannel, true);
 		}
 		return message.channel.send(`✅ Playlist: **${playlist.title}** foi adicionada à lista de reprodução.`);
 	} else {

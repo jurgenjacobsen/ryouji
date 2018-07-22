@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
     .setDescription(args[1])
     .setTimestamp()
     .setFooter(message.author.tag, message.author.avatarURL)
-    const channel = client.channels.get('468594600039415828').send(sEmbed)
+    const channel = client.channels.get('470355232610582531').send(sEmbed)
     break;
   }
  };

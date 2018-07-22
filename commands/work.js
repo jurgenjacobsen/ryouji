@@ -7,7 +7,7 @@ const ms = require('parse-ms');
 exports.run = async (client, message, args) => { 
 
 try {
-    let worklog = client.channels.get('467443653254709254');
+    let worklog = client.channels.get('470355151048409119');
     let cooldown = 2.88e+7; //8 Hours in ms
     let amount = Math.floor((Math.random() * 200) + 200);
     let workplace = ["Escritório", "Shopping", "Restaurante", "Mercado", "Segurança", "Técnico de Informática"] // Different outputs match below, from 0 to 5 with an included error system.

@@ -8,7 +8,7 @@ module.exports = (client, member) => {
 	if (!guildSettings.welcomeChannel) return console.log('Não é possível enviar uma mensagem de boas-vindas, pois não há nada na configuração welcomeChannel');
 	if (guildSettings.welcomeEnabled !== 'true') return;
 
-	const welcomeMessage = guildSettings.welcomeMessage.replace('{{user}}', member.user);
+	const welcomeMessage = guildSettings.welcomeMessage.replace('{{user}}', member.user).replace('{{guild}}', member.guild.name);
 
 	if (guildSettings.welcomeEnabled === 'true') {
 		if (member.guild.channels.find('name', guildSettings.welcomeChannel)) {
