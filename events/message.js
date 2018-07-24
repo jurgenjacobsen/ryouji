@@ -46,7 +46,7 @@ if (mentioned) {
 	client.pointsMonitor(client, message);
 
 
-	const settings = message.guild ? client.settings.get(message.guild.id) : client.config.defaultSettings;
+	const settings = client.config.defaultSettings;
 
 	const args = message.content.split(/\s+/g);
 	var command;
