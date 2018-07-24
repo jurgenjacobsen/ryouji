@@ -13,8 +13,10 @@ exports.run = async (client, message, args) => {
     const profileEmbed = new Discord.RichEmbed()
     .setTitle('Perfil de **' + user.username + '**')
     .setDescription(`Link: **https://ryouji.glitch.me/user/${user.id}**`)
-    .setThumbnail(user.avatarURL + '?size=512')
     .setColor('#23272A')
+if(user.avatar) {
+    profileEmbed.setThumbnail(user.avatarURL + '?size=512')
+}
     message.channel.send(profileEmbed)
 };
 

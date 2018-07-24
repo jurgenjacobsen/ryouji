@@ -197,6 +197,8 @@ app.get('/user/:userID', (req, res) => {
 const usuário = client.users.get(req.params.userID)
 const moment = require('moment')
 let badge;
+db.fetch(`userBackground_${usuário.id}`).then(back => {
+db.fetch(`userItems_${usuário.id}_background`).then(bg => {
 db.fetch(`userBalance_${usuário.id}`).then(cB => {
 const coins = cF.format(cB, { code: 'BRL' })
 db.fetch(`userRep1_${usuário.id}`).then(r => {
@@ -212,7 +214,9 @@ res.render(path.resolve(`${templateDir}${path.sep}user.ejs`), {
   badge: b,
   premium: p,
   reps: r,
-  cB: coins
+  cB: coins,
+  bg: bg,
+  back: back
  });
 } else {
 res.render(path.resolve(`${templateDir}${path.sep}user.ejs`), {
@@ -224,9 +228,13 @@ res.render(path.resolve(`${templateDir}${path.sep}user.ejs`), {
   badge: b,
   premium: p,
   reps: r,
-  cB: coins
+  cB: coins,
+  bg: bg,
+  back: back
   });
   };
+ });
+ });
  });
  });
  });
@@ -263,13 +271,13 @@ app.get('/user/', (req, res) => {
 		if (client.config.dashboard.protectStats === 'true') {
 			cAuth(req, res);
 		}
-    
+  client.guilds.forEach(guild => {
+    db.fetch(`partner_${guild.id}`).then(p => { 
 		const duration = moment.duration(client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
 		const members = `${client.users.filter(u => u.id !== '1').size} (${client.users.filter(u => u.id !== '1').filter(u => u.bot).size} bots)`;
 		const textChannels = client.channels.filter(c => c.type === 'text').size;
 		const voiceChannels = client.channels.filter(c => c.type === 'voice').size;
 		const guilds = client.guilds.size; 
-
 		res.render(path.resolve(`${templateDir}${path.sep}servers.ejs`), {
 			bot: client,
 			auth: req.isAuthenticated() ? true : false,
@@ -285,8 +293,12 @@ app.get('/user/', (req, res) => {
 				dVersion: Discord.version,
 				nVersion: process.version,
 				bVersion: client.version
-			}
-		});
+			},
+      db: db,
+      p: p
+		 });
+    });
+   })
 	});
 
 	app.get('/legal', function (req, res) {

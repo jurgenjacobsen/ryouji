@@ -1,9 +1,10 @@
 const Discord = require('discord.js'),
       db = require('quick.db');
 exports.run = async (client, message, args) => { 
+const itens = client.config.itens;
 switch (args[0]) {  
-  case 'badge': {
-   const pagar = 250;
+  case 'Badge': {
+   const pagar = itens.badge.valor;
    db.fetch(`userBalance_${message.author.id}`).then(bucks => {
    if (!bucks >= pagar) {
 			message.reply('Você não tem dinheiro o suficiente');
@@ -25,8 +26,8 @@ switch (args[0]) {
     break;
   }
 
-  case 'premium': {
-   const pagar = 850;
+  case 'Premium': {
+   const pagar = itens.premium.valor;
    db.fetch(`userBalance_${message.author.id}`).then(bucks => {
    if (!bucks >= pagar) {
 			message.reply('Você não tem dinheiro o suficiente');
@@ -48,8 +49,8 @@ switch (args[0]) {
    break;
   }
 
-  case 'bonus': {
-   const pagar = 750;
+  case 'Bonus': {
+   const pagar = itens.bonus.valor;
    db.fetch(`userBalance_${message.author.id}`).then(bucks => {
     if(!bucks >= pagar) {
       message.reply('Você não tem dinheiro suficiente');
@@ -68,6 +69,54 @@ switch (args[0]) {
    });
   break;
   }
+
+   case 'Parceria': {
+    if(message.guild) {
+     db.fetch(`userBalance_${message.author.id}`).then(bucks => {
+      if(!bucks >= client.config.itens.partner.valor) {
+        message.reply('Você não tem dinheiro suficiente')
+      } else if(bucks >= client.config.itens.partner.valor) {
+        db.fetch(`userItems_${message.author.id}_partner`).then(i => {
+         if(i == null || i == 0) {
+          let desconto = parseInt(bucks) - parseInt(client.config.itens.partner.valor);
+				   db.set(`userBalance_${message.author.id}`, desconto);
+           db.set(`userItems_${message.guild.id}_partner`, 1);
+           db.set(`partner_${message.author.id}`)
+         message.channel.send('Você comprou a Parceria de Servidor! Entre em: https://ryouji.glitch.me/servers Para ver a parceria!');
+         client.users.get(client.config.ownerID).send('<:yes:470363478817767439> ' + message.author + ' comprou o Pack De Parceria no servidor ' + message.guild.name + ', ID: ' + message.guild.id)
+      } else {
+        message.channel.send('Você já comprou a Parceria por mais de 5 vezes!');
+      }
+       });
+     };
+    });
+   } else {
+    message.reply('Você deve estar em um servidor para fazer isso!');
+   }
+   break;
+  }
+
+  case 'Background': {
+    const pagar = itens.background.valor;
+    db.fetch(`userBalance_${message.author.id}`).then(bucks => {
+    if(!bucks >= pagar) {
+      message.reply('Você não tem dinheiro suficiente');
+    } else if(bucks >= pagar) {
+     db.fetch(`userItems_${message.author.id}_background`).then(i => {
+      if(i == null || i == 0) {
+        const desconto = parseInt(bucks) - parseInt(pagar);
+				db.set(`userBalance_${message.author.id}`, desconto);
+        db.set(`userItems_${message.author.id}_background`, 1);
+        message.channel.send('Você comprou o Background, dê r!background para utilizá-lo!');
+      } else {
+        message.channel.send('Você já possui o Background');
+      }
+     });
+    }
+   });
+   break;
+  }
+
 }
 };
 
