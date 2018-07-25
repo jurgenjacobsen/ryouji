@@ -1,43 +1,42 @@
-
 module.exports = async (client, message) => {
-const Discord = require('discord.js')
-const db = require('quick.db');
+	const Discord = require('discord.js')
+	const db = require('quick.db');
 
-let status = new db.table('AFKs');
-let afk = status;
+	let status = new db.table('AFKs');
+	let afk = status;
 
-let authorStatus = await status.fetch(message.author.id);
+	let authorStatus = await status.fetch(message.author.id);
 
-if (authorStatus) {
+	if (authorStatus) {
 
-  const embed = new Discord.RichEmbed()
-    .setColor(0xffffff)
-    .setFooter(`${message.author.username} não está mais AFK.`)
-	
-  message.channel.send(embed).then(i => i.delete(10000))
-  
-  afk.delete(message.author.id);
+		const embed = new Discord.RichEmbed()
+			.setColor(0xffffff)
+			.setFooter(`${message.author.username} não está mais AFK.`)
 
-}
+		message.channel.send(embed).then(i => i.delete(10000))
 
-if(message.channel.type !== 'dm') {
-let mentioned = message.mentions.members.first();
-if (mentioned) {
+		afk.delete(message.author.id);
 
-  let status = await afk.fetch(mentioned.id);
+	}
 
-  if (status) {
+	if (message.channel.type !== 'dm') {
+		let mentioned = message.mentions.members.first();
+		if (mentioned) {
 
-    message.delete(10000)
-    const embed = new Discord.RichEmbed()
-      .setColor(0xffffff)
-      .setFooter(status);
+			let status = await afk.fetch(mentioned.id);
 
-    message.channel.send(embed).then(msg => msg.delete(8000))
+			if (status) {
 
-  }
- }
-}
+				message.delete(10000)
+				const embed = new Discord.RichEmbed()
+					.setColor(0xffffff)
+					.setFooter(status);
+
+				message.channel.send(embed).then(msg => msg.delete(8000))
+
+			}
+		}
+	}
 
 	if (message.author.bot) {
 		return;
@@ -54,9 +53,9 @@ if (mentioned) {
 
 	message.settings = settings;
 
-  command = args.shift().slice(settings.prefix.length)
-    .toLowerCase();
-  
+	command = args.shift().slice(settings.prefix.length)
+		.toLowerCase();
+
 	const level = client.permlevel(message);
 
 	const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
@@ -69,7 +68,8 @@ if (mentioned) {
 	if (message.channel.type !== 'dm') {
 		const guildSettings = client.settings.get(message.guild.id);
 
-		if(message.content.match(/(discord\.(gg|me|io)|(discordapp\.com|discord\.com)\/invite).*/) && guildSettings.inviteFilterEnabled === 'true' && message.guild.id !== '351137100722208768') {
+		if (message.content.match(/(discord\.(gg|me|io)|(discordapp\.com|discord\.com)\/invite).*/) && guildSettings.inviteFilterEnabled === 'true' && message.guild
+			.id !== '351137100722208768') {
 
 			var msgInv = message.content.match(/discord\.gg\/[0-9A-Za-z-]+/);
 
@@ -93,7 +93,7 @@ if (mentioned) {
 		}
 
 		if (guildSettings.facepalms === 'true' && (message.content.toLowerCase()
-			.indexOf('facepalm') !== -1 || message.content.indexOf('🤦') !== -1)) {
+				.indexOf('facepalm') !== -1 || message.content.indexOf('🤦') !== -1)) {
 			message.channel.send(':face_palm:');
 		}
 
@@ -102,7 +102,9 @@ if (mentioned) {
 		}
 
 		if (client.talkedRecently.has(message.author.id)) {
-			return message.reply(`Você precisa esperar ${parseInt(guildSettings.commandTimeout)}ms segundos para executar cada comando.`).then(msg => msg.delete({timeout: 4000}))
+			return message.reply(`Você precisa esperar ${parseInt(guildSettings.commandTimeout)}ms segundos para executar cada comando.`).then(msg => msg.delete({
+				timeout: 4000
+			}))
 		}
 
 		if (level < 2) {
@@ -118,18 +120,26 @@ if (mentioned) {
 				if (level >= cmd.conf.permLevel) {
 					if (cmd.conf.enabled === true) {
 						cmd.run(client, message, args, level);
-						console.log('[LOG]', `${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content}`, 'CMD');
+						console.log('[LOG]',
+							`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content}`,
+							'CMD');
 					} else {
 						message.reply('Este comando está desligado');
-						client.log('[LOG]', `${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`, 'CMD');
+						client.log('[LOG]',
+							`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`,
+							'CMD');
 					}
 				} else {
-          message.reply('Você não tem permissão para isso!')
-					client.log('[LOG]', `${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`, 'CMD');
+					message.reply('Você não tem permissão para isso!')
+					client.log('[LOG]',
+						`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`,
+						'CMD');
 				}
 			} else {
-				client.log('[LOG]', `${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) tentou executar um comando enexistente ${message.content}`, 'CMD');
-        message.reply('Este comando não existe, dê **r!ajuda** para ver meus comandos');
+				client.log('[LOG]',
+					`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) tentou executar um comando enexistente ${message.content}`,
+					'CMD');
+				message.reply('Este comando não existe, dê **r!ajuda** para ver meus comandos');
 			}
 		} else {
 			cmd.run(client, message, args, level);
@@ -139,30 +149,30 @@ if (mentioned) {
 			if (cmd.conf.enabled) {
 				cmd.run(client, message, args, level);
 				if (client.config.defaultSettings.logCommandUsage === 'true') {
-        client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content}`, 'CMD');
-        }
+					client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content}`, 'CMD');
+				}
 			} else if (client.config.defaultSettings.logCommandUsage === 'true') {
-      client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`, 'CMD');
-      }
+				client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`, 'CMD');
+			}
 		} else if (client.config.defaultSettings.logCommandUsage === 'true') {
-    client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`, 'CMD');
-    message.reply('Você não tem permissão para isso!')
-   }
+			client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`, 'CMD');
+			message.reply('Você não tem permissão para isso!')
+		}
 	}
 
 
-const canal = client.channels.get('465654523176943618');
+	const canal = client.channels.get('465654523176943618');
 
-const logOwnEmbed = new Discord.RichEmbed()
-.setTitle('Comando Executado')
-.setColor('#23272A')
-.addField('Autor', message.author)
-.addField('ID da Mensagem', message.id)
-.setAuthor(message.author.username, message.author.avatarURL)
+	const logOwnEmbed = new Discord.RichEmbed()
+		.setTitle('Comando Executado')
+		.setColor('#23272A')
+		.addField('Autor', message.author)
+		.addField('ID da Mensagem', message.id)
+		.setAuthor(message.author.username, message.author.avatarURL)
 
-if(message.channel.type !== 'dm') {
- logOwnEmbed.addField('Servidor', message.guild.name).addField('ID do Servidor', message.guild.id)
-}
+	if (message.channel.type !== 'dm') {
+		logOwnEmbed.addField('Servidor', message.guild.name).addField('ID do Servidor', message.guild.id)
+	}
 
-canal.send(logOwnEmbed)
+	canal.send(logOwnEmbed)
 };

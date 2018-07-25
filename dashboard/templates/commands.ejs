@@ -1,19 +1,17 @@
 <title>Ryouji - Comandos</title>
-
 <%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
 
-<head>
-    <meta name="theme-color" content="#23272A">
-  <meta property="og:title" content="Ryouji Bot">
-  <meta property="og:url" content="https://ryouji.glitch.me">
-  <meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
-  <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
-</head>
-
-
-<title> Comandos - <%= bot.user.username %> </title>
-
-  <%
+	<head>
+		<meta name="theme-color" content="#23272A">
+		<meta property="og:title" content="Ryouji Bot">
+		<meta property="og:url" content="https://ryouji.glitch.me">
+		<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+		<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+	</head>
+	<title> Comandos -
+		<%= bot.user.username %>
+	</title>
+	<%
 const help = {};
 bot.commands.forEach((command) => {
   const cat = command.help.category;
@@ -21,33 +19,37 @@ bot.commands.forEach((command) => {
   help[cat].push(command);
 });
 %>
-
-
-    <h1 class="display-3">Comandos [<%= bot.commandsNumber %>]</h1>
-    <p>
-     Use <%= bot.config.defaultSettings.prefix %>help [comando] para receber informações mais detalhadas sobreee um comando, ou <%= bot.config.defaultSettings.prefix %>help para receber a lista de todos os comandos que você tem acesso.
-    </p>
-
-
-    <% for (const category in help) { %>
-      <h1 class="display-5">
-        <%= category %>
-      </h1>
-      <div class="card-columns">
-        <% for (const command of help[category]) { %>
-          <div class="card">
-            <h3 class="card-header"><%= command.help.name %></h3>
-              <div class="card-block" style="margin: 7px">
-                <p class="card-text"><%= command.help.description %></p>
-                    <p><span style="font-weight: bold;">Exemplo(s):</span> <%- command.help.usage.replace(/\n/g) %></p>
-
-            </div>
-          </div>
-            </tr>               
-        <% } %>
-      </div>
-    <% } %>
-
-
-
-<% include ./blocks/footer %>
+		<h1 class="display-3">Comandos [
+			<%= bot.commandsNumber %>]
+		</h1>
+		<p>
+			Use
+			<%= bot.config.defaultSettings.prefix %>help [comando] para receber informações mais detalhadas sobreee um comando, ou
+				<%= bot.config.defaultSettings.prefix %>help para receber a lista de todos os comandos que você tem acesso.
+		</p>
+		<% for (const category in help) { %>
+			<br>
+			<br>
+			<h1 class="display-5 text-center">
+				<%= category %>
+			</h1>
+			<br>
+			<div class="card-columns">
+				<% for (const command of help[category]) { %>
+					<div class="card">
+						<h3 class="card-header">
+							<%= command.help.name %>
+						</h3>
+						<div class="card-block" style="margin: 7px">
+							<p class="card-text">
+								<%= command.help.description %>
+							</p>
+							<p><span style="font-weight: bold;">Exemplo(s):</span> <%- command.help.usage.replace(/\n/g) %>
+							</p>
+						</div>
+					</div>
+					</tr>
+					<% } %>
+			</div>
+			<% } %>
+				<% include ./blocks/footer %>

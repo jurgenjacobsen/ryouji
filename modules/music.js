@@ -1,16 +1,18 @@
-const { Util } = require('discord.js');
+const {
+	Util
+} = require('discord.js');
 const ytdl = require('ytdl-core');
 const Discord = require('discord.js');
 module.exports = (client) => {
-  
+
 	client.handleVideo = async function handleVideo(video, msg, voiceChannel, playlist = false) {
-    const canal = client.channels.get('470355176251850754');
-    const logMusicEmbed = new Discord.RichEmbed()
-    .setTitle('Música Tocando')
-    .setColor('#23272A')
-    .setDescription(`**${video.title}**`);
-    canal.send(logMusicEmbed);
-    
+		const canal = client.channels.get('470355176251850754');
+		const logMusicEmbed = new Discord.RichEmbed()
+			.setTitle('Música Tocando')
+			.setColor('#23272A')
+			.setDescription(`**${video.title}**`);
+		canal.send(logMusicEmbed);
+
 		const serverQueue = client.musicQueue.get(msg.guild.id);
 		console.log(video.title);
 		const song = {
@@ -27,7 +29,7 @@ module.exports = (client) => {
 				volume: 5,
 				playing: true
 			};
-      
+
 			client.musicQueue.set(msg.guild.id, queueConstruct);
 
 			queueConstruct.songs.push(song);
@@ -50,7 +52,7 @@ module.exports = (client) => {
 		return undefined;
 	};
 
-  
+
 
 	function play(guild, song) {
 		const serverQueue = client.musicQueue.get(guild.id);
@@ -63,12 +65,12 @@ module.exports = (client) => {
 		console.log(serverQueue.songs);
 
 		const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
-      .on('end', reason => {
-			if (reason === 'None') console.log('Song ended.');
-			else console.log(reason);
-			serverQueue.songs.shift();
-			play(guild, serverQueue.songs[0]);
-		})
+			.on('end', reason => {
+				if (reason === 'None') console.log('Song ended.');
+				else console.log(reason);
+				serverQueue.songs.shift();
+				play(guild, serverQueue.songs[0]);
+			})
 			.on('error', error => console.error(error));
 		dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 		serverQueue.textChannel.send(`🎶 Começando a tocar: **${song.title}**`);

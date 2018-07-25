@@ -57,6 +57,6 @@ exports.conf = {
 exports.help = {
     name: 'Month',
     category: '💳 Econômia',
-    description: 'Recebe uma quantia em dinheiro por cada mês de uso',
+    description: 'Recebe uma quantia em dinheiro por mês',
     usage: 'r!month'
 };

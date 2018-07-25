@@ -1,28 +1,16 @@
-
 var moment = require('moment');
 
 module.exports = (client) => {
 
-	/*
-	PERMISSION LEVEL FUNCTION
-	This is a very basic permission system for commands which uses "levels"
-	"spaces" are intentionally left black so you can add them if you want.
-	NEVER GIVE ANYONE BUT OWNER THE LEVEL 10! By default this can run any
-	command including the VERY DANGEROUS `eval` and `exec` commands!
-	*/
 	client.permlevel = message => {
 		let permlvl = 0;
 
-		// If bot owner, return max perm level
 		var ownerID = client.config.ownerID;
 
 		if (message.author.id === ownerID) return 10;
 
-		// If DMs or webhook, return 0 perm level.
 		if (message.channel.type === 'dm' || !message.member) return 0;
 
-		// The rest of the perms rely on roles. If those roles are not found
-		// in the settings, or the user does not have it, their level will be 0
 		try {
 			const modRole = message.guild.roles.find(r => r.name.toLowerCase() === message.settings.modLogChannel.toLowerCase());
 			if (modRole && message.member.roles.has(modRole.id)) permlvl = 2;
@@ -36,7 +24,6 @@ module.exports = (client) => {
 			console.warn('adminRole not present in guild settings. Skipping Administrator (level 3) check');
 		}
 
-		// Guild Owner gets an extra level, wooh!
 		if (message.author === message.guild.owner) permlvl = 4;
 
 		return permlvl;
@@ -51,25 +38,28 @@ module.exports = (client) => {
 	};
 
 	client.pointsMonitor = (client, message) => {
-    const db = require('quick.db');
-    let amount;
-    db.fetch(`userItems_${message.author.id}_bonus`).then(i => {
-     if(i >= 1) {
-      amount = 0.5;
-     } else {
-      amount = 0.01
-     }
-		if (message.channel.type !== 'text') return;
-		const settings = client.settings.get(message.guild.id);
-		const score = client.points.get(`${message.guild.id}-${message.author.id}`) || { points: 0, level: 0 };
-		score.points++;
-		const curLevel = Math.floor(amount * Math.sqrt(score.points));
-		if (score.level < curLevel) {
-			message.reply(`Você upou para o nível **${curLevel}**!`);
-			score.level = curLevel;
-		}
-		client.points.set(`${message.guild.id}-${message.author.id}`, score);
-   })
+		const db = require('quick.db');
+		let amount;
+		db.fetch(`userItems_${message.author.id}_bonus`).then(i => {
+			if (i >= 1) {
+				amount = 0.5;
+			} else {
+				amount = 0.01
+			}
+			if (message.channel.type !== 'text') return;
+			const settings = client.settings.get(message.guild.id);
+			const score = client.points.get(`${message.guild.id}-${message.author.id}`) || {
+				points: 0,
+				level: 0
+			};
+			score.points++;
+			const curLevel = Math.floor(amount * Math.sqrt(score.points));
+			if (score.level < curLevel) {
+				message.reply(`Você upou para o nível **${curLevel}**!`);
+				score.level = curLevel;
+			}
+			client.points.set(`${message.guild.id}-${message.author.id}`, score);
+		})
 	};
 
 	client.log = (type, msg, title) => {
@@ -82,7 +72,11 @@ module.exports = (client) => {
 		const filter = m => m.author.id = msg.author.id;
 		await msg.channel.send(question);
 		try {
-			const collected = await msg.channel.awaitMessages(filter, { max: 1, time: limit, errors: ['time'] });
+			const collected = await msg.channel.awaitMessages(filter, {
+				max: 1,
+				time: limit,
+				errors: ['time']
+			});
 			return collected.first().content;
 		} catch (e) {
 			return false;
@@ -93,7 +87,11 @@ module.exports = (client) => {
 		const filter = m => m.author.id = msg.author.id;
 		await msg.channel.send(question);
 		try {
-			const collected = await msg.channel.awaitMessages(filter, { max: 1, time: limit, errors: ['time'] });
+			const collected = await msg.channel.awaitMessages(filter, {
+				max: 1,
+				time: limit,
+				errors: ['time']
+			});
 			return collected.first().content;
 		} catch (e) {
 			return false;
@@ -101,8 +99,9 @@ module.exports = (client) => {
 	};
 
 	client.clean = (client, text) => {
-		//if (text && text.constructor.name === 'Promise') text = await text;
-		if (typeof evaled !== 'string') text = require('util').inspect(text, { depth: 0 });
+		if (typeof evaled !== 'string') text = require('util').inspect(text, {
+			depth: 0
+		});
 		//console.log(`T (${typeof text}): ${text}`);
 
 		var t = text
@@ -124,7 +123,9 @@ module.exports = (client) => {
 	/* MISCELANEOUS NON-CRITICAL FUNCTIONS */
 
 	String.prototype.toProperCase = function() {
-		return this.replace(/([^\W_]+[^\s-]*) */g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		return this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
 	};
 
 	// `await wait(1000);` to "pause" for 1 second.

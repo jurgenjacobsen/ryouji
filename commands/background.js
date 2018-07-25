@@ -117,7 +117,7 @@ exports.conf = {
 
 exports.help = {
     name: 'Background',
-    category: 'Desenvolvimento',
-    description: 'oie',
-    usage: 'Testes'
+    category: '🌠 Cosméticos',
+    description: 'Se você possuir o item Background, você poderá alterar o mesmo através desse comando',
+    usage: 'r!background'
 };

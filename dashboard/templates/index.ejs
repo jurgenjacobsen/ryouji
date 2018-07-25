@@ -1,119 +1,109 @@
 <%- include('blocks/header', {bot: bot, user: user, auth: auth, stats: stats}) %>
 
-<head>
-    <meta name="theme-color" content="#23272A">
-  <meta property="og:title" content="Ryouji Bot">
-  <meta property="og:url" content="https://ryouji.glitch.me">
-  <meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
-  <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
-</head>
-
-
-  <title>
-   <%= bot.user.username %>
-  </title>
-
-<br>
-<br>
-<br>
-<br>
-<div class="text-center">
-      <h1 class="navbar-brand" style="font-family: 'Pacifico', cursive; text-transform: none; font-size: 70px;"> Ryouji</h1>
-        <br>
-</div>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<% var borderedStats;
+	<head>
+		<meta name="theme-color" content="#23272A">
+		<meta property="og:title" content="Ryouji Bot">
+		<meta property="og:url" content="https://ryouji.glitch.me">
+		<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+		<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+	</head>
+	<title>
+		<%= bot.user.username %>
+	</title>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="text-center">
+		<h1 class="navbar-brand" style="font-family: 'Pacifico', cursive; text-transform: none; font-size: 70px;"> Ryouji</h1>
+		<br>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<% var borderedStats;
 if (bot.config.dashboard.borderedStats === "true") {
 	borderedStats = true;
  } else {
 		borderedStats = false;
 	} %>
-
-    <div class="jumbotron">
-      <div class="container">
-      <h3 class="text-center">Informações do Bot</h3>
-      <div class="container text-center">
-      <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-          <div class="col-6  align-middle"><i class="fa fa-fw fa-server" aria-hidden="true"></i> Servidores:</div>
-          <div class="col-6  align-middle"><strong><%= stats.servers %></strong></div>
-        </div>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-          <div class="col-6  align-middle"><i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Uptime:</div>
-          <div class="col-6  align-middle"><strong><%= stats.uptime %></strong></div>
-        </div>
-				<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-					<div class="col-6  align-middle"><i class="fa fa-fw fa-terminal" aria-hidden="true"></i> Comandos:</div>
-					<div class="col-6  align-middle"><strong><%= stats.commands %></strong></div>
+		<div class="jumbotron">
+			<div class="container">
+				<h3 class="text-center">Informações do Bot</h3>
+				<div class="container text-center">
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-server" aria-hidden="true"></i> Servidores:</div>
+						<div class="col-6  align-middle"><strong><%= stats.servers %></strong></div>
+					</div>
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Uptime:</div>
+						<div class="col-6  align-middle"><strong><%= stats.uptime %></strong></div>
+					</div>
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-terminal" aria-hidden="true"></i> Comandos:</div>
+						<div class="col-6  align-middle"><strong><%= stats.commands %></strong></div>
+					</div>
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Usuários:</div>
+						<div class="col-6  align-middle"><strong><%= bot.users.size %></strong></div>
+					</div>
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-tasks" aria-hidden="true"></i> Memória:</div>
+						<div class="col-6  align-middle"><strong><%= stats.memoryUsage %> MB</strong></div>
+					</div>
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> Canais de Texto:</div>
+						<div class="col-6  align-middle"><strong><%= stats.text %></strong></div>
+					</div>
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-microphone" aria-hidden="true"></i> Canais de Voz:</div>
+						<div class="col-6  align-middle"><strong><%= stats.voice %></strong></div>
+					</div>
+					<h3 class="text-center">Versões</h3>
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-cogs" aria-hidden="true"></i> Discord.js:</div>
+						<div class="col-6  align-middle"><strong><%= stats.dVersion %></strong></div>
+					</div>
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Node.js:</div>
+						<div class="col-6  align-middle"><strong><%= stats.nVersion %></strong></div>
+					</div>
+					<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
+						<div class="col-6  align-middle"><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Bot:</div>
+						<div class="col-6  align-middle"><strong><%= stats.bVersion %></strong></div>
+					</div>
 				</div>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-          <div class="col-6  align-middle"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Usuários:</div>
-          <div class="col-6  align-middle"><strong><%= bot.users.size %></strong></div>
-        </div>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-          <div class="col-6  align-middle"><i class="fa fa-fw fa-tasks" aria-hidden="true"></i> Memória:</div>
-          <div class="col-6  align-middle"><strong><%= stats.memoryUsage %> MB</strong></div>
-        </div>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-          <div class="col-6  align-middle"><i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> Canais de Texto:</div>
-          <div class="col-6  align-middle"><strong><%= stats.text %></strong></div>
-        </div>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-          <div class="col-6  align-middle"><i class="fa fa-fw fa-microphone" aria-hidden="true"></i> Canais de Voz:</div>
-          <div class="col-6  align-middle"><strong><%= stats.voice %></strong></div>
-        </div>
-				<h3 class="text-center">Versões</h3>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-          <div class="col-6  align-middle"><i class="fa fa-fw fa-cogs" aria-hidden="true"></i> Discord.js:</div>
-          <div class="col-6  align-middle"><strong><%= stats.dVersion %></strong></div>
-        </div>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-          <div class="col-6  align-middle"><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Node.js:</div>
-          <div class="col-6  align-middle"><strong><%= stats.nVersion %></strong></div>
-        </div>
-				<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-					<div class="col-6  align-middle"><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Bot:</div>
-					<div class="col-6  align-middle"><strong><%= stats.bVersion %></strong></div>
+			</div>
+		</div>
+		<div class="jumbotron">
+			<div class="container">
+				<div class="col-sm-8 mx-auto">
+					<div class="col-8">
+						<h2>
+							<i class="fa fa-fw fa-question-circle-o"></i> Quer nos ajudar ?
+						</h2>
+					</div>
+					<p>Se você quer nos ajudar você pode fazer isso de três formas:ㅤVocê pode nos ajudar votando no <a href="https://discordbots.org/bot/452585205975351297">Discord
+							Bots</a>, criando um monitor no <a href="https://uptimerobot.com/">Uptimerobot</a> ou divulgando o Bot.</p>
 				</div>
-      </div>
-    </div>
-</div>
-
-
- <div class="jumbotron">
-    <div class="container">
-  <div class="col-sm-8 mx-auto">
-    <div class="col-8">
-      <h2>
-        <i class="fa fa-fw fa-question-circle-o"></i> Quer nos ajudar ?
-      </h2>
-    </div>
-     <p>Se você quer nos ajudar você pode fazer isso de três formas:ㅤVocê pode nos ajudar votando no <a href="https://discordbots.org/bot/452585205975351297">Discord Bots</a>, criando um monitor no <a href="https://uptimerobot.com/">Uptimerobot</a> ou divulgando o Bot.</p>
-    </div>
-  </div>
-</div>
-
-<div class="jumbotron">
-   <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h2><i class="fa fa-fw fa-cogs" aria-hidden="true"></i> Dashboard</h2>
-          <p>Yeah, um painel de controle para você administrar algumas configurações do Ryouji!</p>
-          <p><a class="btn btn-secondary" href="/login" role="button">Login »</a></p>
-        </div>
-       <div class="col-md-4">
-         <h2><i class="fa fa-fw fa-navicon"></i>Support Server</h2>
-          <p>Meu servidor de Suporte</p>
-          <p><a class="btn btn-secondary" href="https://discord.gg/GyAPE8G" role="button">Entrar »</a></p>
-        </div>
-
-      </div>
-  </div>
- </div>
-
-<br>
+			</div>
+		</div>
+		<div class="jumbotron">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<h2><i class="fa fa-fw fa-cogs" aria-hidden="true"></i> Dashboard</h2>
+						<p>Yeah, um painel de controle para você administrar algumas configurações do Ryouji!</p>
+						<p><a class="btn btn-secondary" href="/login" role="button">Login »</a></p>
+					</div>
+					<div class="col-md-4">
+						<h2><i class="fa fa-fw fa-navicon"></i>Support Server</h2>
+						<p>Meu servidor de Suporte</p>
+						<p><a class="btn btn-secondary" href="https://discord.gg/GyAPE8G" role="button">Entrar »</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
