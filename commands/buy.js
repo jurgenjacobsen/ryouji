@@ -1,7 +1,8 @@
 const Discord = require('discord.js'),
       db = require('quick.db');
 exports.run = async (client, message, args) => { 
-const itens = client.config.itens;
+const itens = client.itens;
+if(args[0]) {
 switch (args[0]) {  
   case 'Badge': {
    const pagar = itens.badge.valor;
@@ -116,7 +117,9 @@ switch (args[0]) {
    });
    break;
   }
-
+ }
+} else {
+ message.reply(`Dê **r!lista** para ver os itens disponíveis para compra!`)
 }
 };
 

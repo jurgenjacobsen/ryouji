@@ -4,7 +4,7 @@ const Discord = require('discord.js')
   if (client.config.musicEnabled !== 'true') return message.channel.send('Comandos de música desativados');
   const serverQueue = client.musicQueue.get(message.guild.id);
   
-  	if (!serverQueue) return message.channel.send('Não há nada jogando.');
+  	if (!serverQueue) return message.channel.send('Não há nada tocando.');
    const embed = new Discord.RichEmbed()
    .setTitle('Lista de Reprodução')
    .setColor('#23272A')

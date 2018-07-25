@@ -1,51 +1,56 @@
-
 <%- include('blocks/header', {bot:bot, user: user, auth: auth, db: db}) %>
 
-<head>
-    <meta name="theme-color" content="#23272A">
-  <meta property="og:title" content="Ryouji Bot">
-  <meta property="og:url" content="https://ryouji.glitch.me">
-  <meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
-  <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
-</head>
+	<head>
+		<meta name="theme-color" content="#23272A">
+		<meta property="og:title" content="Ryouji Bot">
+		<meta property="og:url" content="https://ryouji.glitch.me">
+		<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
+		<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+	</head>
+	<title>
+		Dashboard -
+		<%= bot.user.username %>
+	</title>
 
-  <title>
-    Dashboard - <%= bot.user.username %>
-  </title>
-<body>
-<h1 class="display-3" style="">Perfil</h1>
-
-<div class="card" style="width: 100%">
-<% if (user.avatar) { %>
-    <img class="" alt="<%= user.username%>" width="256" height="256" src="https://cdn.discordapp.com/avatars/<%= user.id%>/<%= user.avatar%>?size=2048" style="width: 25%; border-radius: 0px 0px 8px 0px; border : solid #23272A" src="<%= user.avatarURL%>?size=512"> 
-  <% } %>
-   <div class="card-body">
-   <% if(user) { %>
-     <h4 class="card-title"><%= user.username %></h4>
-   <% } else { %>
-      <h4 class="card-title"><%= user.tag %></h4>
-   <% } %>
-      <a class="btn btn-success" href="https://ryouji.glitch.me/user/<%= user.id%>" target="_blank" role="button">Ver Meu Perfil  <i class="fa fa-share-square" aria-hidden="true"></i></a>
-    </div>
-</div>
-
-<br>
-
-<h1 class="display-3">Dashboard</h1>
-<ul class="jumbotron">
-<% user.guilds.forEach(guild => {
+	<body>
+		<h1 class="display-3" style="">Perfil</h1>
+		<div class="card" style="width: 100%">
+			<% if (user.avatar) { %>
+				<img class="" alt="<%= user.username%>" width="256" height="256" src="https://cdn.discordapp.com/avatars/<%= user.id%>/<%= user.avatar%>?size=2048" style="width: 25%; border-radius: 0px 0px 8px 0px; border : solid #23272A"
+				 src="<%= user.avatarURL%>?size=512">
+				<% } %>
+					<div class="card-body">
+						<% if(user) { %>
+							<h4 class="card-title">
+								<%= user.username %>
+							</h4>
+							<% } else { %>
+								<h4 class="card-title">
+									<%= user.tag %>
+								</h4>
+								<% } %>
+									<a class="btn btn-success" href="https://ryouji.glitch.me/user/<%= user.id%>" target="_blank" role="button">Ver Meu Perfil <i class="fa fa-share-square"
+										 aria-hidden="true"></i></a>
+					</div>
+		</div>
+		<br>
+		<h1 class="display-3">Dashboard</h1>
+		<ul class="jumbotron">
+			<% user.guilds.forEach(guild => {
   const permsOnGuild = new perms(guild.permissions);
   if(!permsOnGuild.has("MANAGE_GUILD")) return;
 %>
-<li class="media" style="padding: 10px;">
-    <% if (guild.icon) { %>
-      <img class="d-flex mr-3 rounded-circle" src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.jpg?size=128" style="width: 75px;" alt="">
-    <% } else { %>
-      <img class="d-flex mr-3 rounded-circle" src="https://i.imgur.com/2otMem9.png" style="width: 75px;" alt="">
-    <% } %>
-    <div class="media-body">
-      <h5 class="mt-0 mb-1"><%= guild.name %></h5>
-      <%
+				<li class="media" style="padding: 10px;">
+					<% if (guild.icon) { %>
+						<img class="d-flex mr-3 rounded-circle" src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.jpg?size=128" style="width: 75px;" alt="">
+						<% } else { %>
+							<img class="d-flex mr-3 rounded-circle" src="https://i.imgur.com/2otMem9.png" style="width: 75px;" alt="">
+							<% } %>
+								<div class="media-body">
+									<h5 class="mt-0 mb-1">
+										<%= guild.name %>
+									</h5>
+									<%
       let href, text;
       let enabled;
       if(bot.guilds.get(guild.id)) {
@@ -58,17 +63,13 @@
         enabled = user.id === bot.config.ownerID || bot.appInfo.botPublic;
       }
       %>
-      <a class="btn btn-primary btn-lg<% if(!enabled) { %> disabled<% } %>" role="button" href="<%= href %>">
-        <%= text %>
-        <i class="right chevron icon"></i>
-      </a>
-    </div>
-  </li>
-<% }); %>
-</ul>
-
-
-</body>
-
-
-<% include ./blocks/footer %>
+										<a class="btn btn-primary btn-lg<% if(!enabled) { %> disabled<% } %>" role="button" href="<%= href %>">
+											<%= text %>
+												<i class="right chevron icon"></i>
+										</a>
+								</div>
+				</li>
+				<% }); %>
+		</ul>
+	</body>
+	<% include ./blocks/footer %>

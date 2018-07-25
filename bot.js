@@ -10,6 +10,7 @@ const client = new Discord.Client();
 
 try {
 	client.config = require('./config.js');
+  client.itens = require('./itens.json');
 } catch (err) {
 	console.error('Unable to load config.js \n', err);
 	process.exit(1);
@@ -57,7 +58,7 @@ const init = async () => {
 
 	const cmdFiles = await readdir('./commands/');
 	client.commandsNumber = cmdFiles.length;
-	client.log('log', `Loading a total of ${client.commandsNumber} commands.`, 'LOAD');
+	client.log('[LOG]', `Carregando um total de ${client.commandsNumber} comandos`, 'LOAD');
 	cmdFiles.forEach(f => {
 		try {
 			const props = require(`./commands/${f}`);

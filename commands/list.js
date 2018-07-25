@@ -2,7 +2,7 @@ exports.run = async (client, message, args) => {
  const Discord = require('discord.js');
  const c = require('currency-formatter');
 
- const item = client.config.itens;
+ const item = client.itens;
 
  const Embed = new Discord.RichEmbed()
  .setTitle(':shopping_cart: Lista de Itens Para Compra')
@@ -28,7 +28,7 @@ exports.conf = {
 
 exports.help = {
     name: 'Lista',
-    category: '💳 Econômia',
+    category:  '🌠 Cosméticos',
     description: 'Mostra a lista de itens para compra',
     usage: 'r!lista'
 };
