@@ -199,10 +199,10 @@ const moment = require('moment')
 let badge;
 db.fetch(`userBackground_${usuário.id}`).then(back => {
 db.fetch(`userItems_${usuário.id}_background`).then(bg => {
-db.fetch(`userBalance_${usuário.id}`).then(cB => {
+db.fetch(`userBalance2.0_${usuário.id}`).then(cB => {
 const coins = cF.format(cB, { code: 'BRL' })
 db.fetch(`userRep1_${usuário.id}`).then(r => {
-db.fetch(`userItems_${usuário.id}_premium`).then(p => {
+db.fetch(`userItems_${usuário.id}_premium1`).then(p => {
 db.fetch(`userItems_${usuário.id}_badge`).then(b => {
 if (req.isAuthenticated()) {
 res.render(path.resolve(`${templateDir}${path.sep}user.ejs`), {
@@ -334,7 +334,8 @@ app.get('/user/', (req, res) => {
     auth: req.isAuthenticated() ? true : false,
     user: req.isAuthenticated() ? req.user : null,
     guild: guild,
-    moment: moment
+    moment: moment,
+    db: db
    });
   }); 
 

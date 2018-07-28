@@ -12,7 +12,7 @@
      "premium": {
        "name": "Premium",
        "description": "Recebe uma **Badge** em seu perfil, ganha **400%** de bônus",
-       "valor": "2150"
+       "valor": "4350"
      },
      "background": {
        "name": "Background",
@@ -23,5 +23,5 @@
         "name": "Parceria",
         "description": "Adiciona o servidor à lista de **Parceiros do Site**",
         "valor": "18450"
-     }
+     }    
 }

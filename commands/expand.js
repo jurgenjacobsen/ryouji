@@ -22,7 +22,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['expand', 'expandir'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

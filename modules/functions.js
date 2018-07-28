@@ -1,4 +1,5 @@
 var moment = require('moment');
+var db = require('quick.db');
 
 module.exports = (client) => {
 
@@ -34,6 +35,7 @@ module.exports = (client) => {
 		2: 'Moderador',
 		3: 'Administrador',
 		4: 'Dono do Servidor',
+    9: 'WhiteList',
 		10: 'Dono do Bot'
 	};
 

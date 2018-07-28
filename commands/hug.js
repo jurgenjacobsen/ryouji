@@ -23,7 +23,8 @@ exports.conf = {
     enabled: true,
     guildOnly: true,
     aliases: ['hug', 'abraço'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

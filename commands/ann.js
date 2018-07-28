@@ -38,7 +38,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['anúncio', 'ann'],
-	permLevel: 4
+	permLevel: 4,
+  manu: false
 };
 
 exports.help = {

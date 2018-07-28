@@ -21,7 +21,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['load', 'loadcommand'],
-	permLevel: 10
+	permLevel: 10,
+  manu: false
 };
 
 exports.help = {

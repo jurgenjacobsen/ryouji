@@ -4,20 +4,26 @@ exports.run = async (client, message, args, level) => {
     if (client.config.musicEnabled !== 'true') return message.channel.send('Comandos de música desativados');
     const serverQueue = client.musicQueue.get(message.guild.id);
     if (!serverQueue) return message.channel.send('Não há nada tocando.');
+    const ytdl = require('ytdl-core');
+    const id = serverQueue.songs[0].id; 
+    ytdl.getInfo(id, (err, info) => {
     let embed = new Discord.RichEmbed()
         .setColor('#23272A')
         .setTitle('Tocando Agora')
+        .setURL(info.video_url)
         .setDescription(serverQueue.songs[0].title)
-        .setThumbnail(serverQueue.songs[0].thumbnail)
-        .setFooter(client.user.username, client.user.avatarURL)
+        .setThumbnail(info.thumbnail_url)
+        .setFooter(info.author.name, info.author.avatar)
     return message.channel.send(embed)
+   });
 };
 
 exports.conf = {
     enabled: true,
     guildOnly: true,
     aliases: ['nowplaying', 'np'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

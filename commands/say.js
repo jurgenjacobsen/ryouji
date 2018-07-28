@@ -8,7 +8,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['say', 'dizer'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

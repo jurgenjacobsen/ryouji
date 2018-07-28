@@ -29,7 +29,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['inrole'],
-	permLevel: 2
+	permLevel: 2,
+  manu: false
 };
 
 exports.help = {

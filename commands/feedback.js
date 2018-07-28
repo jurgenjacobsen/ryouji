@@ -1,4 +1,9 @@
 exports.run = async (client, message, args) => { 
+ if(!args[0]) {
+   message.reply('**r!feedback send [texto]**')
+ }
+
+
  switch (args[0]) {  
   case 'send': {
     const Discord = require('discord.js');
@@ -29,7 +34,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['feedback'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

@@ -44,7 +44,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['eval', 'exec', 'executar'],
-	permLevel: 10
+	permLevel: 10,
+  manu: false
 };
 
 exports.help = {

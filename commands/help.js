@@ -95,7 +95,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['h', 'halp', 'help', 'ajuda'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

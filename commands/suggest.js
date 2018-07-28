@@ -27,7 +27,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['sugestão', 'suggest', 'suggestion'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

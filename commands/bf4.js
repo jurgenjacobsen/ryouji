@@ -106,7 +106,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['bf4', 'battlefield4'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

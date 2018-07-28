@@ -53,7 +53,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['beijo', 'beija', 'beijinho'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

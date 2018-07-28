@@ -112,14 +112,18 @@
 	background-color:  !important;
 }
 	</style>
+
 	<div class="container">
 		<% if(bg >= 1 && back !== null) { %>
 			<div class="headerimage" style="width: 1369px;height:300px;z-index: -0; margin-left: -150;background-image:url('<%= back %>');"></div>
 			<% } else { %>
 				<div class="headerimage" style="width: 100%;height:200px;z-index: -0;background-image:url('');"></div>
 				<% } %>
-					<div style="width:100%;  height: -10px; margin: auto; margin-left: -150px; margin-top: -100px;">
-						<% if(usuário.id == bot.config.ownerID) { %>
+					<div style="width:100%;  height: -30px; margin: auto; margin-left: -150px; margin-top: -100px;">
+<!-- -------------------------------------------------------------- -->
+<!-- --------------------------OWNER------------------------------- -->
+<!-- -------------------------------------------------------------- -->
+						<% if(usuário.id == bot.config.ownerID || usuário.id == bot.users.get('226865242095878144').id) { %>
 							<%  if(bg >= 1 && back !== null) {%>
 								<h1 class="nametitle">
 									<%= usuário.username%>
@@ -131,35 +135,51 @@
 									</h1> <img alt="Desenvolvedor" src="https://cdn.glitch.com/4a4f105d-84dd-4709-8bfb-16428e054a2d%2Fcertifieddeveloper.png?1529539427281" width="35px" height="35px"
 									 style="margin-left: 200px; margin-top: -020px;">
 									<% } %>
+
+            
+            
+<!-- -------------------------------------------------------------- -->
+<!-- -------------------------PREMIUM------------------------------ -->
+<!-- -------------------------------------------------------------- -->
 										<% }else if(premium >= 1) {%>
-											<%  if(bg >= 1 && back !== null) {%>
-												<h1 class="nametitle">
-													<%= usuário.username%>
-												</h1> <img alt="Premium" src="https://images.vexels.com/media/users/3/144965/isolated/preview/c04037a2fd4b6897eff8c687059862d2-foam-finger-icon-by-vexels.png"
-												 width="45px" height="45px" style="margin-left: 200px; margin-top: -120px;">
-												<% } else { %>
-													<h1 class="nametitle">
-														<%= usuário.username%>
-													</h1> <img alt="Premium" src="https://images.vexels.com/media/users/3/144965/isolated/preview/c04037a2fd4b6897eff8c687059862d2-foam-finger-icon-by-vexels.png"
-													 width="45px" height="45px" style="margin-left: 200px; margin-top: 80px;">
-													<% } %>
+											        <%  if(bg >= 1 && back !== null) {%>
+												        <h1 class="nametitle">
+													        <%= usuário.username%>
+												        </h1> 
+                                <img alt="Premium" src="https://cdn.glitch.com/5a52387b-5d84-4df6-a4da-cf517c871147%2Ficons8-solicitor-80.png?1532567252932"width="45px" height="45px" style="margin-left: 200px; margin-top: -120px;">
+												      <% } else { %>
+													      <h1 class="nametitle">
+														     <%= usuário.username%>
+													      </h1> 
+                                 <img alt="Premium" src="https://cdn.glitch.com/5a52387b-5d84-4df6-a4da-cf517c871147%2Ficons8-solicitor-80.png?1532567252932" width="45px" height="45px" style="margin-left: 200px; margin-top: 80px;">
+													    <% } %>
+
+
+
+<!-- -------------------------------------------------------------- -->
+<!-- --------------------------BADGE------------------------------- -->
+<!-- -------------------------------------------------------------- -->
+
 														<% }else if(badge >= 1){ %>
+                             <%  if(bg >= 1 && back !== null) {%>
 															<h1 class="nametitle">
 																<%= usuário.username%>
-															</h1> <img alt="Badge" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Circle-icons-star.svg/200px-Circle-icons-star.svg.png" width="35px;"
-															 height="35px;" style="margin-left: 200px; margin-top: 80px;" <% } else {%>
+															</h1> <img alt="Badge" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Circle-icons-star.svg/200px-Circle-icons-star.svg.png" width="35px;" height="35px;" style="margin-left: 200px; margin-top: 80px;"> 
+                             <% } else {  %>
+                              <h1 class="nametitle">
+																<%= usuário.username%>
+															</h1> <img alt="Badge" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Circle-icons-star.svg/200px-Circle-icons-star.svg.png" width="35px;" height="35px;" style="margin-left: 200px; margin-top: 80px;"> 
+
+                             <% } %>
+                               <% } else {%>
 															<h1 class="nametitle">
 																<%= usuário.username%>
 															</h1>
 															<% } %>
+
+
 																<br>
-																<% if(premium == null) { %>
-																	<% if(usuário.avatarURL) {%>
-																		<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.avatarURL%>?size=512" style="border-radius:50%; border:5px solid #2C2F33;">
-																		<%}else if(usuário.defaultAvatarURL) { %>
-																			<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%; border:5px solid #2C2F33;">
-																			<%}%>
-																				<% } else {%>
+                               <% if(premium == 1){%>
 																					<% if(usuário.avatarURL) {%>
 																						<% if(usuário.presence.status === "online"){ %>
 																							<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.avatarURL%>?size=512" style="border-radius:50%; border:5px solid limegreen">
@@ -173,7 +193,13 @@
 																											<%}else if(usuário.defaultAvatarURL) { %>
 																												<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%; border:5px solid #7289DA;">
 																												<%}%>
-																													<% } %>
+																													<% } else { %>
+																	<% if(usuário.avatarURL) {%>
+																		<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.avatarURL%>?size=512" style="border-radius:50%; border:5px solid #2C2F33;">
+																		<%}else if(usuário.defaultAvatarURL) { %>
+																			<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%; border:5px solid #2C2F33;">
+																			                     <%}%>
+																				                  <% } %>
 					</div>
 	</div>
 	<div class="card" style="width: 100%">
@@ -225,12 +251,9 @@
 													<%= usuário.tag %>
 												</p>
 												<p class="nav-link disable">Conta criada em:
-													<%= moment.utc(usuário.createdAt).format('LLLL') %>
+													<%= moment.utc(usuário.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %>
 												</p>
 		</div>
 	</div>
-	<br>
 	</body>
-	<br>
-	<hr>
 	<br>

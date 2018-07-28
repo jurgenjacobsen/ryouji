@@ -35,7 +35,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['github'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

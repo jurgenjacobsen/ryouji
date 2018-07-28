@@ -19,10 +19,10 @@ exports.run = async (client, message, args, level) => {
 
 	if (!args[1]) return message.reply('Não consegui obter um usuário para depositar R$' + pagar);
 
-	db.fetch(`userBalance_${message.author.id}`).then(bucks => {
+	db.fetch(`userBalance2.0_${message.author.id}`).then(bucks => {
 
   	if (bucks == null) {
-				db.set(`userBalance_${message.author.id}`, 50)
+				db.set(`userBalance2.0_${message.author.id}`, 50)
 			}
 
 		if (!bucks >= pagar) {
@@ -30,10 +30,10 @@ exports.run = async (client, message, args, level) => {
 			message.reply('Você não tem dinheiro o suficiente');
 
 		} else if (bucks >= pagar) {
-			db.fetch(`userBalance_${user.id}`).then(banco => {
-      if(banco == null) {db.set(`userBalance_${user.id}`, 50)};
+			db.fetch(`userBalance2.0_${user.id}`).then(banco => {
+      if(banco == null) {db.set(`userBalance2.0_${user.id}`, 50)};
 				const valor = parseInt(banco) + parseInt(pagar);
-				db.set(`userBalance_${user.id}`, valor).then(i => {
+				db.set(`userBalance2.0_${user.id}`, valor).then(i => {
 					var discord = require('discord.js')
 					var embed = new Discord.RichEmbed()
 						.setTitle('<:green:463073006093336576> Pagamento Concluído!')
@@ -44,10 +44,10 @@ exports.run = async (client, message, args, level) => {
 				});
 			});
 
-			db.fetch(`userBalance_${message.author.id}`).then(banco => {
+			db.fetch(`userBalance2.0_${message.author.id}`).then(banco => {
         
 				const valor = parseInt(banco) - parseInt(pagar);
-				db.set(`userBalance_${message.author.id}`, valor);
+				db.set(`userBalance2.0_${message.author.id}`, valor);
 			});
 
 		};
@@ -60,7 +60,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['pay', 'pagamento', 'pagar', 'paypal'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

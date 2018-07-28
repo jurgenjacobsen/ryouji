@@ -23,7 +23,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['yesorno'],
-	permLevel: 3
+	permLevel: 3,
+  manu: false
 };
 
 exports.help = {

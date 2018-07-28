@@ -119,10 +119,12 @@ module.exports = async (client, message) => {
 			if (cmd) {
 				if (level >= cmd.conf.permLevel) {
 					if (cmd.conf.enabled === true) {
+            if(cmd.conf.manu === false) {
 						cmd.run(client, message, args, level);
-						console.log('[LOG]',
-							`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content}`,
-							'CMD');
+						 console.log('[LOG]', `${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content}`, 'CMD');
+            } else {
+             message.reply('Este comando está em manutenção!')
+            }
 					} else {
 						message.reply('Este comando está desligado');
 						client.log('[LOG]',

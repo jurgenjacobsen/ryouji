@@ -21,7 +21,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['level', 'nível'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {
