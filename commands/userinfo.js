@@ -34,7 +34,7 @@ const isBot = {
 var reps = await db.fetch(`userRep1_${user.id}`);
   
     const embed = new Discord.RichEmbed()
-		.setColor('#23272A')
+		.setColor(client.color)
 		.setThumbnail(user.avatarURL + '?size=512')
 		.setTitle(`${user.username}#${user.discriminator}`)
 		.addField(":clipboard: ID:", `${user.id}`, true)

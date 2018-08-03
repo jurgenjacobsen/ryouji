@@ -13,7 +13,7 @@ var user = message.mentions.users.first() || message.author;
         var embed = new Discord.RichEmbed()
         .setTitle(':credit_card: Conta')
         .setDescription(`${user.username}, tem em sua conta: **:dollar: ${currencyFormatter.format(balance, { code: 'BRL' })}**`)
-        .setColor('#23272A')
+        .setColor(client.color)
         .setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
         message.channel.send(embed)
 

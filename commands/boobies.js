@@ -18,7 +18,7 @@ if (!message.channel.nsfw) return message.channel.send({embed: {
   randomPuppy(sub)
         .then(url => {
             const embed = new Discord.RichEmbed()
-                .setColor("RANDOM")
+                .setColor(client.color)
                 .setAuthor("4k", client.user.avatarURL)
                 .setFooter("xD")
                 .setImage(url);

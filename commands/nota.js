@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
 
 			const HastebinEmbed = new Discord.RichEmbed()
 				.setTitle('Nota Adionada com Sucesso!')
-				.setColor('#23272A')
+				.setColor(client.color)
 				.setAuthor('Hastebin', 'https://pbs.twimg.com/profile_images/1664989409/twitter_400x400.png')
 				.setDescription('\nURL: https://hastebin.com/' + body.body.key)
 			message.channel.send(HastebinEmbed);

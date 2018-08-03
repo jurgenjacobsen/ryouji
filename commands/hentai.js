@@ -11,10 +11,9 @@ let {body} = await superagent
    }
   
     let hentaiEmbed = new Discord.RichEmbed()
-    .setColor("#23272A")
     .setTitle("Hentai é arte")
     .setImage(body.url)
-    .setColor("#23272A")
+    .setColor(client.color)
 
     message.channel.send(hentaiEmbed);
 };

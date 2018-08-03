@@ -8,7 +8,7 @@ exports.run = async (client, message, args, level) => {
 	let annEmbed = new Discord.RichEmbed()
 		.setTitle('Anúncio')
 		.setAuthor(client.user.username, client.user.displayAvatarURL)
-		.setColor("#23272A")
+		.setColor(client.color)
 		.setDescription(texto)
 		.setFooter(message.author.tag);
 

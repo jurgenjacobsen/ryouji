@@ -1,25 +1,33 @@
 const Discord = require('discord.js')
 
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
+exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
 
-let invites = await message.guild.fetchInvites().catch(error => {
-        return message.reply('Perdão, mas você ou eu não possuímos permissões para ver os convites');
-    });
+try {
+message.guild.fetchInvites().then(invites => {
+        if (!invites) return message.reply('Este servidor não possui convites!');
+     
+            var rank    = invites.array().sort((a, b) => b.uses - a.uses).slice(0, 3);
+            var primeiro  = rank[0];
+            var segundo   = rank[1];
+            var terceiro  = rank[2];
+        
+           let total = primeiro.uses + segundo.uses + terceiro.uses;
 
-    invites = invites.array();
+const Embed = new Discord.RichEmbed()
+.setTitle('Top Invites')
+.setAuthor('', message.guild.iconURL)
+.setColor(client.color)
+.addField(`:first_place: 1º ${primeiro.inviter.username}`, `Membros Recrutados: ${primeiro.uses}`)
+.addField(`:second_place: 2º ${segundo.inviter.username}`, `Membros Recrutados: ${segundo.uses}`)
+.addField(`:third_place: 3º ${terceiro.inviter.username}`, `Membros Recrutados: ${terceiro.uses}`)
 
-    let possibleinvites = [];
-    invites.forEach(function(invites) {
-        possibleinvites.push(`${invites.inviter.username} | ${invites.uses}`)
-    })
+.addField('Total: **' + total + '**', 'ㅤ')
 
-    const embed = new Discord.RichEmbed()
-        .setTitle(`**INVITE LEADERBOARD**`)
-        .setColor('#23272A')
-        .addField('Invites', `\`\`\`${possibleinvites.join('\n')}\`\`\``)
-        .setTimestamp();
-    message.channel.send(embed);
-
+  message.channel.send(Embed);
+ });
+} catch (err) {
+ message.reply('Eu provavelmente não possuo permissões para ver isso.')
+}
 };
 
 exports.conf = {

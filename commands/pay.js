@@ -38,7 +38,7 @@ exports.run = async (client, message, args, level) => {
 					var embed = new Discord.RichEmbed()
 						.setTitle('<:green:463073006093336576> Pagamento Concluído!')
 						.setDescription(`Você efetuou um pagamento com sucesso! :dollar: **R$${pagar}**`)
-						.setColor('#23272A')
+						.setColor(client.color)
 						.setFooter('Pago por ' + message.author.tag, message.author.avatarURL)
 					message.channel.send(embed);
 				});

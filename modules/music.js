@@ -58,7 +58,7 @@ module.exports = (client) => {
 		const serverQueue = client.musicQueue.get(guild.id);
 
 		if (!song) {
-			serverQueue.voiceChannel.leave();
+			serverQueue.voiceChannel.leave(300000);
 			client.musicQueue.delete(guild.id);
 			return;
 		}

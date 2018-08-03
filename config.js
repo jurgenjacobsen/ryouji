@@ -5,16 +5,14 @@ var config = {
     token: vault.TOKEN,
     status: 'online',
     debug: 'false',
+    color: '#36393F',
     playingGame: 'felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#001',
     purgeLogFormat: '\n ID da Mensagem: {{mID}} | Hora: {{mTS}} | Conteúdo: {{mC}} \n',
     eightBallResponses: ['Sim', 'Não', 'Certamente', 'Minhas fontes dizem sim', 'Tente mais tarde...', 'Sem dúvida', 'É melhor não contar agora'],
     googleAPIToken: vault.GOOGLEAPITOKEN,
     logTimeFormat: 'LLLL',
-    version: '3.1.3',
+    version: '3.1.5',
     musicEnabled: 'true',
-    cores: {
-     padrão: "#23272A"
-    },
     defaultSettings: {
         prefix: 'r!',
         modLogChannel: 'logs',
@@ -22,6 +20,7 @@ var config = {
         adminRole: 'Administrador',
         welcomeChannel: '⚫bem-vindos',
         welcomeMessage: 'Bem-Vindo {{user}} ao **{{guild}}!**',
+        byeMessage: "Adeus **{{user}}**, Volte Sempre!",
         welcomeEnabled: 'true',
         inviteFilterEnabled: 'true',
         inviteWhitelist: ['Dono'],

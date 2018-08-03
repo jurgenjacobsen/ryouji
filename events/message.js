@@ -38,6 +38,12 @@ module.exports = async (client, message) => {
 		}
 	}
 
+let textinho = "viu só, eu disse que eu e você ìamos conseguir";
+
+if(message.content.startsWith("<@"+ client.user.id + ">") && message.content.includes(textinho)) {
+  message.reply('Yeah, Bro!!! <a:kDab:450477136239919104>')
+}
+
 	if (message.author.bot) {
 		return;
 	}
@@ -50,12 +56,21 @@ module.exports = async (client, message) => {
 	const args = message.content.split(/\s+/g);
 	var command;
 
+const EmbedBlackList = new Discord.RichEmbed()
+.setTitle('Você está na BlackList!')
+.setAuthor('', message.author.avatarURL)
+.setColor(client.color)
+.setDescription('Você não tem permissão alguma de executar algum comando do bot, por motivos que, <@'+client.config.ownerID+'> adicionou você na **BlackList**')
+
+if(message.guild.id !== '425864977996578816' || message.guild.id !== '264445053596991498') {
+   if(message.author.id == '303188858307346432' || message.author.id == '247362229031272449' || message.author.id == '361272813052493826') return message.channel.send(message.author, EmbedBlackList);
+};
 
 	message.settings = settings;
 
 	command = args.shift().slice(settings.prefix.length)
 		.toLowerCase();
-
+  
 	const level = client.permlevel(message);
 
 	const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
@@ -90,11 +105,6 @@ module.exports = async (client, message) => {
 		if (guildSettings.swearFilter === 'true' && guildSettings.swearWords.some(word => message.content.includes(word))) {
 			message.delete();
 			message.reply('Não fale palavrões!');
-		}
-
-		if (guildSettings.facepalms === 'true' && (message.content.toLowerCase()
-				.indexOf('facepalm') !== -1 || message.content.indexOf('🤦') !== -1)) {
-			message.channel.send(':face_palm:');
 		}
 
 		if (message.content.indexOf(guildSettings.prefix) !== 0) {

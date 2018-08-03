@@ -30,7 +30,7 @@ exports.run = async (client, message, args, level) => {
 
 				let lastRepEmbed = new Discord.RichEmbed()
 					.setAuthor(`Reputação`)
-					.setColor('#23272A')
+					.setColor(client.color)
 					.setDescription(`Você já deu **Reputação** para alguém em menos de 24hrs`)
 					.setFooter(message.author.tag, message.author.avatarURL)
 				message.channel.send(lastRepEmbed)
@@ -41,7 +41,7 @@ exports.run = async (client, message, args, level) => {
 					var embed = new Discord.RichEmbed()
 						.setTitle('Reputação')
 						.setDescription(`Você deu reputação a **${user.username}**`)
-						.setColor('#23272A')
+						.setColor(client.color)
 						.setFooter(message.author.tag, message.author.avatarURL)
 					message.channel.send(embed);
 				})

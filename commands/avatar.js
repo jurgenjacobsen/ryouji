@@ -13,7 +13,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
   
   const avatarEmbed = new Discord.RichEmbed()
   .setTitle(`${user.username}`)
-  .setColor(`#23272A`)
+  .setColor(client.color)
   .setImage(user.avatarURL)
 
 message.channel.send(avatarEmbed)

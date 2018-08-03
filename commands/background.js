@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
  const DB = require('quick.db');
  const send = require('quick.hook');
 
- DB.fetch(`userItems_${msg.author.id}_background`).then(background => {
+ DB.fetch(`userItems_${msg.author.id}_background1`).then(background => {
     if(background >= 1) {
        DB.fetch(`userBackground_${msg.author.id}`).then(item => {
         if(item == null) {
@@ -35,7 +35,7 @@ switch (args[0]) {
   case "list" : {
     const Embed = new Discord.RichEmbed()
     .setTitle(':frame_photo: Lista de Backgrounds')
-    .setColor(client.config.cores.padrão)
+    .setColor(client.color)
     .addField('Azoxo', '<:Azoxo:454695663284912140> , **r!background set Azoxo**')
     .addField('Branco', '<:Totalmentebranco:454695663847079936>  **r!background set Branco**')
     .addField('Cinxo', '<:Cunxo:454695663389769729>  **r!background set Cinxo**')

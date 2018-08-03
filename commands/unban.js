@@ -14,8 +14,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 		message.reply(`${member} foi desbanido por ${message.author.tag} Por: ${reason}`);
 		if (!modlog) return console.log('modLogChannel não existe nesse servidor, tente criar ou alterar o nome de um canal para **logs** ou edite as configurações usando:' + guildSettings.prefix + 'config edit modLogChannel {NOME_do_CANAL}');
 		const embed = new Discord.RichEmbed()
-			.setColor('RED')
-			.setTitle('Unbanido')
+			.setColor(client.color)
+			.setTitle('Desbanido')
 			.addField(`Usuário`, `${member}`, true)
 			.addField(`Moderador`, `${message.author.tag} (${message.author.id})`, true)
 			.addField(`Motivo`, `${reason}`, true)

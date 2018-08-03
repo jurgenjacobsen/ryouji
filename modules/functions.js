@@ -42,7 +42,7 @@ module.exports = (client) => {
 	client.pointsMonitor = (client, message) => {
 		const db = require('quick.db');
 		let amount;
-		db.fetch(`userItems_${message.author.id}_bonus`).then(i => {
+		db.fetch(`userItems_${message.author.id}_bonus1`).then(i => {
 			if (i >= 1) {
 				amount = 0.5;
 			} else {

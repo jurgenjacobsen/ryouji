@@ -191,7 +191,15 @@
 																										<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.avatarURL%>?size=512" style="border-radius:50%; border:5px solid dimgrey">
 																										<% } %>
 																											<%}else if(usuário.defaultAvatarURL) { %>
-																												<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%; border:5px solid #7289DA;">
+																					<% if(usuário.presence.status === "online"){ %>
+																							<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%; border:5px solid limegreen">
+																							<% } else if(usuário.presence.status === "idle") {%>
+																								<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%; border:5px solid #F39C12">
+																								<% } else if(usuário.presence.status === "dnd"){ %>
+																									<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%; border:5px solid #E74C3C">
+																									<% } else if(usuário.presence.status === "offline"){ %>
+																										<img class="pfp" alt="<%= usuário.username%>'s Discord Avatar  " width="236" height="236" src="<%= usuário.defaultAvatarURL%>?size=512" style="border-radius:50%; border:5px solid dimgrey">
+																										<% } %>
 																												<%}%>
 																													<% } else { %>
 																	<% if(usuário.avatarURL) {%>

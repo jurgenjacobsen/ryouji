@@ -17,7 +17,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 				body: buffer
 			} = await snek.get(`${URL}`);
 			const embed = new Discord.RichEmbed()
-				.setColor('#23272A')
+				.setColor(client.color)
 				.setImage(URL);
 			message.channel.send(embed)
 		} else {
@@ -26,7 +26,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 				body: buffer
 			} = await snek.get(`${URL}`);
 			const embed = new Discord.RichEmbed()
-				.setColor('#23272A')
+				.setColor(client.color)
 				.setImage(URL);
 			message.channel.send(embed)
 		}

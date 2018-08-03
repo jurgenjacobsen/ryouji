@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
       }).then(user => {
         var embed = new RichEmbed()
           .setThumbnail(user.avatar_url)
-          .setColor('#23272A')
+          .setColor(client.color)
           .setFooter(client.user.username, client.user.avatarURL)
           .addField('Seguidores', user.followers, true)
           .addField('Gists', user.public_gists, true)

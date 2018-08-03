@@ -16,7 +16,7 @@ if (args[0] == null) { return message.reply(":x: **Mencione 2 usuários!**" ) }
         var shipname = (take + take1)
         var embed = new Discord.RichEmbed()
         .setTitle('**:couple:  SHIP :couple: **')
-        .setColor("#b24984")
+        .setColor(client.color)
         .addField(`${user} + ${user1} =`, `**${shipname.toUpperCase()}**`)
         .addField(`:fingers_crossed: **CHANCE DO CASAL** :fingers_crossed:`, `${ShipPerecent}%`)
         .setFooter(message.author.tag, message.author.avatarURL)

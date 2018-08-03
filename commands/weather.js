@@ -17,7 +17,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
           .setDescription(`**${current.skytext}**`)
           .setAuthor(`Clima de ${current.observationpoint}`)
           .setThumbnail(current.imageUrl)
-          .setColor(0x00AE86)
+          .setColor(client.color)
           .addField('Timezone',`UTC${location.timezone}`, true)
           .addField('Tipo de grau',location.degreetype, true)
           .addField('Temperatura',`${current.temperature} Graus`, true)

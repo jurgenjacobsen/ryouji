@@ -18,7 +18,7 @@ username = args[1];
 
     message.channel.send({
       embed: {
-        color: 0xe9ff00,
+        color: client.color,
         author: {
           name: `${response.player.name}`,
           url: response.player.blPlayer

@@ -5,7 +5,7 @@ exports.run = async (client, message, args, level) => {
 
   const invEmbed = new Discord.RichEmbed()
   .setTitle(':envelope_with_arrow: Aqui está o convite deste servidor')
-  .setColor('#23272A')
+  .setColor(client.color)
   .setDescription(invite)
   .setTimestamp()
   .setFooter('Para obter meu convite dê r!info | To get my invite write r!info')

@@ -11,7 +11,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     const Discord = require('discord.js');
     const Embed = new Discord.RichEmbed()
     .setTitle('Expanção')
-    .setColor('#23272A')
+    .setColor(client.color)
     .setDescription(`URL Curto: ${args[0]} \n URL Original: ${result}`)
     .setFooter(message.author.username, message.author.avatarURL);
 		message.channel.send(Embed);

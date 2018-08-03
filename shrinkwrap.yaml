@@ -18,6 +18,7 @@ dependencies:
   express-session: 1.15.6
   figlet: 1.2.0
   goo.gl: 0.1.4
+  google: 2.1.0
   google-translate-api: 2.3.0
   helmet: 3.13.0
   isgd: 1.1.3
@@ -435,6 +436,18 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-ObN6h1v2fTJSmUXoS3nMQ92LbDK9be4TV+6G+omQlGJFdcUX5heKi1LZ1YnRMIgwTLEj3E24bT6tYni50rlCfQ==
+  /cheerio/0.19.0:
+    dependencies:
+      css-select: 1.0.0
+      dom-serializer: 0.1.0
+      entities: 1.1.1
+      htmlparser2: 3.8.3
+      lodash: 3.10.1
+    dev: false
+    engines:
+      node: '>= 0.6'
+    resolution:
+      integrity: sha1-dy5wFfLuKZZQltcepBdbdas1SSU=
   /cheerio/0.20.0:
     dependencies:
       css-select: 1.2.0
@@ -666,6 +679,15 @@ packages:
     optional: true
     resolution:
       integrity: sha1-7ZH/HxetE9N0gohZT4pIoNJvMlw=
+  /css-select/1.0.0:
+    dependencies:
+      boolbase: 1.0.0
+      css-what: 1.0.0
+      domutils: 1.4.3
+      nth-check: 1.0.1
+    dev: false
+    resolution:
+      integrity: sha1-sRIcpRhI3SZOIkTQWM7iVN7rRLA=
   /css-select/1.2.0:
     dependencies:
       boolbase: 1.0.0
@@ -675,6 +697,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-KzoRBTnFNV8c2NMUYj6HCxIeyFg=
+  /css-what/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-18wt9FGAZm+Z0rFEYmOUaeAPc2w=
   /css-what/2.1.0:
     dev: false
     resolution:
@@ -897,6 +923,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-JiK04h0Ht5u/80fdLMCEmV4zkNh2BcoMFBmZ/91WtYZ8qVXSKjiw7fXMgFPnHcSZgOo3XdinHvmnDUeMf5R4wA==
+  /domutils/1.4.3:
+    dependencies:
+      domelementtype: 1.3.0
+    dev: false
+    resolution:
+      integrity: sha1-CGVRN5bGswYDGFDhdVFrr4C3Km8=
   /domutils/1.5.1:
     dependencies:
       dom-serializer: 0.1.0
@@ -1422,6 +1454,13 @@ packages:
     dev: false
     resolution:
       integrity: sha1-vpQ0RXhvAMN2Xewx9JDawhIo0/g=
+  /google/2.1.0:
+    dependencies:
+      cheerio: 0.19.0
+      request: 2.87.0
+    dev: false
+    resolution:
+      integrity: sha1-Edl8m1QvoqxMOlDLzZwUyC9qgQE=
   /got/6.7.1:
     dependencies:
       create-error-class: 3.0.2
@@ -2093,6 +2132,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
+  /lodash/3.10.1:
+    dev: false
+    resolution:
+      integrity: sha1-W/Rejkm6QYnhfUgnid/RW9FAt7Y=
   /lodash/3.7.0:
     dev: true
     resolution:
@@ -3892,6 +3935,7 @@ specifiers:
   express-session: ^1.15.6
   figlet: ^1.2.0
   goo.gl: ^0.1.4
+  google: ^2.1.0
   google-translate-api: ^2.3.0
   helmet: ^3.13.0
   isgd: ^1.1.3

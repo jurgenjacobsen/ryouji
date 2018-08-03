@@ -7,7 +7,7 @@ const Discord = require('discord.js')
   	if (!serverQueue) return message.channel.send('Não há nada tocando.');
    const embed = new Discord.RichEmbed()
    .setTitle('Lista de Reprodução')
-   .setColor('#23272A')
+   .setColor(client.color)
    .setDescription(`
     ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
        

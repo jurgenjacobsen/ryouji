@@ -31,7 +31,7 @@ db.fetch(`userItems_${message.author.id}_bonus`).then(i => {
 
 				let lastDailyEmbed = new Discord.RichEmbed()
 					.setAuthor(`Próxima Diária`)
-					.setColor('#23272A')
+					.setColor(client.color)
 					.setDescription(`Você coletou já coletou seu **Daily**, você deve esperar para coletar no dia seguinte.`)
 					.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 				message.channel.send(lastDailyEmbed)
@@ -42,7 +42,7 @@ db.fetch(`userItems_${message.author.id}_bonus`).then(i => {
 					var embed = new Discord.RichEmbed()
 						.setTitle('Diária de Hoje')
 						.setDescription(`Você coletou sua diária com sucesso! :dollar:**${c.format(valor, { code: 'BRL' })}**`)
-						.setColor('#23272A')
+						.setColor(client.color)
 						.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 					message.channel.send(embed);
 				})

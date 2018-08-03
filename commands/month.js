@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
 
 				let lastDailyEmbed = new Discord.RichEmbed()
 					.setAuthor(`Salário Mensal`)
-					.setColor('#23272A')
+					.setColor(client.color)
 					.setDescription(`Você coletou já coletou seu **Salário Mensal**, você deve esperar para coletar no mês seguinte`)
 					.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 				message.channel.send(lastDailyEmbed)
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
 					var embed = new Discord.RichEmbed()
 						.setTitle('Salário Mensal')
 						.setDescription(`Você coletou seu salário mensal! :dollar:**${c.format(valor, { code: 'BRL' })}**`)
-						.setColor('#23272A')
+						.setColor(client.color)
 						.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 					message.channel.send(embed);
 				})

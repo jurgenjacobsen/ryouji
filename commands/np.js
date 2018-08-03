@@ -8,7 +8,7 @@ exports.run = async (client, message, args, level) => {
     const id = serverQueue.songs[0].id; 
     ytdl.getInfo(id, (err, info) => {
     let embed = new Discord.RichEmbed()
-        .setColor('#23272A')
+        .setColor(client.color)
         .setTitle('Tocando Agora')
         .setURL(info.video_url)
         .setDescription(serverQueue.songs[0].title)

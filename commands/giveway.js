@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
   const embed = new Discord.RichEmbed()
   .setTitle("Loteria")
   .setDescription(`O usuário selecionado é: ${user.displayName}`)
-  .setColor('#23272A')
+  .setColor(client.color)
   message.channel.send(embed);
 };
 

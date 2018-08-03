@@ -57,12 +57,16 @@ module.exports = async client => {
 		let channelsCh = client.channels.get('470350643664650260');
 
     let chatVoiceCh = client.channels.get('470353627291189260');
+    let vespertineDevsCh = client.channels.get('472872764961718272');
+    let discord83 = client.channels.get('470279980027478016');
 
 		usersCh.setName(`🚹Usuários ${client.users.size}`);
 		guildsCh.setName(`👥Servidores ${client.guilds.size}`);
 		channelsCh.setName(`📳Canais ${client.channels.size}`);
 
     chatVoiceCh.join();
+    vespertineDevsCh.join();
+    discord83.join();
 
 	}, 10000)
 

@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
 
 				let lastDailyEmbed = new Discord.RichEmbed()
 					.setAuthor(`Pacotão Semanal`)
-					.setColor('#23272A')
+					.setColor(client.color)
 					.setDescription(`Você coletou já coletou seu **Pacotão Semanal**, você deve esperar para coletar na semana seguinte`)
 					.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 				message.channel.send(lastDailyEmbed)
@@ -34,7 +34,7 @@ exports.run = async (client, message, args) => {
 					var embed = new Discord.RichEmbed()
 						.setTitle('Pacotão Semanal')
 						.setDescription(`Você coletou seu dinheiro semanal! :dollar:**${c.format(valor, { code: 'BRL' })}**`)
-						.setColor('#23272A')
+						.setColor(client.color)
 						.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 					message.channel.send(embed);
 				})

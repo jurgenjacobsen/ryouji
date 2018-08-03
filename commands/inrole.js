@@ -6,7 +6,7 @@ const Discord = require('discord.js');
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
  let roleName = args[0];
   
- if(roleName.startsWith('@' || '<' || '<@')) return message.reply('Não mencione um cargo, somente dê o nome do cargo que eu acho!');
+ if(roleName.startsWith('@' || '<' || '<@')) return message.reply('Não mencione um cargo, somente dê o nome do cargo que eu encontrarei!');
   
  if(!roleName) return message.reply('Diga um cargo para eu procurar!') 
 

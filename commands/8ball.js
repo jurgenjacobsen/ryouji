@@ -7,7 +7,7 @@ exports.run = async (client, message, args, level) => {
 
 	let ballembed = new Discord.RichEmbed()
 	.setAuthor(client.user.username, client.user.displayAvatarURL)
-	.setColor("#23272A")
+	.setColor(client.color)
 	.addField("Pergunta", question)
 	.addField("Resposta", answers[a])
 	.setFooter(message.author.tag);

@@ -34,7 +34,7 @@ try {
 
         let workDailyEmbed = new discord.RichEmbed()
         .setAuthor(`${message.author.tag} || Descanso de trabalho!`, message.author.displayAvatarURL)
-        .setColor(`#23272A`)
+        .setColor(client.color)
         .setDescription(`**${message.author.tag}**, Você acabou de trabalhar por 6 horas! \nVocê precisa descansar por, **${timeObj.hours}h, ${timeObj.minutes}m**`)
         message.channel.send(workDailyEmbed)
       send(worklog, dailytEmbed, {
@@ -47,7 +47,7 @@ try {
             var discord = require('discord.js')
             let dailyEmbed = new discord.RichEmbed()
             .setAuthor(`${message.author.tag} Você trabalhou em um escritório e conferiu muitos documentos`, message.author.displayAvatarURL)
-            .setColor(`#23272A`)
+            .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
             send(worklog, workEmbed, {
@@ -61,7 +61,7 @@ try {
             var discord = require('discord.js')
             let dailyEmbed = new discord.RichEmbed()
             .setAuthor(`${message.author.tag} Você estava trabalhando no shopping e vendeu muitas roupas`, message.author.displayAvatarURL)
-            .setColor(`#23272A`)
+            .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
             send(worklog, workEmbed, {
@@ -75,7 +75,7 @@ try {
             var discord = require('discord.js')
             let dailyEmbed = new discord.RichEmbed()
             .setAuthor(`${message.author.tag} Acabamento de Cozinha e Limpeza`, message.author.displayAvatarURL)
-            .setColor(`#23272A`)
+            .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
             send(worklog, workEmbed, {
@@ -89,7 +89,7 @@ try {
             var discord = require('discord.js')
             let dailyEmbed = new discord.RichEmbed()
             .setAuthor(`${message.author.tag} Você trabalhou no mercado e vendeu muitos melões`, message.author.displayAvatarURL)
-            .setColor(`#23272A`)
+            .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
             send(worklog, workEmbed, {
@@ -103,7 +103,7 @@ try {
             var discord = require('discord.js')
             let dailyEmbed = new discord.RichEmbed()
             .setAuthor(`${message.author.tag} Terminou de trabalho como segurança e cuidou de muitas pessoas!`, message.author.displayAvatarURL)
-            .setColor(`#23272A`)
+            .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
             send(worklog, workEmbed, {
@@ -117,7 +117,7 @@ try {
             var discord = require('discord.js')
             let dailyEmbed = new discord.RichEmbed()
             .setAuthor(`${message.author.tag} Você trabalho como Técnico de informática esmagando alguns erros de codificação`, message.author.displayAvatarURL)
-            .setColor(`#23272A`)
+            .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
           send(worklog, workEmbed, {

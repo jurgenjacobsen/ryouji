@@ -40,7 +40,7 @@ exports.run = async (client, message, args, level) => {
 		.setTitle(`ㅤ`)
 		.setAuthor(`${guild.name}`,
 			'https://images-ext-1.discordapp.net/external/rXMwUDg4JWQ30e0YkTQkF2Fvf2KhlG2RdzyKztO4COA/https/cdn.discordapp.com/emojis/452852445001941002.png')
-		.setColor('#23272A')
+		.setColor(client.color)
 		.setThumbnail(`${guild.iconURL}?size=512`)
 		.addField(`ID do Servidor`, `${guild.id}`, true)
 		.addField(`:crown: Dono`, `${guild.owner}`, true)
