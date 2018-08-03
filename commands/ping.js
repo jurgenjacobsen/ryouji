@@ -3,16 +3,17 @@ const Discord = require('discord.js');
 exports.run = (client, message, args, level) => {
   const embed = new Discord.RichEmbed()
   .setTitle('Ping')
-  .setColor('#2C2F33')
+  .setColor(client.color)
   .setDescription(`:ping_pong: Meu Ping\ **${Date.now() - message.createdTimestamp}**ms , Discord API Ping **${Math.round(client.ping)}**ms`)
-   message.channel.send(embed)
+   message.channel.send(message.author, embed)
 };
 
 exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['ping'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

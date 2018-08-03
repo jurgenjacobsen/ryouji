@@ -19,7 +19,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['volume'],
-	permLevel: 3
+	permLevel: 3,
+  manu: false
 };
 
 exports.help = {

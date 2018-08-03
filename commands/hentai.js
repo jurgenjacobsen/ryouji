@@ -11,10 +11,9 @@ let {body} = await superagent
    }
   
     let hentaiEmbed = new Discord.RichEmbed()
-    .setColor("#23272A")
     .setTitle("Hentai é arte")
     .setImage(body.url)
-    .setColor("#23272A")
+    .setColor(client.color)
 
     message.channel.send(hentaiEmbed);
 };
@@ -23,7 +22,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['hentai', 'oi'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

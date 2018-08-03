@@ -23,7 +23,7 @@ const dashboardz = 'dashboard'; if(message.content.match(dashboardz)) return mes
       evaled = require("util").inspect(evaled);      
       const embed = new Discord.RichEmbed()
       .setTitle("<:yep:416325498130399234> Executado!")
-      .setColor("#00ff00")
+      .setColor(client.color)
       .addField(`:inbox_tray: Input`, '```' + (code) + '```')
       .addField(`:outbox_tray: Output:`, '```' + clean(evaled) + '```')
       msg.channel.send({embed})
@@ -44,7 +44,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['eval', 'exec', 'executar'],
-	permLevel: 10
+	permLevel: 10,
+  manu: false
 };
 
 exports.help = {

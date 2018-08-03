@@ -6,7 +6,7 @@ const Discord = require('discord.js');
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
 	var time = Date.now();
 	const embed = new Discord.RichEmbed()
-		.setColor('#23272A')
+		.setColor(client.color)
 		.setTitle('Paleta de Cores')
     .addField('<:discordlogo:454695663620587541> **Discord:**', 'ㅤ')
 		.addField(`Azoxo `, `#7289DA  <:Azoxo:454695663284912140>`, true)
@@ -26,7 +26,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['cores',  'cor'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

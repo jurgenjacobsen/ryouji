@@ -1,4 +1,9 @@
 exports.run = async (client, message, args) => { 
+ if(!args[0]) {
+   message.reply('**r!feedback send [texto]**')
+ }
+
+
  switch (args[0]) {  
   case 'send': {
     const Discord = require('discord.js');
@@ -7,7 +12,7 @@ exports.run = async (client, message, args) => {
     db.add(`userBalance_${message.author.id}`, amount)
     const Embed = new Discord.RichEmbed()
     .setTitle('<:green:463073006093336576> FeedBack Enviado !')
-    .setColor('#23272A')
+    .setColor(client.color)
     .setDescription('Sua mensagem de feedback foi enviada com sucesso! Já que você está me ajudando com sua mensagem de feedback estou lhe dando **R$50,00**')
     .setTimestamp()
     .setFooter('Lembrando que se você spammar este comando com a intenção de ganhar dinheiro você será punido!', client.user.avatarURL);
@@ -15,7 +20,7 @@ exports.run = async (client, message, args) => {
 
     const sEmbed = new Discord.RichEmbed()
     .setTitle('User: ' + message.author.username)
-    .setColor('#23272A')
+    .setColor(client.color)
     .setDescription(args[1])
     .setTimestamp()
     .setFooter(message.author.tag, message.author.avatarURL)
@@ -29,7 +34,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['feedback'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

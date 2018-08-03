@@ -12,6 +12,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         return message.reply(':x: **Max 1 Palavra**');
     }
     const emb = new Discord.RichEmbed();
+    emb.setColor(client.color)
     emb.setAuthor("Trump está fazendo " + meow + " se tornar ilegal!", "http://blog.adsy.me/wp-content/uploads/2016/11/angry-side-face-trump-transparent.png");
     emb.setImage(illegal);
     message.channel.send({
@@ -24,7 +25,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['trump'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

@@ -27,7 +27,7 @@ const Discord = require('discord.js')
 
 const lembrete2Embed =  new Discord.RichEmbed()
 .setTitle('Lembrete')
-.setColor('#23272A')
+.setColor(client.color)
 .setAuthor(message.author.username, message.author.avatarURL)
 .setDescription(`Vou te lembrar em **${time}** sobre: **${reminder}**`)
 
@@ -36,7 +36,7 @@ const lembrete2Embed =  new Discord.RichEmbed()
 
 const lembreteEmbed = new Discord.RichEmbed()
 .setTitle('Lembrete')
-.setColor('#23272A')
+.setColor(client.color)
 .setAuthor(message.author.username, message.author.avatarURL)
 .setDescription(`Você me pediu **${time}** atrás para lembrá-lo : **${reminder}**`)
 	setTimeout(function () {
@@ -50,7 +50,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['lembrete'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

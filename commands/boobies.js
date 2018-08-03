@@ -18,7 +18,7 @@ if (!message.channel.nsfw) return message.channel.send({embed: {
   randomPuppy(sub)
         .then(url => {
             const embed = new Discord.RichEmbed()
-                .setColor("RANDOM")
+                .setColor(client.color)
                 .setAuthor("4k", client.user.avatarURL)
                 .setFooter("xD")
                 .setImage(url);
@@ -33,7 +33,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['porn'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

@@ -8,39 +8,41 @@ exports.run = async (client, message, args) => {
 	let cooldown = 8.64e+7;
 	const amount = 250
 
+let bonus;
 
-	const VIPS = ['292065674338107393'];
+db.fetch(`userItems_${message.author.id}_bonus`).then(i => {
+  if(i >= 1) {
+    bonus = true
+  } else {
+    bonus = false
+  }
 
-	let valor;
+});
 
-	if (message.author.id == VIPS) {
-		valor = 350;
-	} else {
-		valor = 250
-	};
+	let valor = 150;
 
 	let lastDaily = await db.fetch(`lastDaily_${message.author.id}`)
 	try {
-		db.fetch(`userBalance_${message.author.id}`).then(bucks => {
+		db.fetch(`userBalance2.0_${message.author.id}`).then(bucks => {
 			if (bucks == null) {
-				db.set(`userBalance_${message.author.id}`, 50)
+				db.set(`userBalance2.0_${message.author.id}`, 50)
 			} else if (lastDaily !== null && cooldown - (Date.now() - lastDaily) > 0) {
 				let timeObj = ms(cooldown - (Date.now() - lastDaily))
 
 				let lastDailyEmbed = new Discord.RichEmbed()
 					.setAuthor(`Próxima Diária`)
-					.setColor('#23272A')
+					.setColor(client.color)
 					.setDescription(`Você coletou já coletou seu **Daily**, você deve esperar para coletar no dia seguinte.`)
 					.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 				message.channel.send(lastDailyEmbed)
 			} else {
 				db.set(`lastDaily_${message.author.id}`, Date.now());
-				db.add(`userBalance_${message.author.id}`, valor).then(i => {
+				db.add(`userBalance2.0_${message.author.id}`, valor).then(i => {
 					var discord = require('discord.js')
 					var embed = new Discord.RichEmbed()
 						.setTitle('Diária de Hoje')
 						.setDescription(`Você coletou sua diária com sucesso! :dollar:**${c.format(valor, { code: 'BRL' })}**`)
-						.setColor('#23272A')
+						.setColor(client.color)
 						.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 					message.channel.send(embed);
 				})
@@ -56,7 +58,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['daily', 'diaria', 'diário'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

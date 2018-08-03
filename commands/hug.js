@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
     .setTitle("Abraço! <:EeveeSip:459132727397056512>")
     .setDescription(`**${message.author.username}** abraçou **${message.mentions.users.first().username}**!`)
     .setImage(body.url)
-    .setColor("#23272A")
+    .setColor(client.color)
 
     message.channel.send(hugEmbed)
 
@@ -23,7 +23,8 @@ exports.conf = {
     enabled: true,
     guildOnly: true,
     aliases: ['hug', 'abraço'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

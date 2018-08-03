@@ -19,7 +19,7 @@ let input = args.join(" ");
     const Discord = require('discord.js');
     const embed = new Discord.RichEmbed()
         .setThumbnail("https://images-na.ssl-images-amazon.com/images/I/31QYTepQomL.png")
-        .setColor('#23272A')
+        .setColor(client.color)
         .addField("**Calculo:**", '```' + question + '```', true)
         .addField("**Resposta:**", '```' + answer + '```')
 
@@ -30,7 +30,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['calc', 'calculator', 'calcular', 'calculadora'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

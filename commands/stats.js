@@ -7,7 +7,7 @@ exports.run = (client, message, args, level) => {
 	var time = Date.now();
 	const duration = moment.duration(client.uptime).format(' D [dias], H [hrs], m [mins], s [segs]');
 	const embed = new Discord.RichEmbed()
-		.setColor('#23272A]')
+		.setColor(client.color)
 		.setAuthor(client.user.username, client.user.displayAvatarURL)
 		.setTitle('BOT STATS')
 		.addField(`Uso de memória`, `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`, true)
@@ -27,7 +27,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['stats'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

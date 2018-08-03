@@ -47,8 +47,6 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		title: (video.title),
 		url: `https://www.youtube.com/watch?v=${video.id}`
 	};
-
-
 }
 
 
@@ -57,7 +55,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['play'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

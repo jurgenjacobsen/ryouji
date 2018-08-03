@@ -1,4 +1,5 @@
 var moment = require('moment');
+var db = require('quick.db');
 
 module.exports = (client) => {
 
@@ -34,13 +35,14 @@ module.exports = (client) => {
 		2: 'Moderador',
 		3: 'Administrador',
 		4: 'Dono do Servidor',
+    9: 'WhiteList',
 		10: 'Dono do Bot'
 	};
 
 	client.pointsMonitor = (client, message) => {
 		const db = require('quick.db');
 		let amount;
-		db.fetch(`userItems_${message.author.id}_bonus`).then(i => {
+		db.fetch(`userItems_${message.author.id}_bonus1`).then(i => {
 			if (i >= 1) {
 				amount = 0.5;
 			} else {

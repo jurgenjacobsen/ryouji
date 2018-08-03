@@ -10,7 +10,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['add', 'Adicionar'],
-    permLevel: 10
+    permLevel: 10,
+    manu: false
 };
 
 exports.help = {

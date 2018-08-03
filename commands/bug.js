@@ -10,7 +10,7 @@ if(!args[0]) return message.reply('O que você quer que eu faça ? **send** = En
    case 'send':
     const channelBugEmbed = new Discord.RichEmbed()
     .setTitle('<:BugHunter:454695663628713994> Bug Reportado')
-    .setColor('#23272A')
+    .setColor(client.embed.color)
     .setDescription('Você acabou de fazer um report de bug para meus administradores!')
     .addField('Descrição do Bug', args[1])
     .setTimestamp()
@@ -23,7 +23,7 @@ if(!args[0]) return message.reply('O que você quer que eu faça ? **send** = En
 //
     const supportBugEmbed = new Discord.RichEmbed()
     .setTitle('<:BugHunter:454695663628713994> Bug Reportado')
-    .setColor('#23272A')
+    .setColor(client.color)
     .setDescription(message.author + ' acabou de fazer um report de bug para você!')
     .addField('Descrição do Bug', args[1])
     .addField('ID do Autor', message.author.id, true)
@@ -31,7 +31,6 @@ if(!args[0]) return message.reply('O que você quer que eu faça ? **send** = En
     .addField('Conta criada em', moment.utc(message.author.createdAt).format('LLLL'))
     .setTimestamp()
     .setFooter(message.author.tag, message.author.avatarURL);
-    client.channels.get('470355257965150238').send(`==========================================\nㅤㅤㅤㅤㅤㅤ${message.author}\n==========================================`);
     client.channels.get('470355257965150238').send(supportBugEmbed)
    break;
   
@@ -41,7 +40,7 @@ if(!args[0]) return message.reply('O que você quer que eu faça ? **send** = En
 
   const supportBugEmbeded = new Discord.RichEmbed()
     .setTitle('<:BugHunter:454695663628713994> Bug Reportado')
-    .setColor('#23272A')
+    .setColor(client.color)
     .setDescription(message.author + ' acabou de fazer um report de bug para você!')
     .addField('Descrição do Bug', args[1])
     .addField('ID do Autor', message.author.id, true)
@@ -49,7 +48,6 @@ if(!args[0]) return message.reply('O que você quer que eu faça ? **send** = En
     .addField('Conta criada em', moment.utc(message.author.createdAt).format('LLLL'))
     .setTimestamp()
     .setFooter(message.author.tag, message.author.avatarURL);
-    client.channels.get('470355257965150238').send(`==========================================\nㅤㅤㅤㅤㅤㅤ${message.author}\n ㅤㅤㅤㅤ${message.id}\n==========================================`);
     client.channels.get('470355257965150238').send(supportBugEmbeded)
    break;
 
@@ -63,7 +61,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['bug', 'ticket'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

@@ -32,7 +32,7 @@ exports.run = (client, message, args, level) => {
 			var eNumber = 0;
 			embeds.forEach((e) => {
 				eNumber++;
-				e.setColor('#23272A');
+				e.setColor(client.color);
 				if (eNumber === embeds.length) {
 					e.setFooter(`Ping: ${Date.now() - time}ms`);
 				}
@@ -44,7 +44,7 @@ exports.run = (client, message, args, level) => {
 			});
 		} else {
 			embeds.forEach((e) => {
-				e.setColor('#23272A');
+				e.setColor(client.color);
 				e.setFooter(`Ping: ${Date.now() - time}`);
 				message.author.send({
 					embed: e
@@ -68,7 +68,7 @@ exports.run = (client, message, args, level) => {
 
 			var hEmbed = new Discord.RichEmbed()
 				.setTitle(`Ajuda do Comando: ${command.help.name}`)
-				.setColor('#23272A')
+				.setColor(client.color)
 				.addField('Descrição', command.help.description)
 				.addField('Categoria', command.help.category)
 				.addField('Uso', command.help.usage)
@@ -84,7 +84,7 @@ exports.run = (client, message, args, level) => {
 				message.author.send({
 					embed: hEmbed
 				});
-				message.react('👍');
+				message.react('📌');
 			}
 		} else {
 			return message.reply('Comando não encontrado!');
@@ -95,7 +95,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['h', 'halp', 'help', 'ajuda'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

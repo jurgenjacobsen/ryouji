@@ -14,7 +14,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
   const embed = new Discord.RichEmbed()
   .setTitle('Info')
   .setAuthor('Ryouji', 'https://cdn.discordapp.com/avatars/452585205975351297/78d6388a1c48344ab0464b7c1dd63f43.png?size=2048?size=128')
-  .setColor('#23272A')
+  .setColor(client.color)
   .setDescription('Informações sobre Ryouji')
   .addField('<:online:470363783605256225> Ping:', `**${Date.now() - message.createdTimestamp}**ms`, true)
   .addField('<a:454704719282044940:470364256962084866> Tempo em que estou acordado', days + 'd ' + hours + 'h ' + mins + 'm ' + realTotalSecs +'s ', true)
@@ -31,7 +31,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['informações', 'info'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

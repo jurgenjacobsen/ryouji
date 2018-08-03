@@ -41,7 +41,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['lockdown'],
-	permLevel: 2
+	permLevel: 2,
+  manu: true
 };
 
 exports.help = {

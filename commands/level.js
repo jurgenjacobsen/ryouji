@@ -11,7 +11,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
   
 	const scoreLevel = client.points.get(`${message.guild.id}-${user.id}`).level || 0;
 	let embed = new Discord.RichEmbed()
-	.setColor('#23272A')
+	.setColor(client.color)
 	.setAuthor(user.username + ' está no nível ' + scoreLevel)
 	.setFooter(client.user.username, client.user.avatarURL)
     !scoreLevel ? message.channel.send('Você não possui nível') : message.channel.send(embed);
@@ -21,7 +21,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['level', 'nível'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

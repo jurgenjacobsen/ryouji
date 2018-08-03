@@ -5,7 +5,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
      const img = await rps()
      const embed = new Discord.RichEmbed()
      .setTitle('Dogs')
-     .setColor('#23272A')
+     .setColor(client.color)
      .setImage(img)
      message.channel.send(embed)
   };
@@ -14,7 +14,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['dogs', 'cachorrinho', 'cachorrinhos'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

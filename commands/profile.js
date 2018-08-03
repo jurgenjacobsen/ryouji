@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
     const profileEmbed = new Discord.RichEmbed()
     .setTitle('Perfil de **' + user.username + '**')
     .setDescription(`Link: **https://ryouji.glitch.me/user/${user.id}**`)
-    .setColor('#23272A')
+    .setColor(client.color)
 if(user.avatar) {
     profileEmbed.setThumbnail(user.avatarURL + '?size=512')
 }
@@ -24,7 +24,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['profile', 'perfil'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

@@ -9,7 +9,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     }
     const scorePoints = client.points.get(`${message.guild.id}-${user.id}`).points || 0;
     let embed = new Discord.RichEmbed()
-        .setColor('#23272A')
+        .setColor(client.color)
         .setAuthor(user.username + ' possui ' + scorePoints + ' pontos')
         .setFooter(client.user.username, client.user.avatarURL) 
 	!scorePoints ? message.channel.send('Você não tem pontos ainda.') : message.channel.send(embed);
@@ -19,7 +19,8 @@ exports.conf = {
     enabled: true,
     guildOnly: true,
     aliases: ['pontos', 'points'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

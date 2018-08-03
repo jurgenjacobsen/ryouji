@@ -40,12 +40,12 @@ exports.run = async (client, message, args, level) => {
 		.setTitle(`ㅤ`)
 		.setAuthor(`${guild.name}`,
 			'https://images-ext-1.discordapp.net/external/rXMwUDg4JWQ30e0YkTQkF2Fvf2KhlG2RdzyKztO4COA/https/cdn.discordapp.com/emojis/452852445001941002.png')
-		.setColor('#23272A')
+		.setColor(client.color)
 		.setThumbnail(`${guild.iconURL}?size=512`)
 		.addField(`ID do Servidor`, `${guild.id}`, true)
 		.addField(`:crown: Dono`, `${guild.owner}`, true)
-		.addField(":calendar: Criado em:", `${moment.utc(guild.createdAt).format('LLLL')}`, true)
-		.addField(":star2: Entrei em:", moment.utc(client.user.joinedAt).format('LLLL'), true)
+		.addField(":calendar: Criado em:", `${moment.utc(guild.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado')}`, true)
+		.addField(":star2: Entrei em:", moment.utc(client.user.joinedAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado'), true)
 		.addField(`Membros: (${guild.memberCount})`,
 			`:busts_in_silhouette: Pessoas: ${guild.members.filter(member => !member.user.bot).size} | <:bot:470365210423722015> Bots: ${guild.members.filter(member => member.user.bot).size} \n<:online:470363783605256225> **${guild.members.filter(o => o.presence.status === 'online').size}** Online <:idle:470363783563444225> **${guild.members.filter(i => i.presence.status === 'idle').size}** Ausente <:donotdisturb:470363783538409472> **${guild.members.filter(dnd => dnd.presence.status === 'dnd').size}** Ocupado <:offline:470363783630684160> **${guild.members.filter(off => off.presence.status === 'offline').size}** Offline`
 		)
@@ -62,7 +62,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['serverinfo'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

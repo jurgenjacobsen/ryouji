@@ -11,8 +11,8 @@ exports.run = async (client, message, args, tools) => {
      'no' : 'Não'
     }[body.answer];
 
-    if(body.answer === 'yes') color = '0x01DF01';
-    if(body.answer === 'no') color = '0xFF0000';
+    if(body.answer === 'yes') color = client.color;
+    if(body.answer === 'no') color = client.color;
     const embed = new Discord.RichEmbed()
     .setColor(color)
     .setImage(`${body.image}`)
@@ -23,7 +23,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['yesorno'],
-	permLevel: 3
+	permLevel: 3,
+  manu: false
 };
 
 exports.help = {

@@ -18,7 +18,7 @@ username = args[1];
 
     message.channel.send({
       embed: {
-        color: 0xe9ff00,
+        color: client.color,
         author: {
           name: `${response.player.name}`,
           url: response.player.blPlayer
@@ -106,7 +106,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['bf4', 'battlefield4'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

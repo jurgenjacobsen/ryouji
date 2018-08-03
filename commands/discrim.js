@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args, level) => {
 
 	const embed = new Discord.RichEmbed()
-		.setColor('WHITE');
+		.setColor(client.color);
 
 	if (isNaN(args[0]) || args[0] > 9999 || args[0] < 1) {
 
@@ -35,7 +35,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['discrim', 'discriminator'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

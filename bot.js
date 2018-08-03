@@ -11,6 +11,7 @@ const client = new Discord.Client();
 try {
 	client.config = require('./config.js');
   client.itens = require('./itens.json');
+  client.color = require("./config.js").color;
 } catch (err) {
 	console.error('Unable to load config.js \n', err);
 	process.exit(1);

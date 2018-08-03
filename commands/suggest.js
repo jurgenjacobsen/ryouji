@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
  }
 
  let embed = new Discord.RichEmbed()
-     .setColor('#2C2F33')
+     .setColor(client.color)
      .addField("**Sugestão**", `${suggestmessage}`)
      .setFooter(`Sugerido por ${message.author.tag}`)
      .setTimestamp()
@@ -27,7 +27,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['sugestão', 'suggest', 'suggestion'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

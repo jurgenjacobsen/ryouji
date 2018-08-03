@@ -16,26 +16,26 @@ exports.run = async (client, message, args) => {
 
 	let lastMonth = await db.fetch(`lastMonth_${message.author.id}`)
 	try {
-		db.fetch(`userBalance_${message.author.id}`).then(bucks => {
+		db.fetch(`userBalance2.0_${message.author.id}`).then(bucks => {
 			if (bucks == null) {
-				db.set(`userBalance_${message.author.id}`, 50)
+				db.set(`userBalance2.0_${message.author.id}`, 50)
 			} else if (lastMonth !== null && cooldown - (Date.now() - lastMonth) > 0) {
 				let timeObj = ms(cooldown - (Date.now() - lastMonth))
 
 				let lastDailyEmbed = new Discord.RichEmbed()
 					.setAuthor(`Salário Mensal`)
-					.setColor('#23272A')
+					.setColor(client.color)
 					.setDescription(`Você coletou já coletou seu **Salário Mensal**, você deve esperar para coletar no mês seguinte`)
 					.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 				message.channel.send(lastDailyEmbed)
 			} else {
 				db.set(`lastMonth_${message.author.id}`, Date.now());
-				db.add(`userBalance_${message.author.id}`, valor).then(i => {
+				db.add(`userBalance2.0_${message.author.id}`, valor).then(i => {
 					var discord = require('discord.js')
 					var embed = new Discord.RichEmbed()
 						.setTitle('Salário Mensal')
 						.setDescription(`Você coletou seu salário mensal! :dollar:**${c.format(valor, { code: 'BRL' })}**`)
-						.setColor('#23272A')
+						.setColor(client.color)
 						.setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
 					message.channel.send(embed);
 				})
@@ -51,7 +51,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['month', 'mensal', 'salario'],
-    permLevel: 0
+    permLevel: 0,
+    manu: false
 };
 
 exports.help = {

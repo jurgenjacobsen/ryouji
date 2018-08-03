@@ -5,40 +5,14 @@ var config = {
     token: vault.TOKEN,
     status: 'online',
     debug: 'false',
+    color: '#36393F',
     playingGame: 'felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#001',
     purgeLogFormat: '\n ID da Mensagem: {{mID}} | Hora: {{mTS}} | Conteúdo: {{mC}} \n',
     eightBallResponses: ['Sim', 'Não', 'Certamente', 'Minhas fontes dizem sim', 'Tente mais tarde...', 'Sem dúvida', 'É melhor não contar agora'],
     googleAPIToken: vault.GOOGLEAPITOKEN,
     logTimeFormat: 'LLLL',
-    version: '3.1.3',
+    version: '3.1.5',
     musicEnabled: 'true',
-    itens: {
-     badge: {
-      name: "Badge",
-      description: " Adiciona uma **Badge (Ícone)** ao seu perfil ",
-      valor: "350"
-     },
-     bonus: {
-       name: "Bônus",
-       description: "Obtém **400%** como bônus de XP por mensagem",
-       valor: "850"
-     },
-     premium: {
-       name: "Premium",
-       description: "Recebe uma **Badge** em seu perfil, ganha **400%** de bônus",
-       valor: "2150"
-     },
-     background: {
-       name: "Background",
-       description: "Dá o direito de você adicionar um imagem de **Plano de Fundo** no seu perfil",
-       valor: "1805"
-     },
-     partner: {
-        name: "Parceria",
-        description: "Adiciona o servidor à lista de **Parceiros do Site**",
-        valor: "18450"
-     }
-    },
     defaultSettings: {
         prefix: 'r!',
         modLogChannel: 'logs',
@@ -46,6 +20,7 @@ var config = {
         adminRole: 'Administrador',
         welcomeChannel: '⚫bem-vindos',
         welcomeMessage: 'Bem-Vindo {{user}} ao **{{guild}}!**',
+        byeMessage: "Adeus **{{user}}**, Volte Sempre!",
         welcomeEnabled: 'true',
         inviteFilterEnabled: 'true',
         inviteWhitelist: ['Dono'],

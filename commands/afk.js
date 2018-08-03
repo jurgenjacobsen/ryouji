@@ -7,7 +7,7 @@ exports.run = async (client, message, args, level) => {
 
 	let afk = await status.fetch(message.author.id);
 
-	const embed = new Discord.RichEmbed().setColor(0xffffff)
+	const embed = new Discord.RichEmbed().setColor(client.color)
 
 	if (!afk) {
 		embed.setFooter('Você está AFK agora');
@@ -25,7 +25,8 @@ exports.conf = {
 	enabled: true,
 	guildOnly: false,
 	aliases: ['afk'],
-	permLevel: 0
+	permLevel: 0,
+  manu: false
 };
 
 exports.help = {

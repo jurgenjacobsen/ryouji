@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
  const DB = require('quick.db');
  const send = require('quick.hook');
 
- DB.fetch(`userItems_${msg.author.id}_background`).then(background => {
+ DB.fetch(`userItems_${msg.author.id}_background1`).then(background => {
     if(background >= 1) {
        DB.fetch(`userBackground_${msg.author.id}`).then(item => {
         if(item == null) {
@@ -35,16 +35,29 @@ switch (args[0]) {
   case "list" : {
     const Embed = new Discord.RichEmbed()
     .setTitle(':frame_photo: Lista de Backgrounds')
-    .setColor('')
+    .setColor(client.color)
     .addField('Azoxo', '<:Azoxo:454695663284912140> , **r!background set Azoxo**')
     .addField('Branco', '<:Totalmentebranco:454695663847079936>  **r!background set Branco**')
     .addField('Cinxo', '<:Cunxo:454695663389769729>  **r!background set Cinxo**')
     .addField('Cinza', '<:Escuromasnopreto:454695663754674177>  **r!background set Cinza**')
-    .addField('Escuro', '<:Notopreto:454695663851012116>  **background set Escuro**')
+    .addField('Escuro', '<:Notopreto:454695663851012116>  **r!background set Escuro**')
+    .addField('Rainbow', '<:rainbow2:472123064239259658> **r!background set Rainbow**')
+    .addField('Flora', ':camping:  **r!background set Flora**')
     msg.channel.send(Embed)
     break;
   }
-  
+
+  case "reset" : {
+     DB.set(`userBackground_${msg.author.id}`, null)
+     const Embed = new Discord.RichEmbed()
+     .setTitle('Seu Background foi resetado!')
+     .setColor(client.config.cores.padrão)
+     .setAuthor(msg.author.username, msg.author.avatarURL)
+     msg.channel.send(Embed)
+   break;
+  }  
+
+
   case "set" : {
    if(!args[1]) {
      msg.reply('Dê **r!background list**, para saber todos os backgrounds que você pode adicionar ao seu perfil!')
@@ -96,6 +109,24 @@ switch (args[0]) {
            DB.set(`userBackground_${msg.author.id}`, 'https://cdn.discordapp.com/attachments/470277456964747274/471391511590993920/Nao_tao_preto.png')
       break;
       }
+      case "Rainbow" : {
+           const Embed = new Discord.RichEmbed()
+           .setTitle('Você adicionou **' + args[1] + '** como seu novo background!')
+           .setDescription('Agora, você pode ver seu perfil em: https://ryouji.glitch.me/user/' + msg.author.id)
+           .setColor('RANDOM')
+           msg.channel.send(Embed)
+           DB.set(`userBackground_${msg.author.id}`, 'http://4.bp.blogspot.com/-stkUR7dTINk/TnWLnr48JPI/AAAAAAAAAh8/gw-rjcbc_lY/s1600/Abstract+Rainbow+Colored+Background+1366.jpg')
+      break;
+      }
+      case "Flora" : {
+           const Embed = new Discord.RichEmbed()
+           .setTitle('Você adicionou **' + args[1] + '** como seu novo background!')
+           .setDescription('Agora, você pode ver seu perfil em: https://ryouji.glitch.me/user/' + msg.author.id)
+           .setColor('GREEN')
+           msg.channel.send(Embed)
+           DB.set(`userBackground_${msg.author.id}`, 'https://www.planwallpaper.com/static/images/desktop-backgrounds1_wvNeWqW.jpg')
+      break;
+      }
     }
 
    }
@@ -112,7 +143,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['background'],
-    permLevel: 0
+    permLevel: 0,
+  manu: false
 };
 
 exports.help = {
