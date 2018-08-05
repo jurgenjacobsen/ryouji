@@ -34,7 +34,8 @@ module.exports = async client => {
 	let statuses = [
     `felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#0001`,
 		`em ${client.guilds.size} servidoresㅤㅤㅤㅤㅤ | 🔨 Criado por: Eleven#0001`,
-    `com ${client.users.size} usuáriosㅤㅤㅤㅤㅤ | 🔨 Criado por: Eleven#0001`
+    `com ${client.users.size} usuáriosㅤㅤㅤㅤㅤ | 🔨 Criado por: Eleven#0001`,
+    `na ${client.guilds.get('475397487608463361').name} - By Wukknous#2750`
 	]; 
 
 	setInterval(function() {
@@ -58,7 +59,6 @@ module.exports = async client => {
 
     let chatVoiceCh = client.channels.get('470353627291189260');
     let vespertineDevsCh = client.channels.get('472872764961718272');
-    let discord83 = client.channels.get('470279980027478016');
 
 		usersCh.setName(`🚹Usuários ${client.users.size}`);
 		guildsCh.setName(`👥Servidores ${client.guilds.size}`);
@@ -66,7 +66,7 @@ module.exports = async client => {
 
     chatVoiceCh.join();
     vespertineDevsCh.join();
-    discord83.join();
+    
 
 	}, 10000)
 
@@ -80,19 +80,15 @@ module.exports = async client => {
 
 	canal.send(readyOwnEmbed);
 
-	const request = require('request-promise-native');
+const snekfetch = require('snekfetch');
+const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ1MjU4NTIwNTk3NTM1MTI5NyIsImJvdCI6dHJ1ZSwiaWF0IjoxNTMyMjE5NTMzfQ.Unvh9V-Wyg6FvAaTecsdvemK71S_sTZh0yJBwFquJIA';
 
-	function postServerCount() {
-		return request.post({
-			uri: `https://discordbots.org/api/bots/${client.user.id}/stats`,
-			headers: {
-				Authorization: process.env.DBLTOKEN, // Insert token here
-			},
-			json: true,
-			body: {
-				server_count: client.guilds.size,
-			},
-		});
-	}
 
-}
+setInterval(function(){
+ snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
+    .set('Authorization', key)
+    .send({server_count: client.guilds.size, shard_count: client.config.shards})
+    .then(() => console.log(`Posted to dbl.`))
+    .catch((e) => console.error(e));
+  }, 60000);
+ }

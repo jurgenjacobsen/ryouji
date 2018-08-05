@@ -63,7 +63,7 @@ const EmbedBlackList = new Discord.RichEmbed()
 .setDescription('Você não tem permissão alguma de executar algum comando do bot, por motivos que, <@'+client.config.ownerID+'> adicionou você na **BlackList**')
 
 if(message.guild.id !== '425864977996578816' || message.guild.id !== '264445053596991498') {
-   if(message.author.id == '303188858307346432' || message.author.id == '247362229031272449' || message.author.id == '361272813052493826') return message.channel.send(message.author, EmbedBlackList);
+   if(message.author.id == '247362229031272449') return message.channel.send(message.author, EmbedBlackList);
 };
 
 	message.settings = settings;
@@ -109,12 +109,6 @@ if(message.guild.id !== '425864977996578816' || message.guild.id !== '2644450535
 
 		if (message.content.indexOf(guildSettings.prefix) !== 0) {
 			return;
-		}
-
-		if (client.talkedRecently.has(message.author.id)) {
-			return message.reply(`Você precisa esperar ${parseInt(guildSettings.commandTimeout)}ms segundos para executar cada comando.`).then(msg => msg.delete({
-				timeout: 4000
-			}))
 		}
 
 		if (level < 2) {

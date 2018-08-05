@@ -2,20 +2,24 @@ const Discord = require('discord.js');
 const db = require('quick.db');
 
 module.exports = (client, member) => {
-	// Load the guild's settings
 	if (member.user.id === client.user.id) return;
-	const guildSettings = client.settings.get(member.guild.id);
 
-	if (!guildSettings.welcomeChannel) return console.log('Não é possível enviar uma mensagem de boas-vindas, pois não há nada na configuração welcomeChannel');
-	if (guildSettings.welcomeEnabled !== 'true') return;
 
-	const welcomeMessage = guildSettings.welcomeMessage.replace('{{user}}', member.user).replace('{{guild}}', member.guild.name);
+db.fetch(`guildSettings_${member.guild.id}_welcomeMessage_`).then(welcomeMsg => {
+let welcomeMessage;
+if(welcomeMsg !== null) {
+ welcomeMessage = welcomeMsg.replace('{{user}}', member.user).replace('{{guild}}', member.guild.name);
+} else if(welcomeMsg == null) {
+ welcomeMessage = client.config.defaultSettings.welcomeMessage.replace('{{user}}', member.user).replace('{{guild}}', member.guild.name);
+}
 
  db.fetch(`guildSettings_${member.guild.id}_welcomeChannel_`).then(welcomeChannel => {
+    if(welcomeChannel == null) return console.log('Não é possível enviar uma mensagem de boas-vindas, pois não há nada na configuração welcomeChannel, GUILD : ' + member.guild.name + ' (' + member.guild.id + ')');
 		if (client.channels.get(welcomeChannel)) {
-			member.guild.channels.get(welcomeChannel).send(welcomeMessage).catch((e) => client.log('log', `Impossível enviar a mensagem de bem-vindo em (${guildSettings.welcomeChannel}) no servidor ${member.guild.name} (${member.guild.id}): \n ${e}`, 'Error'));
+			member.guild.channels.get(welcomeChannel).send(welcomeMessage)
 		}
  });
+});
 
  db.fetch(`guildSettings_${member.guild.id}_counter_`).then(counter => {
     const count = member.guild.members.size.toString();

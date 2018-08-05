@@ -4,6 +4,7 @@ var config = {
     ownerID: vault.OWNERID,
     token: vault.TOKEN,
     status: 'online',
+    shards: '0',
     debug: 'false',
     color: '#36393F',
     playingGame: 'felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#001',
@@ -11,7 +12,7 @@ var config = {
     eightBallResponses: ['Sim', 'Não', 'Certamente', 'Minhas fontes dizem sim', 'Tente mais tarde...', 'Sem dúvida', 'É melhor não contar agora'],
     googleAPIToken: vault.GOOGLEAPITOKEN,
     logTimeFormat: 'LLLL',
-    version: '3.1.5',
+    version: '3.1.6',
     musicEnabled: 'true',
     defaultSettings: {
         prefix: 'r!',
