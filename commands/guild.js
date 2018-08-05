@@ -38,10 +38,10 @@ switch (args[0]) {
    }
     
   case "set" : {
-   if(message.author.id == message.guild.owner.id) {
+   if(message.author.id == message.guild.owner.id || message.author.id == client.config.ownerID) {
       switch (args[1]) {
         case "welcome" : {
-             const canal = message.guild.channels.get(args[2])
+             const canal = message.guild.channels.get(args[2]) || message.mentions.channels.first();
              if(!canal) return message.reply('Não foi possível obter este canal');
 
              db.set(`guildSettings_${message.guild.id}_welcomeChannel_`, canal.id)
@@ -54,7 +54,7 @@ switch (args[0]) {
         }
         break;
         case "bye" : {
-             const canal = message.guild.channels.get(args[2])
+             const canal = message.guild.channels.get(args[2]) || message.mentions.channels.first();
              if(!canal) return message.reply('Não foi possível obter este canal');
 
              db.set(`guildSettings_${message.guild.id}_byeChannel_`, canal.id)
@@ -67,7 +67,7 @@ switch (args[0]) {
         } 
         break;
         case "counter" : {
-             const canal = message.guild.channels.get(args[2])
+             const canal = message.guild.channels.get(args[2]) || message.mentions.channels.first();
              if(!canal) return message.reply('Não foi possível obter este canal')
 
              db.set(`guildSettings_${message.guild.id}_counter_`, canal.id)
@@ -97,8 +97,23 @@ switch (args[0]) {
                    .setColor(client.color)
                    .setDescription(`O novo **Cargo Automático** foi setado como <@${role.id}>`)
               message.channel.send(message.author, Embed)
-        } 
+        }
         break;
+        case "welcomeMessage" : {
+          const helpEmbed = new Discord.RichEmbed()
+          .setTitle('<:no:470363478843195412> Ajudinha pra você !?')
+          .setColor(client.color)
+          .setDescription(`Você pode usar **{{user}}** para exibir o nome de usuário e/ou **{{guild}}** para exibir o nome do servidor.`)
+          let text = args[2] &&  args[3] && args[4] && args[5] && args[6] && args[7] && args[8] && args[9] && args[10] && args[11] && args[12] && args[13] && args[14] && args[15] && args[16] && args[17] && args[18] && args[19] && args[20] && args[21] && args[22] && args[23] && args[24] && args[25] && args[26] && args[27] && args[28] && args[29] && args[30] && args[32] && args[33] && args[34] && args[35] && args[36];
+          if(!text) return msg.channel.send(msg.author, helpEmbed);
+          
+          db.set(`guildSettings_${msg.guild.id}_welcomeMessage_`, text)
+          const Embed = new Discord.RichEmbed()
+          .setTitle('<:green:463073006093336576> Setado com Sucesso!')
+          .setColor(client.color)
+          .setDescription(`Você setou a mensagem de **Bem-Vindo** como: "${text}"`)
+          message.channel.send(message.author, Embed)
+        } break;
      }
      
    } else {
