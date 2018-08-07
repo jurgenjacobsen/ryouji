@@ -12,7 +12,7 @@ module.exports = (client) => {
 
 		if (message.channel.type === 'dm' || !message.member) return 0;
 
-		try {
+/*		try {
 			const modRole = message.guild.roles.find(r => r.name.toLowerCase() === message.settings.modLogChannel.toLowerCase());
 			if (modRole && message.member.roles.has(modRole.id)) permlvl = 2;
 		} catch (e) {
@@ -24,7 +24,7 @@ module.exports = (client) => {
 		} catch (e) {
 			console.warn('adminRole not present in guild settings. Skipping Administrator (level 3) check');
 		}
-
+*/
 		if (message.author === message.guild.owner) permlvl = 4;
 
 		return permlvl;
@@ -39,65 +39,10 @@ module.exports = (client) => {
 		10: 'Dono do Bot'
 	};
 
-	client.pointsMonitor = (client, message) => {
-		const db = require('quick.db');
-		let amount;
-		db.fetch(`userItems_${message.author.id}_bonus1`).then(i => {
-			if (i >= 1) {
-				amount = 0.5;
-			} else {
-				amount = 0.01
-			}
-			if (message.channel.type !== 'text') return;
-			const settings = client.settings.get(message.guild.id);
-			const score = client.points.get(`${message.guild.id}-${message.author.id}`) || {
-				points: 0,
-				level: 0
-			};
-			score.points++;
-			const curLevel = Math.floor(amount * Math.sqrt(score.points));
-			if (score.level < curLevel) {
-				message.reply(`Você upou para o nível **${curLevel}**!`);
-				score.level = curLevel;
-			}
-			client.points.set(`${message.guild.id}-${message.author.id}`, score);
-		})
-	};
-
 	client.log = (type, msg, title) => {
 		var time = moment().format(client.config.logTimeFormat);
 		if (!title) title = 'Log';
 		console.log(`${time}: [${type}] [${title}] ${msg}`);
-	};
-
-	client.awaitReply = async (msg, question, limit = 60000) => {
-		const filter = m => m.author.id = msg.author.id;
-		await msg.channel.send(question);
-		try {
-			const collected = await msg.channel.awaitMessages(filter, {
-				max: 1,
-				time: limit,
-				errors: ['time']
-			});
-			return collected.first().content;
-		} catch (e) {
-			return false;
-		}
-	};
-
-	client.awaitReply = async (msg, question, limit = 60000) => {
-		const filter = m => m.author.id = msg.author.id;
-		await msg.channel.send(question);
-		try {
-			const collected = await msg.channel.awaitMessages(filter, {
-				max: 1,
-				time: limit,
-				errors: ['time']
-			});
-			return collected.first().content;
-		} catch (e) {
-			return false;
-		}
 	};
 
 	client.clean = (client, text) => {
@@ -110,19 +55,14 @@ module.exports = (client) => {
 			.replace(/`/g, '`' + String.fromCharCode(8203)) // eslint-disable-line prefer-template
 			.replace(/@/g, '@' + String.fromCharCode(8203)) // eslint-disable-line prefer-template
 			.replace(/\n/g, '\n' + String.fromCharCode(8203)) // eslint-disable-line prefer-template
-			.replace(client.config.token, 'mfa.VkO_2G4Qv3T-- NO TOKEN HERE --')
-			.replace(client.config.dashboard.oauthSecret, 'Nk-- NOPE --')
-			.replace(client.config.dashboard.sessionSecret, 'B8-- NOPE --')
-			.replace(client.config.cleverbotToken, 'CC-- NOPE --')
-			.replace(client.config.googleAPIToken, 'AI-- NOPE --...');
-
-		//console.log(`T2 (${typeof t}): ${t}`);
+			.replace(client.config.token, '-- Sem Token --')
+			.replace(client.config.dashboard.oauthSecret, '-- KK EAI MEN --')
+			.replace(client.config.dashboard.sessionSecret, '-- PARA DE BISBILHOTA --')
+			.replace(client.config.cleverbotToken, '-- Nooop --')
+			.replace(client.config.googleAPIToken, '-- Procurar no Google Dashboard --');
 
 		return t;
 	};
-
-
-	/* MISCELANEOUS NON-CRITICAL FUNCTIONS */
 
 	String.prototype.toProperCase = function() {
 		return this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
@@ -133,10 +73,6 @@ module.exports = (client) => {
 	// `await wait(1000);` to "pause" for 1 second.
 	global.wait = require('util').promisify(setTimeout);
 
-
-	// Another semi-useful utility command, which creates a "range" of numbers
-	// in an array. `range(10).forEach()` loops 10 times for instance. Why?
-	// Because honestly for...i loops are ugly.
 	global.range = (count, start = 0) => {
 		const myArr = [];
 		for (var i = 0; i < count; i++) {
@@ -146,7 +82,5 @@ module.exports = (client) => {
 	};
 
 	client.version = require('../package.json').version;
-
-	// These 2 simply handle unhandled things. Like Magic. /shrug
 
 };

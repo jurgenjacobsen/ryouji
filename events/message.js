@@ -38,18 +38,15 @@ module.exports = async (client, message) => {
 		}
 	}
 
-let textinho = "viu só, eu disse que eu e você ìamos conseguir";
+let textinho = "Oie";
 
-if(message.content.startsWith("<@"+ client.user.id + ">") && message.content.includes(textinho)) {
+if(message.content.includes("<@"+ client.user.id + ">") && message.content.includes(textinho)) {
   message.reply('Yeah, Bro!!! <a:kDab:450477136239919104>')
 }
 
 	if (message.author.bot) {
 		return;
 	}
-
-	client.pointsMonitor(client, message);
-
 
 	const settings = client.config.defaultSettings;
 
@@ -68,7 +65,9 @@ if(message.guild.id !== '425864977996578816' || message.guild.id !== '2644450535
 
 	message.settings = settings;
 
-	command = args.shift().slice(settings.prefix.length)
+ const prefix = 'r!';
+
+	command = args.shift().slice(prefix.length)
 		.toLowerCase();
   
 	const level = client.permlevel(message);
@@ -81,7 +80,7 @@ if(message.guild.id !== '425864977996578816' || message.guild.id !== '2644450535
 	}
 
 	if (message.channel.type !== 'dm') {
-		const guildSettings = client.settings.get(message.guild.id);
+		const guildSettings = client.config.defaultSettings;
 
 		if (message.content.match(/(discord\.(gg|me|io)|(discordapp\.com|discord\.com)\/invite).*/) && guildSettings.inviteFilterEnabled === 'true' && message.guild
 			.id !== '351137100722208768') {
@@ -165,20 +164,4 @@ if(message.guild.id !== '425864977996578816' || message.guild.id !== '2644450535
 			message.reply('Você não tem permissão para isso!')
 		}
 	}
-
-
-	const canal = client.channels.get('465654523176943618');
-
-	const logOwnEmbed = new Discord.RichEmbed()
-		.setTitle('Comando Executado')
-		.setColor('#23272A')
-		.addField('Autor', message.author)
-		.addField('ID da Mensagem', message.id)
-		.setAuthor(message.author.username, message.author.avatarURL)
-
-	if (message.channel.type !== 'dm') {
-		logOwnEmbed.addField('Servidor', message.guild.name).addField('ID do Servidor', message.guild.id)
-	}
-
-	canal.send(logOwnEmbed)
 };

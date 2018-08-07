@@ -3,16 +3,9 @@ const {
 } = require('discord.js');
 const ytdl = require('ytdl-core');
 const Discord = require('discord.js');
-module.exports = (client) => {
+module.exports = (client, message) => {
 
 	client.handleVideo = async function handleVideo(video, msg, voiceChannel, playlist = false) {
-		const canal = client.channels.get('470355176251850754');
-		const logMusicEmbed = new Discord.RichEmbed()
-			.setTitle('Música Tocando')
-			.setColor('#23272A')
-			.setDescription(`**${video.title}**`);
-		canal.send(logMusicEmbed);
-
 		const serverQueue = client.musicQueue.get(msg.guild.id);
 		console.log(video.title);
 		const song = {
@@ -47,7 +40,13 @@ module.exports = (client) => {
 			serverQueue.songs.push(song);
 			console.log(serverQueue.songs);
 			if (playlist) return undefined;
-			else return msg.reply(`✅ **${song.title}** foi adicionado à fila de reprodução!`);
+			else {
+           const Embed = new Discord.RichEmbed()
+           .setTitle(':notes: Música')
+           .setColor(client.color)
+           .setDescription(`**${song.title}** foi adicionado à fila de reprodução!`);
+      msg.channel.send(msg.author, Embed);
+     };
 		}
 		return undefined;
 	};
@@ -73,6 +72,10 @@ module.exports = (client) => {
 			})
 			.on('error', error => console.error(error));
 		dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-		serverQueue.textChannel.send(`🎶 Começando a tocar: **${song.title}**`);
+    const Embed = new Discord.RichEmbed()
+    .setTitle(':notes: Música')
+    .setColor(client.color)
+    .setDescription(`Começando a tocar: **${song.title}**`);
+		serverQueue.textChannel.send(message.author, Embed);
 	}
 };
