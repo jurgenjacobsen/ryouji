@@ -2,7 +2,7 @@ module.exports = async client => {
 	const moment = require('moment');
 
 	if (!client.user.bot) {
-		client.log('ERROR', '', 'INFO');
+		client.log('[ERRO]', '', '[INFO]');
 		return process.exit(0);
 	}
 
@@ -14,22 +14,6 @@ module.exports = async client => {
 	}, 60000);
 
 	require('../modules/dashboard')(client);
-
-
-	var cMembers = client.users.filter(u => u.id !== '1').size;
-	var gCount = client.guilds.size;
-
-	client.log('EVENT',
-		`Logged into '${client.user.tag}' (${client.user.id}). Ligado com ${cMembers} usuários em ${gCount} servidores. Versão do bot ${client.config.version}`);
-
-	var g = [];
-	client.guilds.forEach(guild => g.push(guild.id));
-
-	for (var i = 0; i < g.length; i++) {
-		if (!client.settings.get(g[i])) {
-			client.settings.set(g[i], client.config.defaultSettings);
-		}
-	}
 
 	let statuses = [
     `felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#0001`,

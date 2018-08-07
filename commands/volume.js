@@ -2,6 +2,8 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
   const serverQueue = client.musicQueue.get(message.guild.id);
 
+if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('Você não tem permissão para isso!')
+
 if(args[0] > 10) {
   message.reply('Você não pode utilizar mais de **10** volumes, pois isso pode prejudicar a qualidade de audio!')
 
@@ -19,7 +21,7 @@ exports.conf = {
 	enabled: true,
 	guildOnly: true,
 	aliases: ['volume'],
-	permLevel: 3,
+	permLevel: 0,
   manu: false
 };
 

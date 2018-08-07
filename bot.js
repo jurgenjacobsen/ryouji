@@ -30,21 +30,11 @@ if (!allowedStatuses.includes(client.config.status)) {
 	process.exit(1);
 }
 
-let statuses = ['felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#001', `em ${client.guilds.size} servidoresㅤㅤ | 🔨 Criado por: Eleven#001`, `com ${client.users.size} ㅤㅤ | 🔨 Criado por: Eleven#001`]
-
-setInterval(function() {
-  
- let status = statuses[Math.floor(Math.random() * statuses.length)];
-  
-}, 10000);
-
 require('./modules/functions.js')(client);
 require('./modules/music.js')(client);
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
-client.settings = new Enmap({provider: new EnmapLevel({name: 'settings'})});
-client.points = new Enmap({provider: new EnmapLevel({name: 'points'})})
 
 client.talkedRecently = new Set();
 
@@ -59,7 +49,7 @@ const init = async () => {
 
 	const cmdFiles = await readdir('./commands/');
 	client.commandsNumber = cmdFiles.length;
-	client.log('[LOG]', `Carregando um total de ${client.commandsNumber} comandos`, 'LOAD');
+	client.log('[LOG]', `Carregando ${client.commandsNumber} comandos`, '[CARREGAMENTO]');
 	cmdFiles.forEach(f => {
 		try {
 			const props = require(`./commands/${f}`);
@@ -69,12 +59,12 @@ const init = async () => {
 				client.aliases.set(alias, props.help.name);
 			});
 		} catch (e) {
-			client.log('ERROR', `Unable to load command ${f}: ${e}`);
+			client.log('[ERRO]', `Não foi possível carregar o comando ${f} : ${e}`);
 		}
 	});
 
 	const evtFiles = await readdir('./events/');
-	client.log('log', `Loading a total of ${evtFiles.length} events.`, 'LOAD');
+	client.log('[LOG]', `Carregando ${evtFiles.length} eventos.`, '[CARREGAMENTO]');
 	evtFiles.forEach(file => {
 		const eventName = file.split('.')[0];
 		const event = require(`./events/${file}`);
