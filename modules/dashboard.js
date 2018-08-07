@@ -346,7 +346,7 @@ app.get('/user/', (req, res) => {
 				req.session.backURL = parsed.path;
 			}
 		} else {
-			req.session.backURL = '/';
+			req.session.backURL = '/dashboard';
 		}
 		next();
 	},
@@ -374,14 +374,35 @@ app.get('/user/', (req, res) => {
 
 		app.get('/dashboard', checkAuth, (req, res) => {
 		const perms = Discord.EvaluatedPermissions;
+    const user = req.user;
+    db.fetch(`userBackground_${user.id}`).then(back => {
+     db.fetch(`userItems_${user.id}_background1`).then(bg => {
+      db.fetch(`userBalance2.0_${user.id}`).then(cB => {
+      const coins = cF.format(cB, { code: 'BRL' })
+       db.fetch(`userRep1_${user.id}`).then(r => {
+        db.fetch(`userItems_${user.id}_premium1`).then(p => {
+        db.fetch(`userItems_${user.id}_badge1`).then(b => {
 		res.render(path.resolve(`${templateDir}${path.sep}dashboard.ejs`), {
 			perms: perms,
 			bot: client,
-			user: req.user,
+			user: user,
 			auth: true,
       ms: ms,
       db: db,
+      badge: b,
+      premium: p,
+      reps: r,
+      cB: coins,
+      bg: bg,
+      back: back,
+      moment: moment
 		});
+        });
+        });
+       });
+      });
+     });
+    });
 	});
 
 	app.get('/add/:guildID', checkAuth, (req, res) => {

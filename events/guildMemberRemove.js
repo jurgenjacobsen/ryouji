@@ -10,7 +10,7 @@ db.fetch(`guildSettings_${member.guild.id}_byeMessage_`).then(byeMessage => {
 let text;
  if(byeMessage == null) {
    let tex = client.config.defaultSettings.byeMessage;
-   text = tex.replace('{user}', member.tag).replace('{guild}', member.guild.name);
+   text = tex.replace('{{user}}', member.tag).replace('{{guild}}', member.guild.name);
  } else {
    text = byeMessage;
  }

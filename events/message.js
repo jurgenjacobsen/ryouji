@@ -41,7 +41,7 @@ module.exports = async (client, message) => {
 let textinho = "Oie";
 
 if(message.content.includes("<@"+ client.user.id + ">") && message.content.includes(textinho)) {
-  message.reply('Yeah, Bro!!! <a:kDab:450477136239919104>')
+  message.reply('Falata tu, Bro!!! 777')
 }
 
 	if (message.author.bot) {
@@ -82,8 +82,7 @@ if(message.guild.id !== '425864977996578816' || message.guild.id !== '2644450535
 	if (message.channel.type !== 'dm') {
 		const guildSettings = client.config.defaultSettings;
 
-		if (message.content.match(/(discord\.(gg|me|io)|(discordapp\.com|discord\.com)\/invite).*/) && guildSettings.inviteFilterEnabled === 'true' && message.guild
-			.id !== '351137100722208768') {
+		if (message.content.match(/(discord\.(gg|me|io)|(discordapp\.com|discord\.com)\/invite).*/) && guildSettings.inviteFilterEnabled === 'true') {
 
 			var msgInv = message.content.match(/discord\.gg\/[0-9A-Za-z-]+/);
 
@@ -94,7 +93,7 @@ if(message.guild.id !== '425864977996578816' || message.guild.id !== '2644450535
 			var whitelist = guildSettings.inviteWhitelist;
 
 			if (whitelist.includes(dggInvCode)) return;
-			if (level >= 2) {
+			if (level >= 2 || message.member.hasPermission('MANAGE_ROLES_OR_PERMISSIONS') || message.member.hasPermission('MANAGE_NICKNAMES')  || message.member.hasPermission('MANAGE_MESSAGES') || message.member.hasPermission('ADMINISTRATOR') ) {
 				return console.log(`${message.author.tag} (${message.author.id}) bypassed the invite link filter due to having a level of ${level}`);
 			}
 			message.delete();
@@ -122,28 +121,18 @@ if(message.guild.id !== '425864977996578816' || message.guild.id !== '2644450535
 			if (cmd) {
 				if (level >= cmd.conf.permLevel) {
 					if (cmd.conf.enabled === true) {
-            if(cmd.conf.manu === false) {
 						cmd.run(client, message, args, level);
-						 console.log('[LOG]', `${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content}`, 'CMD');
-            } else {
-             message.reply('Este comando está em manutenção!')
-            }
+						 console.log(`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content}`);
 					} else {
 						message.reply('Este comando está desligado');
-						client.log('[LOG]',
-							`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`,
-							'CMD');
+						console.log(`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`);
 					}
 				} else {
 					message.reply('Você não tem permissão para isso!')
-					client.log('[LOG]',
-						`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`,
-						'CMD');
+					console.log(`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`);
 				}
 			} else {
-				client.log('[LOG]',
-					`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) tentou executar um comando enexistente ${message.content}`,
-					'CMD');
+				console.log(`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) tentou executar um comando enexistente ${message.content}`);
 				message.reply('Este comando não existe, dê **r!ajuda** para ver meus comandos');
 			}
 		} else {
@@ -154,13 +143,14 @@ if(message.guild.id !== '425864977996578816' || message.guild.id !== '2644450535
 			if (cmd.conf.enabled) {
 				cmd.run(client, message, args, level);
 				if (client.config.defaultSettings.logCommandUsage === 'true') {
-					client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content}`, 'CMD');
+					console.log(`DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content}`);
 				}
 			} else if (client.config.defaultSettings.logCommandUsage === 'true') {
-				client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`, 'CMD');
+				console.log(`DM: ${message.author.username} (${message.author.id}) Executou o comando desligado ${message.content}`);
+        message.reply('Este comando está desligado')
 			}
 		} else if (client.config.defaultSettings.logCommandUsage === 'true') {
-			client.log('[LOG]', `DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`, 'CMD');
+			console.log(`DM: ${message.author.username} (${message.author.id}) Executou o comando ${message.content} sem ter o nível de permissão`);
 			message.reply('Você não tem permissão para isso!')
 		}
 	}
