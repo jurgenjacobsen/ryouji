@@ -327,13 +327,20 @@ app.get('/user/', (req, res) => {
 
   app.get('/servers/:guildID', (req, res) => {
    const moment = require('moment')
-   const guild = client.guilds.get(req.params.guildID)
-   res.render(path.resolve(`${templateDir}${path.sep}guild.ejs`), {
-    bot: client,
-    auth: req.isAuthenticated() ? true : false,
-    user: req.isAuthenticated() ? req.user : null,
-    guild: guild,
-    moment: moment
+   let serverList;
+   const guild = client.guilds.get(req.params.guildID);
+   db.fetch(`guildSettings_${guild.id}_serverList`).then(serverList => {
+   db.fetch(`guildItens_${guild.id}_premium`).then(premium => {
+    res.render(path.resolve(`${templateDir}${path.sep}guild.ejs`), {
+      bot: client,
+      auth: req.isAuthenticated() ? true : false,
+      user: req.isAuthenticated() ? req.user : null,
+      guild: guild,
+      moment: moment,
+      serverList: serverList,
+      premium: premium
+     });
+    });
    });
   }); 
 

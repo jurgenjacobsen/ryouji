@@ -28,7 +28,7 @@ exports.run = (client, message, args, level) => {
 			}
 			embeds[eN].addField(`${c.help.name}${' '.repeat(longest - c.help.name.length)}`, c.help.description);
 		});
-		if (message.channel.type === 'dm' || client.settings.get(message.guild.id).sendHelp === 'channel') {
+		if (message.channel.type === 'dm') {
 			var eNumber = 0;
 			embeds.forEach((e) => {
 				eNumber++;

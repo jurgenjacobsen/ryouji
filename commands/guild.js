@@ -10,12 +10,12 @@ exports.run = async (client, message, args) => {
   
 
  const itens = {
-  "Plano_Mensal": {
-     price: "12500",
-     description: ""
-   }
-
+  premium: {
+   value: "22945" 
+  } 
  };
+
+
 if(msg.guild) {
 
 switch (args[0]) {
@@ -24,18 +24,61 @@ switch (args[0]) {
     break;
   }
 
-  case "account" : {
-    const Embed = new Discord.RichEmbed()
-    .setTitle('Account')
-    .setColor(client.color)
-    .setAuthor(`Dono: ${msg.guild.owner.user.tag}`, msg.guild.owner.avatarURL)
-    .setThumbnail(`${msg.guild.iconURL}?size=512`)
-    .addField('Banco do Servidor: ', `:dollar: **${c.format(bank, { code: 'BRL' })}**`)
-    .setFooter(msg.guild.name)
-
-    msg.channel.send(Embed)
-    break;
+  case "buy" : {
+   switch (args[1]) {
+     case "premium" : {
+      db.fetch(`guildItens_${msg.guild.id}_premium`).then(premium => {
+        if(premium == true) {
+         const Embed = new Discord.RichEmbed()
+         .setTitle('Você já possui este item')
+         .setColor(client.color)
+         msg.channel.send(msg.author, Embed)
+        } else {
+         db.fetch(`userBalance2.0_${msg.author.id}`).then(conta => {
+          if(conta >= itens.premium.price) {
+				  const desconto = parseInt(conta) - parseInt(itens.premium.price);
+				  db.set(`userBalance2.0_${msg.author.id}`, desconto);
+           const Embed = new Discord.RichEmbed()
+           .setTitle('Você comprou o Premium')
+           .setColor(client.color)
+           .setDescription('Agora você receberá algumas funções na **Lista de Servidores**')
+           msg.channel.send(msg.author, Embed);
+           db.set(`guildItens_${msg.guild.id}_premium`, true)
+         } else {
+          msg.reply('Você não tem dinheiro suficiente!');
+         }
+			});
+        }
+       });
+     } break;
    }
+  } break;
+ 
+  case "serverList" : {
+  if(message.author.id == message.guild.owner.id || message.author.id == client.config.ownerID) {
+   switch (args[1]) {
+     case "ativar" : {
+      const Embed = new Discord.RichEmbed()
+      .setTitle('<:green:463073006093336576> Ativado com Sucesso')
+      .setColor(client.color)
+      .setDescription('Agora, este servidor irá aparecer na lista de servidores no **Website** | Você pode desativar isto usando **r!guild serverList desativar**') 
+      .setFooter('Lembrando que esta função já é ativada por padrão.')
+      msg.channel.send(msg.author, Embed);
+      db.set(`guildSettings_${msg.guild.id}_serverList`, true)
+     } break;
+     case "desativar" : {
+      const Embed = new Discord.RichEmbed()
+      .setTitle('<:green:463073006093336576> Desativado com Sucesso')
+      .setColor(client.color)
+      .setDescription('Agora, este servidor não irá aparecer na lista de servidores no **Website** | Você pode ativar isto usando **r!guild serverList ativar**') 
+      .setFooter('Lembrando que esta função já é ativada por padrão.')
+      msg.channel.send(msg.author, Embed);
+     db.set(`guildSettings_${msg.guild.id}_serverList`, false)
+    } break;
+    }
+   }
+  } 
+  break;
     
   case "set" : {
    if(message.author.id == message.guild.owner.id || message.author.id == client.config.ownerID) {
@@ -105,13 +148,29 @@ switch (args[0]) {
           .setColor(client.color)
           .setDescription(`Você pode usar **{{user}}** para exibir o nome de usuário e/ou **{{guild}}** para exibir o nome do servidor.`)
           let text = args[2] &&  args[3] && args[4] && args[5] && args[6] && args[7] && args[8] && args[9] && args[10] && args[11] && args[12] && args[13] && args[14] && args[15] && args[16] && args[17] && args[18] && args[19] && args[20] && args[21] && args[22] && args[23] && args[24] && args[25] && args[26] && args[27] && args[28] && args[29] && args[30] && args[32] && args[33] && args[34] && args[35] && args[36];
-          if(!text) return msg.channel.send(msg.author, helpEmbed);
+          if(!args[2]) return msg.channel.send(msg.author, helpEmbed);
           
           db.set(`guildSettings_${msg.guild.id}_welcomeMessage_`, text)
           const Embed = new Discord.RichEmbed()
           .setTitle('<:green:463073006093336576> Setado com Sucesso!')
           .setColor(client.color)
           .setDescription(`Você setou a mensagem de **Bem-Vindo** como: "${text}"`)
+          message.channel.send(message.author, Embed)
+        } 
+        break;
+        case "byeMessage" : {
+          const helpEmbed = new Discord.RichEmbed()
+          .setTitle('<:no:470363478843195412> Ajudinha pra você !?')
+          .setColor(client.color)
+          .setDescription(`Você pode usar **{{user}}** para exibir o nome de usuário e/ou **{{guild}}** para exibir o nome do servidor.`)
+          let text = args[2] &&  args[3] && args[4] && args[5] && args[6] && args[7] && args[8] && args[9] && args[10] && args[11] && args[12] && args[13] && args[14] && args[15] && args[16] && args[17] && args[18] && args[19] && args[20] && args[21] && args[22] && args[23] && args[24] && args[25] && args[26] && args[27] && args[28] && args[29] && args[30] && args[32] && args[33] && args[34] && args[35] && args[36];      
+          if(!args[2]) return msg.channel.send(msg.author, helpEmbed);
+          
+          db.set(`guildSettings_${msg.guild.id}_byeMessage_`, text);
+          const Embed = new Discord.RichEmbed()
+          .setTitle('<:green:463073006093336576> Setado com Sucesso!')
+          .setColor(client.color)
+          .setDescription(`Você setou a mensagem de **Despedidas** como: "${text}"`)
           message.channel.send(message.author, Embed)
         } break;
      }

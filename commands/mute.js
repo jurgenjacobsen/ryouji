@@ -1,40 +1,67 @@
 const Discord = require('discord.js');
+const ms = require("ms");
+
 exports.run = async (client, message, args) => {
-  var guildSettings = client.settings.get(message.guild.id);
 
-  const user = message.mentions.users.first();
-  const modlog = message.guild.channels.find('name', guildSettings.modLogChannel);
-  if (!modlog) return message.reply('Não foi possível encontrar o canal de log mod');
-  const reason = args.splice(1, args.length).join(' ') || `Sem motivo`;
+ if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("No can do.");
+    if (args[0] == "help") {
+        message.reply("r!mute <user> <TEMPO/m/h/d>");
+        return;
+    }
+    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if (!tomute) return message.reply("Por favor mencione um usuário!");
+    if (tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Eu não posso silenciar ele(a)!");
+    let reason = args.slice(2).join(" ");
+    if (!reason) return message.reply("Por favor, indique um motivo!");
 
-  var muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Mutado');
-  if (!modlog) return message.reply('Eu não consigo encontrar um canal de log mod');
-  if (!muteRole) {
-    message.guild.createRole({name: 'Mutado', color: 'DARKER_GREY', permissions: 36766720}).then(() => message.reply('Como não havia um cargo "Mutado", um foi criado')).catch(()=> {return message.reply('Não é possível criar o cargo `Mutado` que ainda não estava presente')});
-    muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Mutado');
-  }
-  if (message.mentions.users.size < 1) return message.reply('Você deve mencionar alguém para silenciá-los.');
-  const embed = new Discord.RichEmbed()
-			.setColor(client.color)
-			.addField(`Membro`, `${user.tag} (${user.id})`, true)
-			.addField(`Moderador`, `${message.author.tag} (${message.author.id})`, true)
-			.addField(`Motivo`, `${reason}`, true);
+    let muterole = message.guild.roles.find(`name`, "Mutado");
 
-  if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('Eu não tenho as permissões corretas.').catch(console.error);
+    if (!muterole) {
+        try {
+            muterole = await message.guild.createRole({
+                name: "Mutado",
+                color: "#000000",
+                permissions: []
+            })
+            message.guild.channels.forEach(async (channel, id) => {
+                await channel.overwritePermissions(muterole, {
+                    SEND_MESSAGES: false,
+                    ADD_REACTIONS: false
+                });
+            });
+        } catch (e) {
+            console.log(e.stack);
+        }
+    }
 
-  if (message.guild.member(user).roles.has(muteRole.id)) {
-    message.guild.member(user).removeRole(muteRole).then(() => {
-      message.channel.send(`Usuário desmutado ${message.author.tag} (${message.author.id}) pelo motivo: \`${reason}\``);
-      var unmuteEmbed = embed.setTitle('Usuário desmutado');
-      modlog.send({embed: unmuteEmbed}).catch(console.error);
-    });
-  } else {
-    message.guild.member(user).addRole(muteRole).then(() => {
-      message.channel.send(embed);
-      var muteEmbed = embed.setTitle('Usuário Mutado');
-      modlog.send({embed: muteEmbed}).catch(console.error);
-    });
-  }
+    let mutetime = args[1];
+    if (!mutetime) return message.reply("Obrigado por especificar um tempo");
+
+    message.delete().catch(O_o => {});
+
+    try {
+        await tomute.send(`Oi! você foi mutado por ${mutetime}. Desculpe !`)
+    } catch (e) {
+        message.channel.send(`Um usuário sofreu uma mutação, mas seus DMs estão bloqueados, ele sofreu uma mutação por ${mutetime}`)
+    }
+
+    let muteembed = new Discord.RichEmbed()
+        .setDescription(`Mudo feito por ${message.author}`)
+        .setColor(client.color)
+        .addField("Usuário silenciado:", tomute)
+        .addField("Silenciado no canal:", message.channel)
+        .addField("Mudo à", message.createdAt)
+        .addField("Tempo do mudo", mutetime)
+        .addField("Motivo", reason);
+
+
+    message.channel.send(muteembed);
+    await (tomute.addRole(muterole.id));
+
+    setTimeout(function() {
+        tomute.removeRole(muterole.id);
+        message.channel.send(`<@${tomute.id}> foi desmutado!`);
+    }, ms(mutetime));
 
 };
 exports.conf = {

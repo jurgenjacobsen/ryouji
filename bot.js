@@ -5,13 +5,17 @@ const Enmap = require('enmap');
 const EnmapLevel = require('enmap-level');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
+const fs = require("fs");
 
 const client = new Discord.Client();
+
+let warns = fs.readFileSync("./warn.json", "utf8")
 
 try {
 	client.config = require('./config.js');
   client.itens = require('./itens.json');
   client.color = require("./config.js").color;
+  client.warns = warns;
 } catch (err) {
 	console.error('Unable to load config.js \n', err);
 	process.exit(1);
