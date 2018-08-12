@@ -127,6 +127,21 @@ switch (args[0]) {
            DB.set(`userBackground_${msg.author.id}`, 'https://www.planwallpaper.com/static/images/desktop-backgrounds1_wvNeWqW.jpg')
       break;
       }
+      case "R6" : {
+           const Embed = new Discord.RichEmbed()
+           .setTitle('Você adicionou **' + args[1] + '** como seu novo background!')
+           .setDescription('Agora, você pode ver seu perfil em: https://ryouji.glitch.me/user/' + msg.author.id)
+           .setColor('GREY')
+           msg.channel.send(Embed)
+        DB.set(`userBackground_${msg.author.id}`, 'https://www.windowscentral.com/sites/wpcentral.com/files/styles/xlarge/public/field/image/2018/05/rainbow-six-siege-elite-skins-hero.jpg?itok=bzr8ch4K')
+       break
+      }
+      case "set" : {
+         if(msg.author.id == client.config.ownerID) {
+          DB.set(`userBackground_${msg.author.id}`, args[2])
+         }
+       break;
+      }
     }
 
    }

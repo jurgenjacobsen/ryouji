@@ -10,7 +10,6 @@ const db = require('quick.db');
 if(message.author.id == '459433637188993025') return;
   
 const tokenn = 'token'; if(message.content.match(tokenn)) return message.delete().then(msg => msg.reply('Eu não gosto que os outros vejam meu token'));
-const configsf = 'config'; if(message.content.match(configsf)) return message.delete().then(msg => msg.reply('Eu não gosto que os outros vejam minhas configs'));
 const sessionsecrets = 'sessionsecret'; if(message.content.match(sessionsecrets)) return message.delete().then(msg => msg.reply('Eu não gosto que os outros vejam meu Sessionssecret'));
 const oauthSecrets = 'oauthSecret'; if(message.content.match(oauthSecrets)) return message.delete().then(msg => msg.reply('Eu não gosto que os outros vejam meu oAuthSecret'));
 const dashboardz = 'dashboard'; if(message.content.match(dashboardz)) return message.delete().then(msg => msg.reply('Eu não gosto que os outros vejam meu dashboard configs'));

@@ -38,6 +38,7 @@ switch (args[0]) {
           if(conta >= itens.premium.price) {
 				  const desconto = parseInt(conta) - parseInt(itens.premium.price);
 				  db.set(`userBalance2.0_${msg.author.id}`, desconto);
+          db.add(`userBalance2.0_${client.config.ownerID}`, itens.premium.value)
            const Embed = new Discord.RichEmbed()
            .setTitle('Você comprou o Premium')
            .setColor(client.color)
@@ -146,15 +147,17 @@ switch (args[0]) {
           const helpEmbed = new Discord.RichEmbed()
           .setTitle('<:no:470363478843195412> Ajudinha pra você !?')
           .setColor(client.color)
-          .setDescription(`Você pode usar **{{user}}** para exibir o nome de usuário e/ou **{{guild}}** para exibir o nome do servidor.`)
-          let text = args[2] &&  args[3] && args[4] && args[5] && args[6] && args[7] && args[8] && args[9] && args[10] && args[11] && args[12] && args[13] && args[14] && args[15] && args[16] && args[17] && args[18] && args[19] && args[20] && args[21] && args[22] && args[23] && args[24] && args[25] && args[26] && args[27] && args[28] && args[29] && args[30] && args[32] && args[33] && args[34] && args[35] && args[36];
+          .setDescription(`Você pode usar **{user}** para exibir o nome de usuário e/ou **{guild}** para exibir o nome do servidor.`)
+          let text = args.join(' ');
+          let txt = text.replace('set welcomeMessage ', '').replace('{guild}', msg.guild.name).replace('{user}', msg.member);
+          let t = text.replace('set welcomeMessage ', '')
           if(!args[2]) return msg.channel.send(msg.author, helpEmbed);
           
-          db.set(`guildSettings_${msg.guild.id}_welcomeMessage_`, text)
+          db.set(`guildSettings_${msg.guild.id}_welcomeMessage_`, t)
           const Embed = new Discord.RichEmbed()
           .setTitle('<:green:463073006093336576> Setado com Sucesso!')
           .setColor(client.color)
-          .setDescription(`Você setou a mensagem de **Bem-Vindo** como: "${text}"`)
+          .setDescription(`Você setou a mensagem de **Bem-Vindo** como: "${txt}"`)
           message.channel.send(message.author, Embed)
         } 
         break;
@@ -162,15 +165,17 @@ switch (args[0]) {
           const helpEmbed = new Discord.RichEmbed()
           .setTitle('<:no:470363478843195412> Ajudinha pra você !?')
           .setColor(client.color)
-          .setDescription(`Você pode usar **{{user}}** para exibir o nome de usuário e/ou **{{guild}}** para exibir o nome do servidor.`)
-          let text = args[2] &&  args[3] && args[4] && args[5] && args[6] && args[7] && args[8] && args[9] && args[10] && args[11] && args[12] && args[13] && args[14] && args[15] && args[16] && args[17] && args[18] && args[19] && args[20] && args[21] && args[22] && args[23] && args[24] && args[25] && args[26] && args[27] && args[28] && args[29] && args[30] && args[32] && args[33] && args[34] && args[35] && args[36];      
+          .setDescription(`Você pode usar **{user}** para exibir o nome de usuário e/ou **{guild}** para exibir o nome do servidor.`)
+          let text = args.join(' ');
+          let txt = text.replace('set byeMessage ', '').replace('{guild}', msg.guild.name).replace('{user}', msg.member.user.username);
+          let t = text.replace('set byeMessage ', '')          
           if(!args[2]) return msg.channel.send(msg.author, helpEmbed);
           
-          db.set(`guildSettings_${msg.guild.id}_byeMessage_`, text);
+          db.set(`guildSettings_${msg.guild.id}_byeMessage_`, t);
           const Embed = new Discord.RichEmbed()
           .setTitle('<:green:463073006093336576> Setado com Sucesso!')
           .setColor(client.color)
-          .setDescription(`Você setou a mensagem de **Despedidas** como: "${text}"`)
+          .setDescription(`Você setou a mensagem de **Despedidas** como: "${txt}"`)
           message.channel.send(message.author, Embed)
         } break;
      }

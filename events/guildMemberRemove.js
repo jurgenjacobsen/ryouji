@@ -9,10 +9,10 @@ module.exports = (client, member) => {
 db.fetch(`guildSettings_${member.guild.id}_byeMessage_`).then(byeMessage => {
 let text;
  if(byeMessage == null) {
-   let tex = client.config.defaultSettings.byeMessage;
-   text = tex.replace('{{user}}', member.tag).replace('{{guild}}', member.guild.name);
+   let tex =  'Adeus **{user}**';
+   text = tex.replace('{user}', member.user.username).replace('{guild}', member.guild.name);
  } else {
-   text = byeMessage;
+   text = byeMessage.replace('{user}', member.username).replace('{guild}', member.guild.name);;
  }
  db.fetch(`guildSettings_${member.guild.id}_byeChannel_`).then(byeChannel => {
 		if (client.channels.get(byeChannel)) {

@@ -8,15 +8,22 @@ module.exports = (client, member) => {
 db.fetch(`guildSettings_${member.guild.id}_welcomeMessage_`).then(welcomeMsg => {
 let welcomeMessage;
 if(welcomeMsg !== null) {
- welcomeMessage = welcomeMsg.replace('{{user}}', member.user).replace('{{guild}}', member.guild.name);
+ welcomeMessage = welcomeMsg.replace('{user}', member).replace('{guild}', member.guild.name);
 } else if(welcomeMsg == null) {
- welcomeMessage = client.config.defaultSettings.welcomeMessage.replace('{{user}}', member.user).replace('{{guild}}', member.guild.name);
+ const text = 'Bem-vindo {user} ao **{guild}**!';
+ welcomeMessage = text.replace('{user}', member.user).replace('{guild}', member.guild.name);
 }
 
  db.fetch(`guildSettings_${member.guild.id}_welcomeChannel_`).then(welcomeChannel => {
     if(welcomeChannel == null) return console.log('Não é possível enviar uma mensagem de boas-vindas, pois não há nada na configuração welcomeChannel, GUILD : ' + member.guild.name + ' (' + member.guild.id + ')');
 		if (client.channels.get(welcomeChannel)) {
-			member.guild.channels.get(welcomeChannel).send(welcomeMessage)
+     db.fetch(`guildSettings_${member.guild.id}_welcomeMessageAutoDel`).then(auto => {
+       if(auto == null) {
+			    member.guild.channels.get(welcomeChannel).send(welcomeMessage)
+       } else {
+          member.guild.channels.get(welcomeChannel).send(welcomeMessage).then(msg => msg.delete(10000))
+       }
+     });
 		}
  });
 });

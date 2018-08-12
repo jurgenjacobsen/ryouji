@@ -6,7 +6,6 @@ if(!channel) {
  message.reply('Você deve estar em um canal')
 }
   channel.leave()
-    .catch(console.error);
 
 };
 

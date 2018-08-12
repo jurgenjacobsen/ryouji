@@ -1,7 +1,7 @@
 <title>Ryouji -
 	<%= usuário.username%>
 </title>
-<%- include('blocks/header', {bot: bot, user: user, auth: auth, usuário: usuário, badge: badge,  premium: premium, reps: reps, cB: cB, bg: bg, back: back}) %>
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, usuário: usuário, badge: badge,  premium: premium, reps: reps, cB: cB, bg: bg, back: back, desc: desc}) %>
 
 	<head>
 		<meta name="theme-color" content="#23272A">
@@ -9,6 +9,10 @@
 		<meta property="og:url" content="https://ryouji.glitch.me/user/<%= usuário.id %>">
 		<meta property="og:description" content="Acesse o perfil de <%= usuário.username %>">
 		<meta property="og:image" content="<%= usuário.avatarURL %>?size=512">
+	<link rel="stylesheet" type="text/css" href="public/servers/main.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.css">
 	</head>
 	<style>
 .statusSymbol {
@@ -104,6 +108,10 @@
 	width: 100%;
 
 	padding: 10px;
+}
+
+div .btn {
+	color: #7187dd !important;
 }
 
 .headerimagee,
@@ -225,41 +233,47 @@
 									<i class="statusSymbol statusSymbolStream"></i> Transmitindo
 									<% } %>
 			</p>
+
+      <p class="nav-link disable">
+        <% if(desc !== null) {%>
+        Descrição:  <span class="btn btn-orange"><%= desc %></span>
+        <% } else { %>
+        Descrição: <span class="btn btn-orange">Este usuário não possui descrição ! Lembrando que você pode usar r!user set desc {textinho}</span>
+        <% } %>
+      </p>
+
 			<% if(reps == null) {%>
-				<p class="nav-link disable">Pontos de Reputação: Esse usuário não possui reputação</p>
+				<p class="nav-link disable">Pontos de Reputação: <span class="btn btn-orange">Esse usuário não possui reputação</p>
 				<% } else { %>
-					<p class="nav-link disable">Pontos de Reputação:
-						<%= reps %>
+					<p class="nav-link disable">Pontos de Reputação: <span class="btn btn-orange btn-1x"><%= reps %></span>
 					</p>
 					<% } %>
 						<% if(cB == null) {%>
-							<p class="nav-link disable">Conta Bancária: Este usuário não possui nada</p>
+      <p class="nav-link disable">Conta Bancária: <span class="btn btn-orange">Este usuário não possui nada</span></p>
 							<% } else { %>
 								<p class="nav-link disable">Conta Bancária:
-									<%= cB %>
+                  <span class="btn btn-orange"><%= cB %></span>
 								</p>
 								<% } %>
 									<p class="nav-link disable">ID:
-										<%= usuário.id %>
+                    <span class="btn btn-orange btn-1x"><%= usuário.id %></span>
 									</p>
-									<p class="nav-link disable">Discriminator: #
-										<%= usuário.discriminator %>
-									</p>
+      <p class="nav-link disable">Discriminator: <span class="btn btn-orange btn-1x">#<%= usuário.discriminator %></span></p>
 									<% if( usuário.lastMessage) {%>
 										<p class="nav-link disable">Última mensagem:
-											<%= usuário.lastMessage %>
+                      <span class="btn btn-orange btn-1x"><%= usuário.lastMessage %></span>
 										</p>
 										<%} else {%>
-											<p class="nav-link disable">Última mensagem: Sem mensagens recentes</p>
+      <p class="nav-link disable">Última mensagem: <span class="btn btn-orange">Sem mensagens recentes</span></p>
 											<%} %>
 												<p class="nav-link disable">Jogando:
-													<%= usuário.presence.game ? usuário.presence.game.name : 'Não está jogando nada' %>
+                          <span class="btn btn-orange btn-1x"><%= usuário.presence.game ? usuário.presence.game.name : 'Não está jogando nada' %></span>
 												</p>
 												<p class="nav-link disable">Tag:
-													<%= usuário.tag %>
+                          <span class="btn btn-orange btn-1x"><%= usuário.tag %></span>
 												</p>
 												<p class="nav-link disable">Conta criada em:
-													<%= moment.utc(usuário.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %>
+                          <span class="btn btn-orange btn-1x"><%= moment.utc(usuário.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %></span>
 												</p>
 		</div>
 	</div>

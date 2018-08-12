@@ -9,13 +9,10 @@ const fs = require("fs");
 
 const client = new Discord.Client();
 
-let warns = fs.readFileSync("./warn.json", "utf8")
-
 try {
 	client.config = require('./config.js');
   client.itens = require('./itens.json');
   client.color = require("./config.js").color;
-  client.warns = warns;
 } catch (err) {
 	console.error('Unable to load config.js \n', err);
 	process.exit(1);
@@ -26,12 +23,6 @@ if (client.config.debug === 'true') {
 	client.on('error', (e) => console.log(e));
 	client.on('warn', (e) => console.log(e));
 	client.on('debug', (e) => console.log(e));
-}
-
-var allowedStatuses = ['online', 'idle', 'invisible', 'dnd', 'streaming', 'watching'];
-
-if (!allowedStatuses.includes(client.config.status)) {
-	process.exit(1);
 }
 
 require('./modules/functions.js')(client);

@@ -14,14 +14,9 @@ var config = {
     logTimeFormat: 'LLLL',
     version: '3.1.6',
     musicEnabled: 'true',
+    prefix: 'r!',
     defaultSettings: {
         prefix: 'r!',
-        modLogChannel: 'logs',
-        modRole: 'Moderador',
-        adminRole: 'Administrador',
-        welcomeChannel: '⚫bem-vindos',
-        welcomeMessage: 'Bem-Vindo {{user}} ao **{{guild}}!**',
-        byeMessage: "Adeus **{{user}}**, Volte Sempre!",
         welcomeEnabled: 'true',
         inviteFilterEnabled: 'true',
         inviteWhitelist: ['Dono'],
@@ -45,7 +40,7 @@ var config = {
         port:  vault.PORT,
         invitePerm: vault.INVITEPERM,
         protectStats: 'false',
-        borderedStats: 'true',
+        borderedStats: 'false',
         legalTemplates: {
             contactEmail: 'devs_services@engineer.com',
             lastEdited: '01 de Julho de 2018'

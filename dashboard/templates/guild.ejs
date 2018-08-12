@@ -80,6 +80,11 @@
 #site-header {
 	background-color:  !important;
 }
+
+div .btn-1x {
+	color: #7187dd !important;
+}
+      
 		</style>
 		<% 
 
@@ -137,32 +142,32 @@ if(serverList == null || serverList == true) {
 								<%}%>
 					</div>
 					<div class="card" style="width: 100%">
-						<div class="card-body text-center">
-							<p class="nav-link disable">Dono:
-								<%= guild.owner.user.tag %>, ID
-									<%= guild.owner.id%>
+						<div class="card-body">
+							<p class="nav-link disable">
+                Dono: <span style="color:#7289DA"><%= guild.owner.user.tag %></span> 
+                ID: <span style="color:#7289DA"><%= guild.owner.id%></span>
 							</p>
               <hr>
 							<p class="nav-link disable">Canais:
-								<%= guild.channels.size%>
+                <span style="color:#7289DA"><%= guild.channels.size%></span>
 							</p>
 							<p class="nav-link disable">ID:
-								<%= guild.id %>
+                <span style="color:#7289DA"><%= guild.id %></span>
 							</p>
 							<p class="nav-link disable">Membros:
-								<%= guild.memberCount %>
+                <span style="color:#7289DA"><%= guild.memberCount %></span>
 							</p>
 							<p class="nav-link disable">Região:
-								<%= serverRegion %>
+                <span style="color:#7289DA"><%= serverRegion %></span>
 							</p>
 							<p class="nav-link disable">Filtro de Conteúdo:
-								<%= explicitContentFilters %>
+								<span style="color:#7289DA"><%= explicitContentFilters%> </span>
 							</p>
 							<p class="nav-link disable">Verificação de Membros:
-								<%= verificationLevel %>
+                <span style="color:#7289DA"><%= verificationLevel %></span>
 							</p>
 							<p class="nav-link disable">Criado em:
-								<%= moment.utc(guild.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %>
+                <span style="color:#7289DA"><%= moment.utc(guild.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %></span>
 							</p>
 						</div>
 						<div class="text-center">
