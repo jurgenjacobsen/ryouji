@@ -33,9 +33,8 @@ module.exports = (client) => {
 	app.set('trust proxy', 5);
 
 	app.use('/public', express.static(path.resolve(`${dataDir}${path.sep}public`), { maxAge: '10d' }));
-	app.use(morgan('combined')); // Logger
+	app.use(morgan('combined'));
 
-	// uhhhh check what these do.
 	passport.serializeUser((user, done) => {
 		done(null, user);
 	});
@@ -197,47 +196,52 @@ const usuário = client.users.get(req.params.userID)
 const moment = require('moment')
 let badge;
 db.fetch(`userBackground_${usuário.id}`).then(back => {
-db.fetch(`userItems_${usuário.id}_background1`).then(bg => {
-db.fetch(`userBalance2.0_${usuário.id}`).then(cB => {
-const coins = cF.format(cB, { code: 'BRL' })
-db.fetch(`userRep1_${usuário.id}`).then(r => {
-db.fetch(`userItems_${usuário.id}_premium1`).then(p => {
-db.fetch(`userItems_${usuário.id}_badge1`).then(b => {
-if (req.isAuthenticated()) {
-res.render(path.resolve(`${templateDir}${path.sep}user.ejs`), {
-  bot: client,
-  auth: true,
-  user: req.user,
-  usuário: usuário,
-  moment: moment,
-  badge: b,
-  premium: p,
-  reps: r,
-  cB: coins,
-  bg: bg,
-  back: back
- });
-} else {
-res.render(path.resolve(`${templateDir}${path.sep}user.ejs`), {
-  bot: client,
-  auth: false,
-  user: null,
-  usuário: usuário,
-  moment: moment,
-  badge: b,
-  premium: p,
-  reps: r,
-  cB: coins,
-  bg: bg,
-  back: back
+ db.fetch(`userItems_${usuário.id}_background1`).then(bg => {
+  db.fetch(`userBalance2.0_${usuário.id}`).then(cB => {
+   const coins = cF.format(cB, { code: 'BRL' });
+    db.fetch(`userRep1_${usuário.id}`).then(r => {
+     db.fetch(`userItems_${usuário.id}_premium1`).then(p => {
+      db.fetch(`userItems_${usuário.id}_badge1`).then(b => {
+       db.fetch(`userDesc_${usuário.id}`).then(desc => {
+        if (req.isAuthenticated()) {
+            res.render(path.resolve(`${templateDir}${path.sep}user.ejs`), {
+            bot: client,
+            auth: true,
+            user: req.user,
+            usuário: usuário,
+            moment: moment,
+            badge: b,
+            premium: p,
+            reps: r,
+            cB: coins,
+            bg: bg,
+            back: back,
+            desc: desc
+           });
+        } else {
+         res.render(path.resolve(`${templateDir}${path.sep}user.ejs`), {
+           bot: client,
+           auth: false,
+           user: null,
+           usuário: usuário,
+           moment: moment,
+           badge: b,
+           premium: p,
+           reps: r,
+           cB: coins,
+           bg: bg,
+           back: back,
+           desc: desc
+          });
+        };
+       });
+      });
+     });
+    });
+   });
   });
-  };
  });
- });
- });
- });
- });
- });
+  
 });
 
 app.get('/user', (req, res) => {
@@ -266,40 +270,6 @@ app.get('/user/', (req, res) => {
     });
   });
 
-	app.get('/servers', (req, res) => {
-		if (client.config.dashboard.protectStats === 'true') {
-			cAuth(req, res);
-		}
-  client.guilds.forEach(guild => {
-    db.fetch(`partner_${guild.id}`).then(p => { 
-		const duration = moment.duration(client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
-		const members = `${client.users.filter(u => u.id !== '1').size} (${client.users.filter(u => u.id !== '1').filter(u => u.bot).size} bots)`;
-		const textChannels = client.channels.filter(c => c.type === 'text').size;
-		const voiceChannels = client.channels.filter(c => c.type === 'voice').size;
-		const guilds = client.guilds.size; 
-		res.render(path.resolve(`${templateDir}${path.sep}servers.ejs`), {
-			bot: client,
-			auth: req.isAuthenticated() ? true : false,
-			user: req.isAuthenticated() ? req.user : null,
-			stats: {
-				servers: guilds,
-				members: members,
-				text: textChannels,
-				voice: voiceChannels,
-				uptime: duration,
-				commands: client.commandsNumber,
-				memoryUsage: (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2),
-				dVersion: Discord.version,
-				nVersion: process.version,
-				bVersion: client.version
-			},
-      db: db,
-      p: p
-		 });
-    });
-   })
-	});
-
 	app.get('/legal', function (req, res) {
     var showdown	= require('showdown');
 		var	converter = new showdown.Converter(),
@@ -327,13 +297,20 @@ app.get('/user/', (req, res) => {
 
   app.get('/servers/:guildID', (req, res) => {
    const moment = require('moment')
-   const guild = client.guilds.get(req.params.guildID)
-   res.render(path.resolve(`${templateDir}${path.sep}guild.ejs`), {
-    bot: client,
-    auth: req.isAuthenticated() ? true : false,
-    user: req.isAuthenticated() ? req.user : null,
-    guild: guild,
-    moment: moment
+   let serverList;
+   const guild = client.guilds.get(req.params.guildID);
+   db.fetch(`guildSettings_${guild.id}_serverList`).then(serverList => {
+   db.fetch(`guildItens_${guild.id}_premium`).then(premium => {
+    res.render(path.resolve(`${templateDir}${path.sep}guild.ejs`), {
+      bot: client,
+      auth: req.isAuthenticated() ? true : false,
+      user: req.isAuthenticated() ? req.user : null,
+      guild: guild,
+      moment: moment,
+      serverList: serverList,
+      premium: premium
+     });
+    });
    });
   }); 
 
@@ -346,7 +323,7 @@ app.get('/user/', (req, res) => {
 				req.session.backURL = parsed.path;
 			}
 		} else {
-			req.session.backURL = '/';
+			req.session.backURL = '/dashboard';
 		}
 		next();
 	},
@@ -374,14 +351,35 @@ app.get('/user/', (req, res) => {
 
 		app.get('/dashboard', checkAuth, (req, res) => {
 		const perms = Discord.EvaluatedPermissions;
+    const user = req.user;
+    db.fetch(`userBackground_${user.id}`).then(back => {
+     db.fetch(`userItems_${user.id}_background1`).then(bg => {
+      db.fetch(`userBalance2.0_${user.id}`).then(cB => {
+      const coins = cF.format(cB, { code: 'BRL' })
+       db.fetch(`userRep1_${user.id}`).then(r => {
+        db.fetch(`userItems_${user.id}_premium1`).then(p => {
+        db.fetch(`userItems_${user.id}_badge1`).then(b => {
 		res.render(path.resolve(`${templateDir}${path.sep}dashboard.ejs`), {
 			perms: perms,
 			bot: client,
-			user: req.user,
+			user: user,
 			auth: true,
       ms: ms,
       db: db,
+      badge: b,
+      premium: p,
+      reps: r,
+      cB: coins,
+      bg: bg,
+      back: back,
+      moment: moment
 		});
+        });
+        });
+       });
+      });
+     });
+    });
 	});
 
 	app.get('/add/:guildID', checkAuth, (req, res) => {

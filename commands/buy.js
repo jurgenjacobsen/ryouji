@@ -98,6 +98,27 @@ switch (args[0]) {
    });
    break;
   }
+  case "Desc": {
+   const pagar = itens.description.valor;
+   db.fetch(conta).then(bucks => {
+    if(bucks >= pagar) {   
+     db.fetch(`userItems_${message.author.id}_desc1`).then(i => {
+      if(i == null || i == 0) {
+       db.fetch(conta).then(conta => {
+				const desconto = parseInt(conta) - parseInt(pagar);
+				db.set(conta, desconto);
+			 });
+        db.add(`userItems_${message.author.id}_desc1`, 1);
+        message.channel.send('Você comprou a **Descrição**! Agora você pode dar **r!user set description {textinho}**');
+      } else {
+        message.channel.send('Você já possui a **Descrição**!');
+      };
+     });
+    } else {
+			message.reply('Você não tem dinheiro o suficiente');
+		}
+   });
+  } break;
  }
 } else {
  message.reply(`Dê **r!lista** para ver os itens disponíveis para compra!`)

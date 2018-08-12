@@ -23,5 +23,10 @@
         "name": "Parceria",
         "description": "Adiciona o servidor à lista de **Parceiros do Site**",
         "valor": "18450"
+     },
+     "description": {
+        "name": "Descrição",
+        "description": "Dá direito à você de adicionar um descrição ao seu perfil no **Site**",
+        "valor": "350"
      }    
 }

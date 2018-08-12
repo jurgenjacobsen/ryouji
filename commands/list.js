@@ -12,10 +12,11 @@ exports.run = async (client, message, args) => {
  .addField('Bônus', `\n Descrição: ${item.bonus.description} \n Preço: :dollar: **${c.format(item.bonus.valor, { code: 'BRL' })}** `)
  .addField('Premium', `\n Descrição: ${item.premium.description} \n Preço: :dollar: **${c.format(item.premium.valor, { code: 'BRL' })}** `)
  .addField('Background', `\n Descrição: ${item.background.description} \n Preço: :dollar: **${c.format(item.background.valor, { code: 'BRL' })}** `)
+ .addField('Descrição', `\n Descrição: ${item.description.description} \n Preço: :dollar: **${c.format(item.description.valor, { code: 'BRL' })}** `)
 
  .setFooter(message.author.username, message.author.avatarURL)
 
- message.channel.send(Embed)
+ message.channel.send(message.author, Embed)
 };
 
 exports.conf = {

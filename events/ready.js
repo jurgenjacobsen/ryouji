@@ -19,7 +19,7 @@ module.exports = async client => {
     `felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#0001`,
 		`em ${client.guilds.size} servidoresㅤㅤㅤㅤㅤ | 🔨 Criado por: Eleven#0001`,
     `com ${client.users.size} usuáriosㅤㅤㅤㅤㅤ | 🔨 Criado por: Eleven#0001`,
-    `na ${client.guilds.get('475397487608463361').name} - By Wukknous#2750`
+    `na ${client.guilds.get('475397487608463361').name} - By ${client.users.get('226865242095878144').tag}`
 	]; 
 
 	setInterval(function() {

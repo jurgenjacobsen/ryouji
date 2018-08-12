@@ -1,4 +1,4 @@
-<%- include('blocks/header', {bot: bot, user: user, auth: auth, guild:guild, moment:moment}) %>
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, guild:guild, moment:moment, serverList: serverList, premium: premium}) %>
 	<% if(guild) {%>
 
 		<head>
@@ -80,6 +80,11 @@
 #site-header {
 	background-color:  !important;
 }
+
+div .btn-1x {
+	color: #7187dd !important;
+}
+      
 		</style>
 		<% 
 
@@ -114,6 +119,9 @@ let verificationLevel = {
  '3' : 'Alta',
  '4' : 'Muito Alta'
 }[guild.verificationLevel]
+
+
+if(serverList == null || serverList == true) {
 %>
 
 			<body>
@@ -123,47 +131,80 @@ let verificationLevel = {
 							<%= guild.name %>
 						</h1>
 						<% if( guild.iconURL) {%>
-							<img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.iconURL%>?size=2048" style="border-radius:50%; border:5px solid #2C2F33;">
+             <% if(premium == true) {%>
+							<img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.iconURL%>?size=2048" style="border-radius:50%; border:3px solid #e9ff00;">
+              <img alt="Premium" width="50" height="50" src="https://cdn.glitch.com/4a4f105d-84dd-4709-8bfb-16428e054a2d%2Fcertified.svg" style="margin-left: 180px; margin-top: 75px; position: absolute;">
+             <% } else {%>
+              <img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.iconURL%>?size=2048" style="border-radius:50%; border:5px solid #23272A;">
+             <% } %>
 							<%}else if(guild.defaultIconURL) { %>
 								<img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.defaultIconURL%>?size=2048" style="border-radius:50%; border:5px solid #23272A;">
 								<%}%>
 					</div>
 					<div class="card" style="width: 100%">
-						<h4 class="card-header text-center"><i class="fa fa-id-card"></i> Informações</h4>
-						<div class="card-body text-center">
-							<p class="nav-link disable">Dono:
-								<%= guild.owner.user.tag %>, ID
-									<%= guild.owner.id%>
+						<div class="card-body">
+							<p class="nav-link disable">
+                Dono: <span style="color:#7289DA"><%= guild.owner.user.tag %></span> 
+                ID: <span style="color:#7289DA"><%= guild.owner.id%></span>
 							</p>
+              <hr>
 							<p class="nav-link disable">Canais:
-								<%= guild.channels.size%>
+                <span style="color:#7289DA"><%= guild.channels.size%></span>
 							</p>
 							<p class="nav-link disable">ID:
-								<%= guild.id %>
+                <span style="color:#7289DA"><%= guild.id %></span>
 							</p>
 							<p class="nav-link disable">Membros:
-								<%= guild.memberCount %>
+                <span style="color:#7289DA"><%= guild.memberCount %></span>
 							</p>
 							<p class="nav-link disable">Região:
-								<%= serverRegion %>
+                <span style="color:#7289DA"><%= serverRegion %></span>
 							</p>
 							<p class="nav-link disable">Filtro de Conteúdo:
-								<%= explicitContentFilters %>
+								<span style="color:#7289DA"><%= explicitContentFilters%> </span>
 							</p>
 							<p class="nav-link disable">Verificação de Membros:
-								<%= verificationLevel %>
+                <span style="color:#7289DA"><%= verificationLevel %></span>
 							</p>
 							<p class="nav-link disable">Criado em:
-								<%= moment.utc(guild.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %>
+                <span style="color:#7289DA"><%= moment.utc(guild.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %></span>
 							</p>
 						</div>
-						<div class="card-footer text-center">
+						<div class="text-center">
 							<a href="https://ryouji.glitch.me/servers"><button type="button" class="btn btn-primary"> Voltar </button></a>
 						</div>
+            <br>
 					</div>
 				</div>
 			</body>
-			<% } else {%>
+<% } else { %>
+<br>
+  <div class="text-center">
+    <h1>
+  Este servidor desativou esta função!
+</h1>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<% } %>
+<% } else {%>
 				<style>
 .banner {
 	margin-top: 20px;

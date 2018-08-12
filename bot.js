@@ -5,6 +5,7 @@ const Enmap = require('enmap');
 const EnmapLevel = require('enmap-level');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
+const fs = require("fs");
 
 const client = new Discord.Client();
 
@@ -22,12 +23,6 @@ if (client.config.debug === 'true') {
 	client.on('error', (e) => console.log(e));
 	client.on('warn', (e) => console.log(e));
 	client.on('debug', (e) => console.log(e));
-}
-
-var allowedStatuses = ['online', 'idle', 'invisible', 'dnd', 'streaming', 'watching'];
-
-if (!allowedStatuses.includes(client.config.status)) {
-	process.exit(1);
 }
 
 require('./modules/functions.js')(client);

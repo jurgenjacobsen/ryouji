@@ -38,8 +38,7 @@ exports.run = async (client, message, args, level) => {
 	});
 	const embed = new Discord.RichEmbed()
 		.setTitle(`ㅤ`)
-		.setAuthor(`${guild.name}`,
-			'https://images-ext-1.discordapp.net/external/rXMwUDg4JWQ30e0YkTQkF2Fvf2KhlG2RdzyKztO4COA/https/cdn.discordapp.com/emojis/452852445001941002.png')
+		.setAuthor(`${guild.name}`, 'https://images-ext-1.discordapp.net/external/rXMwUDg4JWQ30e0YkTQkF2Fvf2KhlG2RdzyKztO4COA/https/cdn.discordapp.com/emojis/452852445001941002.png')
 		.setColor(client.color)
 		.setThumbnail(`${guild.iconURL}?size=512`)
 		.addField(`ID do Servidor`, `${guild.id}`, true)

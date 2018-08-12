@@ -7,6 +7,31 @@
 		<meta property="og:url" content="https://ryouji.glitch.me">
 		<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
 		<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+<style>
+
+
+  .card {
+    border-style: solid;
+    border-width: 0px 0px 0px 5px;
+    border-color: #7289DA;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   }
+
+  .card-header {
+    background: #2C2F33;
+  }
+
+  .card {
+    background: #2C2F33;
+  }
+
+  .display-5 {
+    border-style: solid;
+    border-width: 0px 0px 0px 5px;
+    border-color: WHITE;
+  }
+
+</style>
 	</head>
 	<title> Comandos -
 		<%= bot.user.username %>
@@ -19,10 +44,9 @@ bot.commands.forEach((command) => {
   help[cat].push(command);
 });
 %>
-		<h1 class="display-3">Comandos [
-			<%= bot.commandsNumber %>]
+		<h1 class="display-3 text-center" style="font-family: 'Dosis', cursive; text-transform: none; font-size: 70px; color: #7289DA;">Comandos [<%= bot.commandsNumber %>]
 		</h1>
-		<p>
+		<p class="text-center">
 			Use
 			<%= bot.config.defaultSettings.prefix %>help [comando] para receber informações mais detalhadas sobre um comando, ou
 				<%= bot.config.defaultSettings.prefix %>help para receber a lista de todos os comandos que você tem acesso.
@@ -30,6 +54,8 @@ bot.commands.forEach((command) => {
 		<% for (const category in help) { %>
 			<br>
 			<br>
+      <br>
+      <br>
 			<h1 class="display-5 text-center">
 				<%= category %>
 			</h1>
@@ -37,14 +63,15 @@ bot.commands.forEach((command) => {
 			<div class="card-columns">
 				<% for (const command of help[category]) { %>
 					<div class="card">
-						<h3 class="card-header">
-							<%= command.help.name %>
+         <br>
+						<h3 class="text-center">
+							 <%= command.help.name %>
 						</h3>
 						<div class="card-block" style="margin: 7px">
-							<p class="card-text">
+							<p class="card-text text-center">
 								<%= command.help.description %>
 							</p>
-							<p><span style="font-weight: bold;">Exemplo(s):</span> <%- command.help.usage.replace(/\n/g) %>
+							<p class="text-center"><span style="font-weight: bold;">Exemplo(s):</span> <%- command.help.usage.replace(/\n/g) %>
 							</p>
 						</div>
 					</div>
@@ -52,4 +79,4 @@ bot.commands.forEach((command) => {
 					<% } %>
 			</div>
 			<% } %>
-				<% include ./blocks/footer %>
+<br>

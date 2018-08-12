@@ -45,7 +45,7 @@ module.exports = (client, message) => {
            .setTitle(':notes: Música')
            .setColor(client.color)
            .setDescription(`**${song.title}** foi adicionado à fila de reprodução!`);
-      msg.channel.send(msg.author, Embed);
+      msg.channel.send(Embed);
      };
 		}
 		return undefined;
@@ -76,6 +76,6 @@ module.exports = (client, message) => {
     .setTitle(':notes: Música')
     .setColor(client.color)
     .setDescription(`Começando a tocar: **${song.title}**`);
-		serverQueue.textChannel.send(message.author, Embed);
+		serverQueue.textChannel.send(Embed);
 	}
 };
