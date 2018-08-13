@@ -151,11 +151,12 @@ app.use(session({
 		const textChannels = client.channels.filter(c => c.type === 'text').size;
 		const voiceChannels = client.channels.filter(c => c.type === 'voice').size;
 		const guilds = client.guilds.size;
+    const user = req.user;
 		if (req.isAuthenticated()) {
 			res.render(path.resolve(`${templateDir}${path.sep}index.ejs`), {
 			 bot: client,
 			 auth: true,
-			 user: req.user,
+			 user: user,
        stats: {
 				 servers: guilds,
 				 members: members,
@@ -458,6 +459,23 @@ app.get('/user/', (req, res) => {
 		}
 	});
   
+  app.get('/br/others', (req, res) => {
+  if (req.isAuthenticated()) {
+   res.render(path.resolve(`${templateDir}${path.sep}others.ejs`), {
+    		bot: client,
+				auth: true,
+				user: req.user
+   });
+  } else {
+  res.render(path.resolve(`${templateDir}${path.sep}others.ejs`), {
+				bot: client,
+				auth: false,
+				user: null,
+			});
+  }
+ 
+  });
+
 	app.get('*', function(req, res) { // Catch-all 404
 		res.send('		<link href="/public/theme-dark.css" rel="stylesheet" id="theme"> <h1 style="font-family: "Pacifico", cursive; text-transform: none;"> 404 Página não encontrado. Por favor, espere...</h1> <script>setTimeout(function () { window.location = "/"; }, 1000);</script><noscript><meta http-equiv="refresh" content="1; url=/" /></noscript>');
 	});
