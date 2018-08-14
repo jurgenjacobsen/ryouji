@@ -22,14 +22,11 @@ const EmbedBlackList = new Discord.RichEmbed()
 .setColor(client.color)
 .setDescription('Você não tem permissão alguma de executar algum comando do bot, por motivos que, <@'+client.config.ownerID+'> adicionou você na **BlackList**')
 
-if(message.guild.id !== '425864977996578816' || message.guild.id !== '264445053596991498') {
-   if(message.content.startsWith('MEUPAL PPOONTO OIJOSHDOINBSIKBIUBUIBYUHBAQSYHUBAHUBDSHJ')) return message.channel.send(message.author, EmbedBlackList);
-};
 
 	message.settings = settings;
 
  const prefix = 'r!';
-
+  
 	command = args.shift().slice(prefix.length)
 		.toLowerCase();
   

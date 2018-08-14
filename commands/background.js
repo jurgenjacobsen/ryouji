@@ -136,10 +136,31 @@ switch (args[0]) {
         DB.set(`userBackground_${msg.author.id}`, 'https://www.windowscentral.com/sites/wpcentral.com/files/styles/xlarge/public/field/image/2018/05/rainbow-six-siege-elite-skins-hero.jpg?itok=bzr8ch4K')
        break
       }
-      case "set" : {
-         if(msg.author.id == client.config.ownerID) {
-          DB.set(`userBackground_${msg.author.id}`, args[2])
-         }
+      case "Steams" : {
+           const Embed = new Discord.RichEmbed()
+           .setTitle('Você adicionou **' + args[1] + '** como seu novo background!')
+           .setDescription('Agora, você pode ver seu perfil em: https://ryouji.glitch.me/user/' + msg.author.id)
+           .setColor('#579164')
+           msg.channel.send(Embed)
+        DB.set(`userBackground_${msg.author.id}`, 'https://i.imgur.com/6XxLQkY.gif')
+       break
+      }
+      case "Steams" : {
+           const Embed = new Discord.RichEmbed()
+           .setTitle('Você adicionou **' + args[1] + '** como seu novo background!')
+           .setDescription('Agora, você pode ver seu perfil em: https://ryouji.glitch.me/user/' + msg.author.id)
+           .setColor('#579164')
+           msg.channel.send(Embed)
+        DB.set(`userBackground_${msg.author.id}`, 'https://i.imgur.com/6XxLQkY.gif')
+       break;
+      }
+      case "Floresta" : {
+            const Embed = new Discord.RichEmbed()
+           .setTitle('Você adicionou **' + args[1] + '** como seu novo background!')
+           .setDescription('Agora, você pode ver seu perfil em: https://ryouji.glitch.me/user/' + msg.author.id)
+           .setColor('#6cc9a7')
+           msg.channel.send(Embed)
+       DB.set('https://media.discordapp.net/attachments/410833293941014538/478575151806545925/tumblr_static_tumblr_static__640.gif')
        break;
       }
     }

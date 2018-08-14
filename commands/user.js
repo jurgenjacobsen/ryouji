@@ -53,7 +53,7 @@ exports.run = async (client, message, args) => {
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: ['user', 'account', 'conta'],
+    aliases: ['user', 'account'],
     permLevel: 0,
     manu: false
 };

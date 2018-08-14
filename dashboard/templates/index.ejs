@@ -117,6 +117,20 @@ if (bot.config.dashboard.borderedStats === "true") {
        </div>
 			</div>
 		</div>
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="text-center">
+          🎵  Rádio 🎶
+        </h1>
+      <% bot.guilds.forEach(guild => { %>
+         <p class="text-center">
+           <% if(bot.musicQueue.get(guild.id)) { %>
+           Tocando Agora em <b><%= guild.name %></b>: <span style="color:#7289DA"><%= bot.musicQueue.get(guild.id).songs[0].title %></span>
+           <% } %>
+        </p>
+      <% }); %>
+      </div>
+    </div>
 		<br>
 
 <script>

@@ -27,9 +27,12 @@ footer {
 	z-index: -1;
 }
 .bot-card .content {
-	background: #27292e !important;
+	background: #1e2021 !important;
 	box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.8) !important;
 	opacity: 0.9;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #7289DA;
 }
 .bot-card:hover .content {
 	background: #24262b !important;
@@ -208,8 +211,8 @@ header {
 		<br>
    		<h1 class="display-3 text-center" style="font-family: 'Dosis', cursive; text-transform: none; font-size: 70px; color: #7289DA;"><i class="fa fa-server"></i> Servidores
 		</h1>
-
-   <span class="servers btn btn-orange btn-1x"><%= bot.guilds.size; %> Servidores</span>
+  <br>
+    <span class="servers btn btn-orange btn-1x"><%= bot.guilds.size; %> Servidores</span
 
 		<br>
 		<br>
@@ -222,7 +225,7 @@ bot.guilds.forEach(guild => {
 %>
 						<li class="column bot-card is-one-quarter" style="opacity: 1; transform: translateY(0px);">
 							<% if(guild.id == '391269244274212866' ||  guild.id == '460314108697378826'  || guild.id == '475397487608463361') { %>
-								<div class="content partnered">
+								<div class="content partnered" style="border-style: solid;border-width: 1px 1px 1px 1px;border-color: #ff870f;">
 									<% } else {%>
 										<div class="content">
 											<% } %>
@@ -236,8 +239,8 @@ bot.guilds.forEach(guild => {
 													<span class="stats">
 														<br>
 														<span class="servers btn btn-orange btn-1x">
-															<%= guild.channels.size%>
-																Canais
+															<%= guild.emojis.size%>
+																E
 														</span>
 														<span class="servers btn btn-orange btn-1x">
 															<%= guild.memberCount%>
