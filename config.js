@@ -12,7 +12,7 @@ var config = {
     eightBallResponses: ['Sim', 'Não', 'Certamente', 'Minhas fontes dizem sim', 'Tente mais tarde...', 'Sem dúvida', 'É melhor não contar agora'],
     googleAPIToken: vault.GOOGLEAPITOKEN,
     logTimeFormat: 'LLLL',
-    version: '3.1.6',
+    version: '3.1.7',
     musicEnabled: 'true',
     prefix: 'r!',
     defaultSettings: {

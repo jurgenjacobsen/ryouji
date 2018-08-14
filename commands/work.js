@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
 
 try {
     let worklog = client.channels.get('470355151048409119');
-    let cooldown = 2.88e+7; //8 Hours in ms
+    let cooldown = 1.44e+7; //8 Hours in ms
     let amount = Math.floor((Math.random() * 200) + 50);
     let workplace = ["Escritório", "Shopping", "Restaurante", "Mercado", "Segurança", "Técnico de Informática"] // Different outputs match below, from 0 to 5 with an included error system.
     let workDaily = await db.fetch(`workDaily_${message.author.id}`) // Used for fetching the time on when work is available.
@@ -35,7 +35,7 @@ try {
         let workDailyEmbed = new discord.RichEmbed()
         .setAuthor(`${message.author.tag} || Descanso de trabalho!`, message.author.displayAvatarURL)
         .setColor(client.color)
-        .setDescription(`**${message.author.tag}**, Você acabou de trabalhar por 6 horas! \nVocê precisa descansar por, **${timeObj.hours}h, ${timeObj.minutes}m**`)
+        .setDescription(`**${message.author.tag}**, Você acabou de trabalhar por 4 horas! \nVocê precisa descansar por, **${timeObj.hours}h, ${timeObj.minutes}m**`)
         message.channel.send(workDailyEmbed)
       send(worklog, dailytEmbed, {
           name: "Manager",

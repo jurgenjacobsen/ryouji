@@ -19,6 +19,7 @@ module.exports = async client => {
     `felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#0001`,
 		`em ${client.guilds.size} servidoresㅤㅤㅤㅤㅤ | 🔨 Criado por: Eleven#0001`,
     `com ${client.users.size} usuáriosㅤㅤㅤㅤㅤ | 🔨 Criado por: Eleven#0001`,
+    `com ${client.emojis.size} emojis ㅤㅤㅤㅤㅤ | 🔨 Criado por: Eleven#0001`,
     `na ${client.guilds.get('475397487608463361').name} - By ${client.users.get('226865242095878144').tag}`
 	]; 
 
@@ -37,16 +38,9 @@ module.exports = async client => {
 	}, 8000);
 
 	setInterval(function() {
-		let usersCh = client.channels.get('470350592825622548');
-		let guildsCh = client.channels.get('470350687537201163');
-		let channelsCh = client.channels.get('470350643664650260');
 
     let chatVoiceCh = client.channels.get('470353627291189260');
     let vespertineDevsCh = client.channels.get('472872764961718272');
-
-		usersCh.setName(`🚹Usuários ${client.users.size}`);
-		guildsCh.setName(`👥Servidores ${client.guilds.size}`);
-		channelsCh.setName(`📳Canais ${client.channels.size}`);
 
     chatVoiceCh.join();
     vespertineDevsCh.join();

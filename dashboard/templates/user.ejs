@@ -15,6 +15,13 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.css">
 	</head>
 	<style>
+  .card {
+    border-style: solid;
+    border-width: 0px 0px 0px 5px;
+    border-color: #7289DA;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   }
+
 .statusSymbol {
 	width: 12px;
 	height: 12px;
@@ -120,11 +127,13 @@ div .btn {
 	background-color:  !important;
 }
 
+
+
 	</style>
 
 	<div class="container">
 		<% if(bg >= 1 && back !== null) { %>
-			<div class="headerimage" style="width: 1369px;height:300px;z-index: -0; margin-left: -150;background-image:url('<%= back %>');"></div>
+			<div class="headerimage" style="width: 1369px;height:300px;z-index: -0;  border-style: solid;   border-width: 0px 0px 5px 0px;   border-color: #7289DA;margin-left: -150;background-image:url('<%= back %>');"></div>
 			<% } else { %>
 				<div class="headerimage" style="width: 100%;height:200px;z-index: -0;background-image:url('');"></div>
 				<% } %>
@@ -219,6 +228,7 @@ div .btn {
 																				                  <% } %>
 					</div>
 	</div>
+
 	<div class="card" style="width: 100%">
 		<div class="card-body">
 			<p class="nav-link disable">
