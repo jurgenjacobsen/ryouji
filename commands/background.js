@@ -43,6 +43,7 @@ switch (args[0]) {
     .addField('Escuro', '<:Notopreto:454695663851012116>  **r!background set Escuro**')
     .addField('Rainbow', '<:rainbow2:472123064239259658> **r!background set Rainbow**')
     .addField('Flora', ':camping:  **r!background set Flora**')
+    .addField('Steams', ':gear: **r!background set Steams**')
     msg.channel.send(Embed)
     break;
   }
@@ -144,24 +145,6 @@ switch (args[0]) {
            msg.channel.send(Embed)
         DB.set(`userBackground_${msg.author.id}`, 'https://i.imgur.com/6XxLQkY.gif')
        break
-      }
-      case "Steams" : {
-           const Embed = new Discord.RichEmbed()
-           .setTitle('Você adicionou **' + args[1] + '** como seu novo background!')
-           .setDescription('Agora, você pode ver seu perfil em: https://ryouji.glitch.me/user/' + msg.author.id)
-           .setColor('#579164')
-           msg.channel.send(Embed)
-        DB.set(`userBackground_${msg.author.id}`, 'https://i.imgur.com/6XxLQkY.gif')
-       break;
-      }
-      case "Floresta" : {
-            const Embed = new Discord.RichEmbed()
-           .setTitle('Você adicionou **' + args[1] + '** como seu novo background!')
-           .setDescription('Agora, você pode ver seu perfil em: https://ryouji.glitch.me/user/' + msg.author.id)
-           .setColor('#6cc9a7')
-           msg.channel.send(Embed)
-       DB.set('https://media.discordapp.net/attachments/410833293941014538/478575151806545925/tumblr_static_tumblr_static__640.gif')
-       break;
       }
     }
 

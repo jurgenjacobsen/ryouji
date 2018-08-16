@@ -6,13 +6,13 @@ var config = {
     status: 'online',
     shards: '0',
     debug: 'false',
-    color: '#36393F',
+    color: '#7289DA', //#36393F
     playingGame: 'felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#001',
     purgeLogFormat: '\n ID da Mensagem: {{mID}} | Hora: {{mTS}} | Conteúdo: {{mC}} \n',
     eightBallResponses: ['Sim', 'Não', 'Certamente', 'Minhas fontes dizem sim', 'Tente mais tarde...', 'Sem dúvida', 'É melhor não contar agora'],
     googleAPIToken: vault.GOOGLEAPITOKEN,
     logTimeFormat: 'LLLL',
-    version: '3.1.6',
+    version: '3.1.7',
     musicEnabled: 'true',
     prefix: 'r!',
     defaultSettings: {

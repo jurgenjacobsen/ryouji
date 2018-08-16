@@ -10,7 +10,7 @@ exports.run = async (client, message, args, level) => {
 		.setAuthor(client.user.username, client.user.displayAvatarURL)
 		.setColor(client.color)
 		.setDescription(texto)
-		.setFooter(message.author.tag);
+		.setFooter(`Anúnciado por ${message.author.tag}`);
 
 	message.reply(
 		`Você que quer fazer este anúncio, você mencionará cerca de ${message.guild.memberCount} pessoas. Diga **Sim** para Confirmar ou **Cancelar** para Cancelar seu anúncio.`

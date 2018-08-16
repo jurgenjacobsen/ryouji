@@ -12,7 +12,7 @@ let text;
    let tex =  'Adeus **{user}**';
    text = tex.replace('{user}', member.user.username).replace('{guild}', member.guild.name);
  } else {
-   text = byeMessage.replace('{user}', member.username).replace('{guild}', member.guild.name);;
+   text = byeMessage.replace('{user}', member.user.username).replace('{guild}', member.guild.name);;
  }
  db.fetch(`guildSettings_${member.guild.id}_byeChannel_`).then(byeChannel => {
 		if (client.channels.get(byeChannel)) {
