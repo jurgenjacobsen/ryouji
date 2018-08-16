@@ -43,6 +43,7 @@ switch (args[0]) {
     .addField('Escuro', '<:Notopreto:454695663851012116>  **r!background set Escuro**')
     .addField('Rainbow', '<:rainbow2:472123064239259658> **r!background set Rainbow**')
     .addField('Flora', ':camping:  **r!background set Flora**')
+    .addField('Steams', ':gear: **r!background set Steams**')
     msg.channel.send(Embed)
     break;
   }

@@ -61,6 +61,7 @@ db.fetch(`guildSettings_${guild.id}_inviteFilter`).then(config => {
 			return;
 		}
 
+                                                        
 			client.talkedRecently.add(message.author.id);
 			setTimeout(() => {
 				client.talkedRecently.delete(message.author.id);

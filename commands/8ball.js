@@ -10,7 +10,7 @@ exports.run = async (client, message, args, level) => {
 	.setColor(client.color)
 	.addField("Pergunta", question)
 	.addField("Resposta", answers[a])
-	.setFooter(message.author.tag);
+	.setFooter(`Pedido por ${message.author.tag}`);
   
 	message.channel.send(ballembed);
 

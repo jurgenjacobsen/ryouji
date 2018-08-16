@@ -22,7 +22,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 	let hugresult = Math.floor((Math.random() * kiss.length));
 	if (!args[0]) {
 		const ghembed = new Discord.RichEmbed()
-			.setColor(`RED`)
+			.setColor(client.color)
 			.setTitle(`${message.author.username} beija a si mesmo ...! (esquisito)`)
 			.setImage('https://cdn.discordapp.com/attachments/452115003659780096/460369555823525898/kiss.gif')
 		message.channel.send({
@@ -32,7 +32,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 	}
 	if (!message.mentions.members.first().user.username === message.isMentioned(message.author)) {
 		const hembed = new Discord.RichEmbed()
-			.setColor(`RANDOM`)
+			.setColor(client.color)
 			.setTitle(`${message.author.username} deu um beijinho para ${message.mentions.members.first().user.username}! Que doce!`)
 			.setImage(kiss[hugresult])
 		message.channel.send({
@@ -41,7 +41,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 		return;
 	}
 	const ghembed = new Discord.RichEmbed()
-		.setColor(`RANDOM`)
+		.setColor(client.color)
 		.setTitle(`${message.author.username} abraçou-se ...! (esquisito)`)
 		.setImage('https://cdn.discordapp.com/attachments/452115003659780096/460369555823525898/kiss.gif')
 	message.channel.send({

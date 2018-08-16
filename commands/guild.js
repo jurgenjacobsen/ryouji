@@ -178,6 +178,17 @@ switch (args[0]) {
           .setDescription(`Você setou a mensagem de **Despedidas** como: "${txt}"`)
           message.channel.send(message.author, Embed)
         } break;
+
+        case "invite" : {
+         if(!args[2]) return message.reply('Você deve inserir um convite!');
+         if(!message.content.match(/(discord\.(gg|me|io)|(discordapp\.com|discord\.com)\/invite).*/)) return message.reply('Isto não é um invite válido, o invite deve conter: **discord.gg , discord.me ou discord.io**');
+         db.set(`guildSettings_${msg.guild.id}_invite`, args[2])
+          const inviteEmbed = new Discord.RichEmbed()
+          .setTitle('<:green:463073006093336576> Setado com Sucesso!')
+          .setColor(client.color)
+          .setDescription(`Você setou o **Invite** como: ${args[2]}`)
+          message.channel.send(message.author, inviteEmbed);
+        } break;
      }
      
    } else {

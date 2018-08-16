@@ -254,7 +254,7 @@ $(document).keydown(function(e) {
 			<div class="container">
 				<div class="collapse navbar-collapse" id="navbar01">
 					<ul class="navbar-nav mr-auto">
-						<a class="navbar-brand" style="font-family: 'Dosis', cursive; text-transform: none; font-size: 21px;" href="/"> <%= bot.user.username %></a>
+						<a class="navbar-brand" style="font-family: 'Dosis'; text-transform: none; font-size: 21px;" href="/"> <%= bot.user.username %></a>
 						<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar01" aria-controls="navbar01" aria-expanded="false" aria-label="Toggle navigation"><span
 							 class="navbar-toggler-icon"></span></button>
 						<li class="nav-item"><a class="nav-link disabled"><% if(bot.user.localPresence.status === "online"){ %> <i class="statusSymbol statusSymbolOnline"></i>Online <% }else if(bot.user.localPresence.status === "dnd"){ %> <i class="statusSymbol statusSymbolDND"></i>

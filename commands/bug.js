@@ -10,7 +10,7 @@ if(!args[0]) return message.reply('O que você quer que eu faça ? **send** = En
    case 'send':
     const channelBugEmbed = new Discord.RichEmbed()
     .setTitle('<:BugHunter:454695663628713994> Bug Reportado')
-    .setColor(client.embed.color)
+    .setColor(client.color)
     .setDescription('Você acabou de fazer um report de bug para meus administradores!')
     .addField('Descrição do Bug', args[1])
     .setTimestamp()

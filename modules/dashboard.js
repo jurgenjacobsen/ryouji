@@ -297,11 +297,12 @@ app.get('/user/', (req, res) => {
 		});
 
   app.get('/servers/:guildID', (req, res) => {
-   const moment = require('moment')
+   const moment = require('moment');
    let serverList;
    const guild = client.guilds.get(req.params.guildID);
    db.fetch(`guildSettings_${guild.id}_serverList`).then(serverList => {
    db.fetch(`guildItens_${guild.id}_premium`).then(premium => {
+   db.fetch(`guildSettings_${guild.id}_invite`).then(invite => {
     res.render(path.resolve(`${templateDir}${path.sep}guild.ejs`), {
       bot: client,
       auth: req.isAuthenticated() ? true : false,
@@ -309,7 +310,25 @@ app.get('/user/', (req, res) => {
       guild: guild,
       moment: moment,
       serverList: serverList,
-      premium: premium
+      premium: premium,
+      invite: invite
+     });
+     });
+    });
+   });
+  });
+
+  app.get('/servers/:guildID/extra', (req, res) => {
+   const guild = client.guilds.get(req.params.guildID)
+  guild.fetchBans().then(bans => {
+   guild.fetchInvites().then(invites => {
+    res.render(path.resolve(`${templateDir}${path.sep}guild-extra.ejs`), {
+      bot: client,
+      auth: req.isAuthenticated() ? true : false,
+      user: req.isAuthenticated() ? req.user : null,
+      guild: guild,
+      bans: bans,
+      invites: invites
      });
     });
    });

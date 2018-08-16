@@ -35,7 +35,7 @@ module.exports = async client => {
 			}
 		});
 
-	}, 8000);
+	}, 15000);
 
 	setInterval(function() {
 
@@ -59,7 +59,7 @@ module.exports = async client => {
 	canal.send(readyOwnEmbed);
 
 const snekfetch = require('snekfetch');
-const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ1MjU4NTIwNTk3NTM1MTI5NyIsImJvdCI6dHJ1ZSwiaWF0IjoxNTMyMjE5NTMzfQ.Unvh9V-Wyg6FvAaTecsdvemK71S_sTZh0yJBwFquJIA';
+const key = process.env.DBLTOKEN;
 
 
 setInterval(function(){
