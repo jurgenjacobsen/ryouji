@@ -59,6 +59,7 @@ module.exports = (client) => {
 			.replace(client.config.dashboard.oauthSecret, '-- KK EAI MEN --')
 			.replace(client.config.dashboard.sessionSecret, '-- PARA DE BISBILHOTA --')
 			.replace(client.config.cleverbotToken, '-- Nooop --')
+      .replace(undefined, '-- Indefinido --')
 			.replace(client.config.googleAPIToken, '-- Procurar no Google Dashboard --');
 
 		return t;

@@ -14,10 +14,7 @@ switch (args[0]) {
    if(bucks >= pagar) {   
    db.fetch(`userItems_${message.author.id}_badge1`).then(i => {
       if(i == null || i == 0) {
-       db.fetch(conta).then(conta => {
-				const desconto = parseInt(conta) - parseInt(pagar);
-				db.set(conta, desconto);
-			});
+       db.subtract(conta, pagar);
         db.add(`userItems_${message.author.id}_badge1`, 1);
         message.channel.send('Você comprou minha badge!');
       } else {
@@ -37,10 +34,7 @@ switch (args[0]) {
    if(bucks >= pagar) {   
    db.fetch(`userItems_${message.author.id}_premium1`).then(i => {
       if(i == null || i == 0) {
-       db.fetch(conta).then(conta => {
-				const desconto = parseInt(conta) - parseInt(pagar);
-				db.set(conta, desconto);
-			});
+       db.subtract(conta, pagar);
         db.add(`userItems_${message.author.id}_premium1`, 1);
         message.channel.send('Você comprou o **Premium pass**!');
       } else {
@@ -62,8 +56,7 @@ switch (args[0]) {
     } else if(bucks >= pagar) {
      db.fetch(`userItems_${message.author.id}_bonus1`).then(i => {
       if(i == null || i == 0) {
-        const desconto = parseInt(bucks) - parseInt(pagar);
-				db.set(`userBalance2.0_${message.author.id}`, desconto);
+        db.subtract(conta, pagar);
         db.set(`userItems_${message.author.id}_bonus1`, 1);
         message.channel.send('Você comprou o **Bonus de XP**!');
       } else {
@@ -82,10 +75,7 @@ switch (args[0]) {
    if(bucks >= pagar) {   
    db.fetch(`userItems_${message.author.id}_background1`).then(i => {
       if(i == null || i == 0) {
-       db.fetch(conta).then(conta => {
-				const desconto = parseInt(conta) - parseInt(pagar);
-				db.set(conta, desconto);
-			});
+       db.subtract(conta, pagar);
         db.add(`userItems_${message.author.id}_background1`, 1);
         message.channel.send('Você comprou o **Background**! Dê **r!background**!');
       } else {
@@ -104,10 +94,7 @@ switch (args[0]) {
     if(bucks >= pagar) {   
      db.fetch(`userItems_${message.author.id}_desc1`).then(i => {
       if(i == null || i == 0) {
-       db.fetch(conta).then(conta => {
-				const desconto = parseInt(conta) - parseInt(pagar);
-				db.set(conta, desconto);
-			 });
+       db.subtract(conta, pagar);
         db.add(`userItems_${message.author.id}_desc1`, 1);
         message.channel.send('Você comprou a **Descrição**! Agora você pode dar **r!user set description {textinho}**');
       } else {

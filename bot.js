@@ -14,15 +14,8 @@ try {
   client.itens = require('./itens.json');
   client.color = require("./config.js").color;
 } catch (err) {
-	console.error('Unable to load config.js \n', err);
+	console.error('Não foi possível carregar as configs! \n', err);
 	process.exit(1);
-}
-
-if (client.config.debug === 'true') {
-	console.warn('RUNNING IN DEBUG MODE. SOME PRIVATE INFORMATION (SUCH AS THE TOKEN) MAY BE LOGGED TO CONSOLE');
-	client.on('error', (e) => console.log(e));
-	client.on('warn', (e) => console.log(e));
-	client.on('debug', (e) => console.log(e));
 }
 
 require('./modules/functions.js')(client);
@@ -44,7 +37,7 @@ const init = async () => {
 
 	const cmdFiles = await readdir('./commands/');
 	client.commandsNumber = cmdFiles.length;
-	client.log('[LOG]', `Carregando ${client.commandsNumber} comandos`, '[CARREGAMENTO]');
+	console.log(`[LOG] Carregando ${client.commandsNumber} comandos [CARREGAMENTO]`);
 	cmdFiles.forEach(f => {
 		try {
 			const props = require(`./commands/${f}`);
@@ -54,12 +47,12 @@ const init = async () => {
 				client.aliases.set(alias, props.help.name);
 			});
 		} catch (e) {
-			client.log('[ERRO]', `Não foi possível carregar o comando ${f} : ${e}`);
+			client.log(`[ERRO] Não foi possível carregar o comando ${f} : ${e}`);
 		}
 	});
 
 	const evtFiles = await readdir('./events/');
-	client.log('[LOG]', `Carregando ${evtFiles.length} eventos.`, '[CARREGAMENTO]');
+	console.log(`[LOG] Carregando ${evtFiles.length} eventos.[CARREGAMENTO]`);
 	evtFiles.forEach(file => {
 		const eventName = file.split('.')[0];
 		const event = require(`./events/${file}`);
