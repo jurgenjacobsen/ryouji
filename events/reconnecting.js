@@ -1,3 +1,3 @@
 module.exports = client => { // eslint-disable-line no-unused-vars
-	console.log(`RECONECTANDO em ${new Date()}`);
+	console.log(`Reconectando [${new Date()}]`);
 };

@@ -25,7 +25,7 @@ _(Note que esta lista pode não estar completa. Se marcado com um asterisco (`*`
 - Registros de junção da guilda _(Nome da Guilda)_
 - Registros de saída da guilda _(Nome da Guilda)_
 
-I, ***NdT3Development***, (como desenvolvedor do bot) _não será responsável por danos de qualquer pessoa (incluindo, sem limitação, danos causados, perda de informações ou dados, ou qualquer outros danos indiretos, incidentais, especiais ou consequentes) decorrentes do uso deste bot, mesmo se avisado da possibilidade de tais danos._
+I, ***ElevenDL***, (como desenvolvedor do bot) _não será responsável por danos de qualquer pessoa (incluindo, sem limitação, danos causados, perda de informações ou dados, ou qualquer outros danos indiretos, incidentais, especiais ou consequentes) decorrentes do uso deste bot, mesmo se avisado da possibilidade de tais danos._
 
 Recomenda-se informar os usuários de sua guilda Discord que o bot pode coletar seus **DADOS DE USUÁRIO**.
 

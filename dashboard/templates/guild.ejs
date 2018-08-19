@@ -232,9 +232,13 @@ if(serverList == null || serverList == true) {
 }
 			</style>
 			<p class="nav-link disable canais">
-				<%= channel.name %>
+      <% if(channel.type !== 'text') {%>
+				<i class="fa fa-fw fa-microphone"></i> <%= channel.name %>
+      <% } else { %>
+        <i class="fa fa-fw fa-hashtag"></i> <%= channel.name %>
 			</p>
-			<% }); %>
+			 <% }; %>
+      <% }); %>
 		</div>
 
 	</div>
