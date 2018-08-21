@@ -96,7 +96,7 @@ switch (args[0]) {
       if(i == null || i == 0) {
        db.subtract(conta, pagar);
         db.add(`userItems_${message.author.id}_desc1`, 1);
-        message.channel.send('Você comprou a **Descrição**! Agora você pode dar **r!user set description {textinho}**');
+        message.channel.send('Você comprou a **Descrição**! Agora você pode dar **r!user set desc {textinho}**');
       } else {
         message.channel.send('Você já possui a **Descrição**!');
       };

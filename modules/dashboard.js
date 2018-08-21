@@ -141,9 +141,6 @@ app.use(session({
  // Página de índice. Se o usuário for autenticado, ele mostrará suas informações
  // no canto superior direito da tela.
 
-  app.get('/home', (req, res) => {
- res.redirect('/');
-  })
 
 	app.get('/', (req, res) => {
     const duration = moment.duration(client.uptime).format(' D[d], H[h], m[m], s[s]');
@@ -478,21 +475,20 @@ app.get('/user/', (req, res) => {
 		}
 	});
   
-  app.get('/br/others', (req, res) => {
-  if (req.isAuthenticated()) {
-   res.render(path.resolve(`${templateDir}${path.sep}others.ejs`), {
+  app.get('/others', (req, res) => {
+   if (req.isAuthenticated()) {
+    res.render(path.resolve(`${templateDir}${path.sep}others.ejs`), {
     		bot: client,
 				auth: true,
 				user: req.user
-   });
-  } else {
-  res.render(path.resolve(`${templateDir}${path.sep}others.ejs`), {
+    });
+   } else {
+    res.render(path.resolve(`${templateDir}${path.sep}others.ejs`), {
 				bot: client,
 				auth: false,
 				user: null,
 			});
-  }
- 
+   } 
   });
 
 	app.get('*', function(req, res) { // Catch-all 404

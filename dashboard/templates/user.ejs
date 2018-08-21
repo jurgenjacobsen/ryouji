@@ -125,7 +125,9 @@ div .btn {
 #site-header {
 	background-color:  !important;
 }
+
 </style>
+
 <div class="container">
 	<% if(bg >= 1 && back !== null) { %>
 	<div class="headerimage" style="width: 1369px;height:300px;z-index: -0;  border-style: solid;   border-width: 0px 0px 5px 0px;   border-color: #7289DA;margin-left: -150;background-image:url('<%= back %>');"></div>
@@ -214,7 +216,6 @@ div .btn {
 		<%}%>
 		<% } %>
 	</div>
-</div>
 <div class="card" style="width: 100%">
 	<div class="card-body">
 		<p class="nav-link disable">
@@ -230,56 +231,37 @@ div .btn {
 			<i class="statusSymbol statusSymbolStream"></i> Transmitindo
 			<% } %>
 		</p>
-		<p class="nav-link disable test1" style="word-break: keep-all; width: 140px;">
+		<p class="nav-link disable test1">
 			<% if(desc !== null) {%>
-			Descrição: <span class="btn btn-orange">
-				<%= desc %></span>
+			Descrição: <span style="color:#7289DA"><%= desc %></span>
 			<% } else { %>
-			Descrição: <span class="btn btn-orange">Este usuário não possui descrição ! Lembrando que você pode usar r!user set desc {textinho}</span>
+			Descrição: <span style="color:#7289DA">Este usuário não possui descrição ! Lembrando que você pode usar r!user set desc {textinho}</span>
 			<% } %>
 		</p>
 		<% if(reps == null) {%>
-		<p class="nav-link disable">Pontos de Reputação: <span class="btn btn-orange">Esse usuário não possui reputação</p>
+    <p class="nav-link disable">Pontos de Reputação: <span style="color:#7289DA">Esse usuário não possui reputação</span></p>
 		<% } else { %>
-		<p class="nav-link disable">Pontos de Reputação: <span class="btn btn-orange btn-1x">
-				<%= reps %></span>
+		<p class="nav-link disable">Pontos de Reputação: <span style="color:#7289DA"><%= reps %></span>
 		</p>
 		<% } %>
 		<% if(cB == null) {%>
-		<p class="nav-link disable">Conta Bancária: <span class="btn btn-orange">Este usuário não possui nada</span></p>
+		<p class="nav-link disable">Conta Bancária: <span style="color:#7289DA">Este usuário não possui nada</span></p>
 		<% } else { %>
-		<p class="nav-link disable">Conta Bancária:
-			<span class="btn btn-orange">
-				<%= cB %></span>
+		<p class="nav-link disable">Conta Bancária: <span style="color:#7289DA"><%= cB %></span>
 		</p>
 		<% } %>
-		<p class="nav-link disable">ID:
-			<span class="btn btn-orange btn-1x">
-				<%= usuário.id %></span>
+		<p class="nav-link disable">ID: <span style="color:#7289DA"><%= usuário.id %></span>
 		</p>
-		<p class="nav-link disable">Discriminator: <span class="btn btn-orange btn-1x">#
-				<%= usuário.discriminator %></span></p>
+		<p class="nav-link disable">Discriminator: <span style="color:#7289DA">#<%= usuário.discriminator %></span></p>
 		<% if( usuário.lastMessage) {%>
-		<p class="nav-link disable">Última mensagem:
-			<span class="btn btn-orange btn-1x">
-				<%= usuário.lastMessage %></span>
-		</p>
+		<p class="nav-link disable">Última mensagem: <span style="color:#7289DA"><%= usuário.lastMessage %></span></p>
 		<%} else {%>
-		<p class="nav-link disable">Última mensagem: <span class="btn btn-orange">Sem mensagens recentes</span></p>
+		<p class="nav-link disable">Última mensagem: <span style="color:#7289DA">Sem mensagens recentes</span></p>
 		<%} %>
-		<p class="nav-link disable">Jogando:
-			<span class="btn btn-orange btn-1x">
-				<%= usuário.presence.game ? usuário.presence.game.name : 'Não está jogando nada' %></span>
-		</p>
-		<p class="nav-link disable">Tag:
-			<span class="btn btn-orange btn-1x">
-				<%= usuário.tag %></span>
-		</p>
-		<p class="nav-link disable">Conta criada em:
-			<span class="btn btn-orange btn-1x">
-				<%= moment.utc(usuário.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %></span>
-		</p>
+		<p class="nav-link disable">Jogando: <span style="color:#7289DA"><%= usuário.presence.game ? usuário.presence.game.name : 'Não está jogando nada' %></span></p>
+		<p class="nav-link disable">Tag: <span style="color:#7289DA"><%= usuário.tag %></span></p>
+		<p class="nav-link disable">Conta criada em: <span style="color:#7289DA"><%= moment.utc(usuário.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %></span></p>
 	</div>
+ </div>
 </div>
-</body>
 <br>

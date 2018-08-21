@@ -7,8 +7,7 @@ const ms = require('parse-ms');
 exports.run = async (client, message, args) => { 
 
 try {
-    let worklog = client.channels.get('470355151048409119');
-    let cooldown = 1.44e+7; //8 Hours in ms
+    let cooldown = 1.44e+7;
     let amount = Math.floor((Math.random() * 200) + 50);
     let workplace = ["Escritório", "Shopping", "Restaurante", "Mercado", "Segurança", "Técnico de Informática"] // Different outputs match below, from 0 to 5 with an included error system.
     let workDaily = await db.fetch(`workDaily_${message.author.id}`) // Used for fetching the time on when work is available.
@@ -37,10 +36,6 @@ try {
         .setColor(client.color)
         .setDescription(`**${message.author.tag}**, Você acabou de trabalhar por 4 horas! \nVocê precisa descansar por, **${timeObj.hours}h, ${timeObj.minutes}m**`)
         message.channel.send(workDailyEmbed)
-      send(worklog, dailytEmbed, {
-          name: "Manager",
-          icon: "https://www.inwhatlanguage.com/wp-content/uploads/2017/01/Project-Manager-01.png"
-     })
     } else if (`${result}` == "0"){
         db.set(`workDaily_${message.author.id}`, Date.now());
         db.add(`userBalance2.0_${message.author.id}`, amount).then(i => {
@@ -50,10 +45,6 @@ try {
             .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
-            send(worklog, workEmbed, {
-                name: "Manager",
-                icon: "https://www.inwhatlanguage.com/wp-content/uploads/2017/01/Project-Manager-01.png"
-            })
         })}
     else if (`${result}` == "1"){
         db.set(`workDaily_${message.author.id}`, Date.now());
@@ -64,10 +55,6 @@ try {
             .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
-            send(worklog, workEmbed, {
-                name: "Manager",
-                icon: "https://www.inwhatlanguage.com/wp-content/uploads/2017/01/Project-Manager-01.png"
-            })
         })}
     else if (`${result}` == "2"){
         db.set(`workDaily_${message.author.id}`, Date.now());
@@ -78,10 +65,6 @@ try {
             .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
-            send(worklog, workEmbed, {
-                name: "Manager",
-                icon: "https://www.inwhatlanguage.com/wp-content/uploads/2017/01/Project-Manager-01.png"
-            })
         })}
     else if (`${result}` == "3"){
         db.set(`workDaily_${message.author.id}`, Date.now());
@@ -92,10 +75,6 @@ try {
             .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
-            send(worklog, workEmbed, {
-                name: "Manager",
-                icon: "https://www.inwhatlanguage.com/wp-content/uploads/2017/01/Project-Manager-01.png"
-            })
         })}
     else if (`${result}` == "4"){
         db.set(`workDaily_${message.author.id}`, Date.now());
@@ -106,10 +85,6 @@ try {
             .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
-            send(worklog, workEmbed, {
-                name: "Manager",
-                icon: "https://www.inwhatlanguage.com/wp-content/uploads/2017/01/Project-Manager-01.png"
-            })
         })}
     else if (`${result}` == "5"){
         db.set(`workDaily_${message.author.id}`, Date.now());
@@ -120,10 +95,6 @@ try {
             .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
-          send(worklog, workEmbed, {
-              name: "Manager",
-              icon: "https://www.inwhatlanguage.com/wp-content/uploads/2017/01/Project-Manager-01.png"
-          })
         })}
     else {
         message.channel.send(`Oof .. você atingiu um erro enorme. Por favor, envie um relatório, \`r!bug [send] [relatório]\``)

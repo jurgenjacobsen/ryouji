@@ -109,28 +109,17 @@ div .btn-1x {
 
      <div class="jumbotron">
 
-<style>
-  .user {
-	border-style: solid;
-	border-width: 0px 0px 0px 0px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-</style>
     <h1 class="text-center">
       Membros
        </h1>
 			<% guild.members.map(u => { %>
-      <div class="user">
-			 <p class="nav-link disable">
-        <% if(u.user.avatarURL) { %>
-				<img src="<%= u.user.avatarURL %>" style="width: 32px; margin-left: -29px; margin-top: -4px; border-radius: 50px; ">ㅤ<%= u.user.username %> - #<%= u.user.discriminator %>
-        <% } else { %>
-        <img src="<%= u.user.defaultAvatarURL %>" style="width: 32px; margin-left: -29px; margin-top: -4px; border-radius: 50%">ㅤ<%= u.user.username %> - #<%= u.user.discriminator %>
-        <% } %>
-
-    
-			 </p>
-      </div>
+         <p class="nav-link disable">
+          <% if(u.user.avatarURL) {%>
+           <img src="<%= u.user.avatarURL%>" width="35px;" style="border-radius: 50%;">ㅤㅤㅤ<%= u.user.username %> - <%= u.user.tag %>
+          <% } else {%>
+           <img src="<%= u.user.defaultAvatarURL%>" width="35px;" style="border-radius: 50%;">ㅤㅤㅤ<%= u.user.username %> - <%= u.user.tag %>
+          <% } %>
+         </p> 
 			<% }).join("\n") %>
 		</div>
     <br>
