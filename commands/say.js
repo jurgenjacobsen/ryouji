@@ -1,7 +1,20 @@
+const got = require('got');
+
 exports.run = async (client, message, args) => { 
-	var sayMessage = args.join(' ');
-	message.delete().catch(O_o=>{});
-	message.channel.send(sayMessage);
+   var text = args.join(' ');
+   if(!text) return message.reply('Diga algo para Bill escrever')
+    const {
+        body
+    } = await got(`http://belikebill.azurewebsites.net/billgen-API.php?text=${text}`, {
+        encoding: null
+    });
+
+    await message.channel.send({
+        file: {
+            attachment: body,
+            name: 'bill.jpg'
+        }
+    });
 };
 
 exports.conf = {

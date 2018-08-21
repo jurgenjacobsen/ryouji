@@ -148,6 +148,7 @@
 .pageContent {
 	display: none;
 }
+      
 		</style>
 	</noscript>
 	<script>
@@ -241,7 +242,6 @@ $(document).keydown(function(e) {
 });
 			</script>
 </head>
-  <style>.a:link {color: #7289DA;} .a:visited{color:#7289DA} .a{color:#7289DA}</style>
 <body>
 	<div id="noscript">
 		<h1>
@@ -250,7 +250,7 @@ $(document).keydown(function(e) {
 	</div>
 	<div id="loading"></div>
 	<div class="pageContent">
-		<nav class="navbar navbar-expand-md navbar-dark" style="background: #5b6dae;">
+		<nav class="navbar navbar-expand-md navbar-dark" style="background: #18191C;">
 			<div class="container">
 				<div class="collapse navbar-collapse" id="navbar01">
 					<ul class="navbar-nav mr-auto">
@@ -266,11 +266,10 @@ $(document).keydown(function(e) {
 													<% var invitePerm = "8" %>
 														<li class="nav-item" style="font-size: 17px;"><a class="nav-link <% if(!bot.appInfo.botPublic) { %> disabled <% } %>" href="https://discordapp.com/oauth2/authorize?client_id=<%= bot.appInfo.id %>&scope=bot%20identify%20guilds&response_type=code&redirect_uri=<%= encodeURIComponent(`${bot.callbackURL}`) %>&permissions=<%= invitePerm %>"><i
 																 class="fa fa-plus fa-fw" aria-hidden="true"></i>Adicionar</a></li>
-														<li class="nav-item"><a class="nav-link disable"> ㅤㅤㅤㅤㅤㅤㅤ</a></li>
 														<% if(auth) { %>
 															<li class="nav-item nav-link disabled">━</li>
 															<a href="/dashboard" class="nav-link nav-item" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-																<i class="fa fa-gears"></i> <%= user.username %>
+																<% if(user.avatar) { %><img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png?size=32" style="margin-top: -3px; margin-left: 70px;" width="30" height="30" class="d-inline-block align-top rounded-circle" alt=""><% } %> <%= user.username %>
 															</a>
 															<% if(user.id === bot.config.ownerID) { %>
 																<li class="nav-item"><a class="nav-link" href="/admin"><i class="fa fa-terminal"></i> Admin </a></li>
@@ -285,5 +284,3 @@ $(document).keydown(function(e) {
 			</div>
 		</nav>
 		<br>
-  <style>.a:link {color: #7289DA;} .a:visited{color:#7289DA}</style>
-		<div class="container">

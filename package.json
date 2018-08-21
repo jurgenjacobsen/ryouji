@@ -9,7 +9,7 @@
     "discord.js": "^11.4.2",
     "djs-collection-persistent": "^0.1.5",
     "ejs": "^2.6.1",
-    "enmap": "^3.1.0",
+    "enmap": "^3.1.2",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "helmet": "^3.13.0",
@@ -65,7 +65,8 @@
     "google": "^2.1.0",
     "discord-emoji": "^1.1.1",
     "discord-bot-list": "^1.0.1",
-    "youtube-info": "^1.2.0"
+    "youtube-info": "^1.2.0",
+    "got": "^9.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

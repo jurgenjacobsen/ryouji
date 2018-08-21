@@ -120,6 +120,7 @@ div .btn-1x {
 }
       
 		</style>
+<div class="container">
 <% 
 
 let serverRegion = {
@@ -176,7 +177,7 @@ if(serverList == null || serverList == true) {
 			<%}%>
 		</div>
 		<div class="jumbotron" style="width: 100%">
-     <% if(guild.fetchInvites() && guild.fetchBans()) {%>
+     <% if(guild.me.hasPermission('MANAGE_ROLES_OR_PERMISSIONS') && guild.me.hasPermission('CREATE_INSTANT_INVITE') && guild.me.hasPermission('MANAGE_GUILD')) {%>
       <a href="/servers/<%= guild.id %>/extra"><button type="button" class="btn" style="background-color: #7289DA; color: white; margin-left: 940px; margin-top: -70px;"> Extra </button></a>
      <% } %>
 		 <% if(invite !== null) {%>
