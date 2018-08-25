@@ -34,19 +34,7 @@ module.exports = async client => {
 				type: 0
 			}
 		});
-
 	}, 15000);
-
-	setInterval(function() {
-
-    let chatVoiceCh = client.channels.get('470353627291189260');
-    let vespertineDevsCh = client.channels.get('472872764961718272');
-
-    chatVoiceCh.join();
-    vespertineDevsCh.join();
-    
-
-	}, 10000)
 
 	const Discord = require('discord.js');
 
@@ -66,7 +54,7 @@ setInterval(function(){
  snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
     .set('Authorization', key)
     .send({server_count: client.guilds.size, shard_count: client.config.shards})
-    .then(() => console.log(`Posted to dbl.`))
+    .then(() => console.log(``))
     .catch((e) => console.error(e));
   }, 60000);
  }

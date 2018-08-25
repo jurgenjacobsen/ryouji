@@ -1,4 +1,3 @@
-<title>Ryouji - Comandos</title>
 <%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
 
 <head>
@@ -7,6 +6,7 @@
 	<meta property="og:url" content="https://ryouji.glitch.me">
 	<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
 	<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+  <title>Commands - <%= bot.user.username %></title>
 	<style>
 .card {
 	border-style: solid;
@@ -58,8 +58,6 @@
 }
 	</style>
 </head>
-<title> Comandos - <%= bot.user.username %>
-</title>
 <% const help = {}; bot.commands.forEach((command) => {const cat = command.help.category;if(!help.hasOwnProperty(cat)) help[cat] = [];help[cat].push(command);});%>
 
 <div class="headerDiv">

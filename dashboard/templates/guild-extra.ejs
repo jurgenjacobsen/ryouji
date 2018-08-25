@@ -1,5 +1,7 @@
 <%- include('blocks/header', {bot: bot, user: user, auth: auth, guild:guild, bans: bans, invites}) %>
-
+<head>
+    <title><%= guild.name%> - <%= bot.user.username %></title>
+</head>
 <style>
 	.banner {
 	margin-top: 20px;

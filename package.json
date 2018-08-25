@@ -1,7 +1,7 @@
 {
   "name": "ryouji",
   "version": "3.1.7",
-  "description": "My first Discord bot made in Discord.js",
+  "description": "I don't have ideias",
   "main": "bot.js",
   "dependencies": {
     "bufferutil": "^4.0.0",

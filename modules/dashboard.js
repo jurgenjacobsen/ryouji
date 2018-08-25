@@ -474,16 +474,24 @@ app.get('/user/', (req, res) => {
 			});
 		}
 	});
+
+  app.get('/contributors', (req, res) => {
+    res.render(path.resolve(`${templateDir}${path.sep}contributors.ejs`), {
+			bot: client,
+			auth: req.isAuthenticated() ? true : false,
+			user: req.isAuthenticated() ? req.user : null,
+    });
+  });
   
-  app.get('/others', (req, res) => {
+  app.get('/extras', (req, res) => {
    if (req.isAuthenticated()) {
-    res.render(path.resolve(`${templateDir}${path.sep}others.ejs`), {
+    res.render(path.resolve(`${templateDir}${path.sep}extras.ejs`), {
     		bot: client,
 				auth: true,
 				user: req.user
     });
    } else {
-    res.render(path.resolve(`${templateDir}${path.sep}others.ejs`), {
+    res.render(path.resolve(`${templateDir}${path.sep}extras.ejs`), {
 				bot: client,
 				auth: false,
 				user: null,

@@ -28,6 +28,7 @@ a:active {
 	<meta property="og:description" content="Um Bot com várias funções, comandos e muitas opções">
 	<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
 	<link rel="stylesheet" type="text/css" href="public/servers/main.css">
+  <title>HomePage - <%= bot.user.username %></title>
 	<style>
 .jumbotron {
   background-color: #222222;
@@ -38,11 +39,14 @@ a:active {
  width: 100%;
  height: 400px;
  margin-top: -40px;
+ border-style: solid;
+ border-width: 0px 0px 0.1px 0px;
+ border-color: 7289DA;
 }
 
 .headerImage {
  margin-left: 50px;
-}
+ }
 
 .headerTextDescription {
  color: white;
@@ -53,28 +57,42 @@ a:active {
  word-break: normal;
 }
 
+.headerButton {
+  border-radius: 5px;
+  padding: 10px;
+  margin-left: 500px;
+  width: 150px;
+  margin-top: 20px;
+  background-color: #18191C;
+}
+
 .textFeatured {
  color: 7289DA;
 }
+
+.line {
+ margin-left: 30px;
+}
+  
     
 	</style>
 </head>
-<title>
-	<%= bot.user.username %>
-</title>
 <div class="headerDiv">
- <img class="headerImage" src="https://eleven.sirv.com/ryouji/Banner.png">
+ <img class="headerImage" src="https://eleven.sirv.com/ryouji/Banner.png" alt="Ryouji" title="Ryouji">
  <p class="headerTextDescription">
    Um incrível bot que possue funções dentro do <span class="textFeatured">WebSite</span> com Perfis, Informações sobre o Servidor, etc. 
   E obviamente no <span class="textFeatured">Discord</span> com vários comandos.
   </p>
 </div>
 
+<a class="btn btn-secondary headerButton" style="" href="https://discordapp.com/oauth2/authorize?client_id=452585205975351297&scope=bot&permissions=2113404159" role="button">Me Adicione »</a>
+<a class="btn btn-secondary headerButton" style="margin-left: -00px;" href="https://www.patreon.com/ryouji" role="button">Patrocinar »</a>
+<br>
+
 <% var borderedStats = false %>
 
 <br>
 	<div class="container">
-		<h3 class="text-center">Estatísticas</h3>
 		<div class="container text-center">
 			<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
 				<div class="col-6  align-middle"><i class="fa fa-fw fa-server" aria-hidden="true"></i> Servidores:</div>
@@ -83,46 +101,16 @@ a:active {
 			</div>
 			<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
 				<div class="col-6  align-middle"><i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Uptime:</div>
-				<div class="col-6  align-middle"><strong><span style="color:#7289DA">
-							<%= stats.uptime %></span></strong></div>
-			</div>
-			<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-				<div class="col-6  align-middle"><i class="fa fa-fw fa-terminal" aria-hidden="true"></i> Comandos:</div>
-				<div class="col-6  align-middle"><strong><span style="color:#7289DA">
-							<%= stats.commands %></span></strong></div>
+				<div class="col-6  align-middle"><strong><span style="color:#7289DA"><%= stats.uptime %></span></strong></div>
 			</div>
 			<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
 				<div class="col-6  align-middle"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Usuários:</div>
-				<div class="col-6  align-middle"><strong><span style="color:#7289DA">
-							<%= bot.users.size %></span></strong></div>
+				<div class="col-6  align-middle"><strong><span style="color:#7289DA"><%= bot.users.size %></span></strong></div>
 			</div>
 			<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-				<div class="col-6  align-middle"><i class="fa fa-fw fa-tasks" aria-hidden="true"></i> Memória:</div>
-				<div class="col-6  align-middle"><strong><span style="color:#7289DA">
-							<%= stats.memoryUsage %> MB</span></strong></div>
+				<div class="col-6  align-middle"><i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> Canais:</div>
+        <div class="col-6  align-middle"><strong><span style="color:#7289DA"><%= bot.channels.size %></span></strong></div>
 			</div>
-			<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-				<div class="col-6  align-middle"><i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> Canais de Texto:</div>
-				<div class="col-6  align-middle"><strong><span style="color:#7289DA">
-							<%= stats.text %></span></strong></div>
-			</div>
-			<div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-				<div class="col-6  align-middle"><i class="fa fa-fw fa-microphone" aria-hidden="true"></i> Canais de Voz:</div>
-				<div class="col-6  align-middle"><strong><span style="color:#7289DA">
-							<%= stats.voice %></span></strong></div>
-			</div>
-		</div>
-	</div>
-<br>
-<hr>
-<br>
-	<div class="container">
-		<div class="col-sm-8 mx-auto text-center">
-				<h2>
-					<i class="fa fa-fw fa-question-circle-o"></i> Quer nos ajudar ?
-				</h2>
-			<p>Se você quer nos ajudar você pode fazer isso de três formas:ㅤVocê pode nos ajudar votando no <a href="https://discordbots.org/bot/452585205975351297">Discord
-					Bots</a>, criando um monitor no <a href="https://uptimerobot.com/">Uptimerobot</a> ou divulgando o Bot.</p>
 		</div>
 	</div>
 <br>
@@ -154,7 +142,10 @@ a:active {
 <br>
 <script>
 function myFunction() {
-	alert('Você não está logado!')
+	alert('Você não está logado')
+}
 
+function myFunction1() {
+	alert('Esta função não está disponível')
 }
 </script>

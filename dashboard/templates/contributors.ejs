@@ -1,0 +1,192 @@
+<%- include('blocks/header', {bot: bot, user: user, auth: auth}) %>
+<link rel="stylesheet" type="text/css" href="public/servers/main.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.css">
+<meta name="theme-color" content="#23272A">
+<meta property="og:title" content="Ryouji Bot">
+<meta property="og:url" content="https://ryouji.glitch.me">
+<meta property="og:description" content="Um Bot com várias funções, comandos e muitas opções">
+<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
+<link rel="stylesheet" type="text/css" href="public/servers/main.css">
+<title><%= bot.user.username %> - Contributors</title>
+<style>
+.headerDiv {
+ background-color: #18191C; 
+ width: 100%;
+ height: 400px;
+ margin-top: -40px;
+ border-style: solid;
+ border-width: 0px 0px 0.1px 0px;
+ border-color: #7289DA;
+}
+
+.headerImage {
+ margin-left: 100px;
+ }
+
+.headerTextDescription {
+ color: white;
+ width: 640px; 
+ margin-left: 200px;
+ margin-top: -40px;
+ font-size: 17px;
+ word-break: normal;
+}
+
+.textFeatured {
+ color: #7289DA;
+}
+
+.text-center {
+ font-size: 35px;
+ color: white;
+ margin-top: 10px;
+ font-family: 'Calibri';
+}
+
+.list-users-icons {
+ border-radius: 50%;
+ width: 150px;
+ height: 150px;
+ margin-left: 100px;
+}
+
+.list-users-name {
+ color: white;
+ font-size: 20px;
+ margin-left: 105px;
+}
+
+.list-users-status {
+ width: 35px;
+ height: 35px;
+ border-radius: 50%;
+ border-style: solid;
+ border-width: 3px;
+ border-color: #23272A;
+ margin-top: 110px;
+ margin-left: -40px;
+}
+
+.bot {
+ padding: 3px;
+ width: 35px;
+}
+   
+</style>
+
+<body>
+  <div class="headerDiv">
+    <img class="headerImage" src="https://eleven.sirv.com/ryouji/Banner_COnt.png">
+    <p class="headerTextDescription">
+      Aqui estão todos os contribuintes para o <span class="textFeatured">WebSite</span> e para o <span class="textFeatured">Ryouji</span>.
+    </p>
+  </div>
+  <br>
+  
+  <h1 class="text-center" style="margin-top: -10px;">
+      Desenvolvedores
+  </h1>
+  <br>
+  <div class="columns" id="Developers">
+   <div class="is-one-quarter">
+     <% let userDev1 = bot.users.get('292065674338107393'); %>
+     <img class="list-users-icons" style="margin-left: 610px;" src="<%= userDev1.displayAvatarURL %>">
+     <% if(userDev1.presence.status == 'online') { %>
+     <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+     <% } else if(userDev1.presence.status == 'idle'){ %>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png">
+     <% } else if(userDev1.presence.status == 'dnd') {%>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png">
+     <% } else { %>  
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png">
+     <% } %>
+    <p class="list-users-name" style="margin-left: 630px;"> <%= userDev1.tag%></p>
+   </div>
+  </div>
+<br>
+<br>
+  
+  <h1 class="text-center" style="margin-top: -10px;">
+      Ajudantes
+  </h1>
+  <br>
+
+  <div class="columns" id="Helpers">
+     <div class="is-one-quarter">
+     <% let userHelper1 = bot.users.get('310566467785457677'); %>
+     <img class="list-users-icons" style="margin-left: 396px;" src="<%= userHelper1.displayAvatarURL %>">
+     <% if(userHelper1.presence.status == 'online') { %>
+     <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+     <% } else if(userHelper1.presence.status == 'idle'){ %>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png">
+     <% } else if(userHelper1.presence.status == 'dnd') {%>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png">
+     <% } else { %>  
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png">
+     <% } %>
+    <p class="list-users-name" style="margin-left: 396px;"> <%= userHelper1.tag%></p>
+   </div>
+
+   <div class="is-one-quarter">
+     <% let userHelper2 = bot.users.get('402131828980318218'); %>
+     <img class="list-users-icons" style="margin-left: 60px;" src="<%= userHelper2.displayAvatarURL %>">
+     <% if(userHelper2.presence.status == 'online') { %>
+     <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+     <% } else if(userHelper2.presence.status == 'idle'){ %>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png">
+     <% } else if(userHelper2.presence.status == 'dnd') {%>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png">
+     <% } else { %>  
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png">
+     <% } %>
+    <p class="list-users-name" style="margin-left: 38px;"> <%= userHelper2.tag%></p>
+   </div>
+    
+    <div class="is-one-quarter">
+     <% let userHelper3 = bot.users.get('226865242095878144'); %>
+     <img class="list-users-icons" style="margin-left: 34px;" src="<%= userHelper3.displayAvatarURL %>">
+     <% if(userHelper3.presence.status == 'online') { %>
+     <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+     <% } else if(userHelper3.presence.status == 'idle'){ %>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png">
+     <% } else if(userHelper3.presence.status == 'dnd') {%>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png">
+     <% } else { %>  
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png">
+     <% } %>
+    <p class="list-users-name" style="margin-left: 34px;"> <%= userHelper3.tag%></p>
+   </div>
+  </div>
+  
+  
+  
+  
+<div class="" id="BotPartners">
+   <h1 class="text-center" style="margin-left: px; m">
+      Network's Bot
+    </h1>
+<div class="columns">
+   <div class="column">
+   <% let userBot1 = bot.users.get('477925836465373184');%>
+     <img class="list-users-icons" src="<%= userBot1.displayAvatarURL %>" style="margin-top: 20px;">
+     <% if(userBot1.presence.status == 'online') { %>
+     <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png">
+     <% } else if(userBot1.presence.status == 'idle'){ %>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png">
+     <% } else if(userBot1.presence.status == 'dnd') {%>
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png">
+     <% } else { %>  
+      <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png">
+     <% } %>
+    <p class="list-users-name" style="margin-left: 80px;"> <%= userBot1.tag%></p>
+<span class="bot servers btn btn-orange btn-1x" style="margin-left: 40px; margin-top: -22px;">BOT</span>
+  </div>
+</div>
+</div>
+<hr>
+  <br>
+  <br>
+  <br>
+</body>
