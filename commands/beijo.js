@@ -42,7 +42,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 	}
 	const ghembed = new Discord.RichEmbed()
 		.setColor(client.color)
-		.setTitle(`${message.author.username} abraçou-se ...! (esquisito)`)
+		.setTitle(`${message.author.username} beijou-se ...! (esquisito)`)
 		.setImage('https://cdn.discordapp.com/attachments/452115003659780096/460369555823525898/kiss.gif')
 	message.channel.send({
 		embed: ghembed

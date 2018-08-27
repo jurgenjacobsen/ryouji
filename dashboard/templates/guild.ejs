@@ -2,19 +2,22 @@
 <% if(guild) {%>
 
 <head>
-  <title><%= guild.name%> - <%= bot.user.username %></title>
-	<meta name="theme-color" content="#23272A">
-	<meta property="og:title" content="Ryouji WebSite">
-	<meta property="og:url" content="https://ryouji.glitch.me/servers/<%= guild.id %>">
-	<meta property="og:description" content="Acesse <%= guild.name %> ">
-	<meta property="og:image" content="<%= guild.iconURL%>?size=512">
-	<link rel="stylesheet" type="text/css" href="public/servers/hover.css">
-	<link rel="stylesheet" type="text/css" href="public/servers/main.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.css">
+    <title>
+        <%= guild.name%> -
+        <%= bot.user.username %>
+    </title>
+    <meta name="theme-color" content="#23272A">
+    <meta property="og:title" content="Ryouji WebSite">
+    <meta property="og:url" content="https://ryouji.glitch.me/servers/<%= guild.id %>">
+    <meta property="og:description" content="Acesse <%= guild.name %> ">
+    <meta property="og:image" content="<%= guild.iconURL%>?size=512">
+    <link rel="stylesheet" type="text/css" href="public/servers/hover.css">
+    <link rel="stylesheet" type="text/css" href="public/servers/main.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.css">
 </head>
 <style>
-	.banner {
+    .banner {
 	margin-top: 20px;
 }
 
@@ -132,7 +135,7 @@ div .btn-1x {
       
 		</style>
 <div class="container">
-<% 
+    <% 
 
 let serverRegion = {
     'amsterdam' : ' Amsterdã',
@@ -170,89 +173,92 @@ let verificationLevel = {
 if(serverList == null || serverList == true) {
 %>
 
-<body>
-	<div class="container">
-		<div style="width:100%;  height: 138px; margin: auto; margin-left: -150px;">
-			<h1 class="nametitle">
-				<%= guild.name %>
-			</h1>
-			<% if( guild.iconURL) {%>
-			<% if(premium == true) {%>
-			<img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.iconURL%>?size=2048" style="border-radius:50%; border:5px solid #23272A;">
-			<img alt="Premium" width="50" height="50" src="https://cdn.glitch.com/4a4f105d-84dd-4709-8bfb-16428e054a2d%2Fcertified.svg" style="margin-left: 180px; margin-top: 75px; position: absolute;">
-			<% } else {%>
-			<img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.iconURL%>?size=2048" style="border-radius:50%; border:5px solid #23272A;">
-			<% } %>
-			<%}else if(guild.defaultIconURL) { %>
-			<img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.defaultIconURL%>?size=2048" style="border-radius:50%; border:5px solid #23272A;">
-			<%}%>
-		</div>
-		<div class="jumbotron" style="width: 100%">
-     <% if(guild.me.hasPermission('MANAGE_ROLES_OR_PERMISSIONS') && guild.me.hasPermission('CREATE_INSTANT_INVITE') && guild.me.hasPermission('MANAGE_GUILD')) {%>
-      <a href="/servers/<%= guild.id %>/extra"><button type="button" class="btn" style="background-color: #7289DA; color: white; margin-left: 940px; margin-top: -70px;"> Extra </button></a>
-     <% } %>
-		 <% if(invite !== null) {%>
-      <a href="<%= invite %>"><button type="button" class="btn" style="background-color: #7289DA; color: white; margin-left: 870px; margin-top: -114px;">Invite</button></a>
-		 <% } %>
-			<div class="card-body" style="margin-top: -80px;">
-				<p class="">Dono:
-						<span style="color:#7289DA"><%= guild.owner.user.tag %></span>
-					ID: <span style="color:#7289DA">
-						<%= guild.owner.id%></span>
-				</p>
-				<p class="">Canais:
-					<span style="color:#7289DA">
-						<%= guild.channels.size%></span>
-				</p>
-				<p class="">ID:
-					<span style="color:#7289DA">
-						<%= guild.id %></span>
-				</p>
-				<p class="">Membros:
-					<span style="color:#7289DA">
-						<%= guild.memberCount %></span>
-				</p>
-				<p class="">Região:
-					<span style="color:#7289DA">
-						<%= serverRegion %></span>
-				</p>
-				<p class="">Filtro de Conteúdo:
-					<span style="color:#7289DA">
-						<%= explicitContentFilters%> </span>
-				</p>
-				<p class="">Verificação de Membros:
-					<span style="color:#7289DA">
-						<%= verificationLevel %></span>
-				</p>
-				<p class="">Criado em:
-					<span style="color:#7289DA">
-						<%= moment.utc(guild.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %></span>
-				</p>
-			</div>
-		</div>
-		<h1 class="text-center">
-			Canais
-		</h1>
-		<div class="jumbotron">
-			<% guild.channels.forEach(channel => { %>
-			<style>
-.canais {
-	border-style: solid;
-	border-width: 0px 0px 0px 0px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-			</style>
-			<p class="nav-link disable canais">
-      <% if(channel.type !== 'text') {%>
-				<i class="fa fa-fw fa-microphone"></i> <%= channel.name %>
-      <% } else { %>
-        <i class="fa fa-fw fa-hashtag"></i> <%= channel.name %>
-			</p>
-			 <% }; %>
-      <% }); %>
-		</div>
+    <body>
+        <div class="container">
+            <div style="width:100%;  height: 138px; margin: auto; margin-left: -150px;">
+                <h1 class="nametitle">
+                    <%= guild.name %>
+                </h1>
+                <% if( guild.iconURL) {%>
+                <% if(premium == true) {%>
+                <img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.iconURL%>?size=2048" style="border-radius:50%; border:5px solid #23272A;">
+                <img alt="Premium" width="50" height="50" src="https://cdn.glitch.com/4a4f105d-84dd-4709-8bfb-16428e054a2d%2Fcertified.svg" style="margin-left: 180px; margin-top: 75px; position: absolute;">
+                <% } else {%>
+                <img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.iconURL%>?size=2048" style="border-radius:50%; border:5px solid #23272A;">
+                <% } %>
+                <%}else if(guild.defaultIconURL) { %>
+                <img class="pfp" alt="<%= guild.name%>'s Discord Icon  " width="236" height="236" src="<%= guild.defaultIconURL%>?size=2048" style="border-radius:50%; border:5px solid #23272A;">
+                <%}%>
+            </div>
+            <div class="jumbotron" style="width: 100%">
+                <% if(guild.me.hasPermission('MANAGE_ROLES_OR_PERMISSIONS') && guild.me.hasPermission('CREATE_INSTANT_INVITE') && guild.me.hasPermission('MANAGE_GUILD')) {%>
+                <a href="/servers/<%= guild.id %>/extra"><button type="button" class="btn" style="background-color: #7289DA; color: white; margin-left: 940px; margin-top: -70px;"> Extra </button></a>
+                <% } %>
+                <% if(invite !== null) {%>
+                <a href="https://ryouji.glitch.me/invite/<%= guild.id%>"><button type="button" class="btn" style="background-color: #7289DA; color: white; margin-left: 870px; margin-top: -114px;">Invite</button></a>
+                <% } %>
+                <div class="card-body" style="margin-top: -80px;">
+                    <p class="">Dono:
+                        <span style="color:#7289DA">
+                            <%= guild.owner.user.tag %></span>
+                        ID: <span style="color:#7289DA">
+                            <%= guild.owner.id%></span>
+                    </p>
+                    <p class="">Canais:
+                        <span style="color:#7289DA">
+                            <%= guild.channels.size%></span>
+                    </p>
+                    <p class="">ID:
+                        <span style="color:#7289DA">
+                            <%= guild.id %></span>
+                    </p>
+                    <p class="">Membros:
+                        <span style="color:#7289DA">
+                            <%= guild.memberCount %></span>
+                    </p>
+                    <p class="">Região:
+                        <span style="color:#7289DA">
+                            <%= serverRegion %></span>
+                    </p>
+                    <p class="">Filtro de Conteúdo:
+                        <span style="color:#7289DA">
+                            <%= explicitContentFilters%> </span>
+                    </p>
+                    <p class="">Verificação de Membros:
+                        <span style="color:#7289DA">
+                            <%= verificationLevel %></span>
+                    </p>
+                    <p class="">Criado em:
+                        <span style="color:#7289DA">
+                            <%= moment.utc(guild.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %></span>
+                    </p>
+                </div>
+            </div>
+            <h1 class="text-center">
+                Canais
+            </h1>
+            <div class="jumbotron">
+                <% guild.channels.forEach(channel => { %>
+                <style>
+                    .canais {
+                        border-style: solid;
+                        border-width: 0px 0px 0px 0px;
+                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                    }
+                </style>
+                <p class="nav-link disable canais">
+                    <% if(channel.type !== 'text') {%>
+                    <i class="fa fa-fw fa-microphone"></i>
+                    <%= channel.name %>
+                    <% } else { %>
+                    <i class="fa fa-fw fa-hashtag"></i>
+                    <%= channel.name %>
+                </p>
+                <% }; %>
+                <% }); %>
+            </div>
 
-	</div>
-</body>
- <% } %>
-<% } %>
+        </div>
+    </body>
+    <% } %>
+    <% } %>

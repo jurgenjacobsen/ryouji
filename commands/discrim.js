@@ -22,6 +22,7 @@ exports.run = async (client, message, args, level) => {
 
 	})
 
+ if(resp.length < 2048) return message.reply('Infelizmente a lista excede o limite de **2048** caracteres do Discord Embed.');
 
 	embed.setTitle(`Discrim: ${args[0]}`)
 		.setDescription(resp)

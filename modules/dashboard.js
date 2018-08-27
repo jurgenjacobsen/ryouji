@@ -315,6 +315,12 @@ app.get('/user/', (req, res) => {
    });
   });
 
+  app.get('/support', (req, res) => {
+   client.channels.get('481999078604144661').createInvite().then(invite => {
+    res.redirect(invite.url)
+   });
+  });
+
   app.get('/servers/:guildID/extra', (req, res) => {
    const guild = client.guilds.get(req.params.guildID)
   guild.fetchBans().then(bans => {
@@ -427,6 +433,18 @@ app.get('/user/', (req, res) => {
 			});
 		}
 	});
+
+  app.get('/invite/:guildID', (req, res) => {
+    db.fetch(`guildSettings_${req.params.guildID}_invite`).then(inv => {
+     res.render(path.resolve(`${templateDir}${path.sep}guild-invite.ejs`), {
+			bot: client,
+			auth: req.isAuthenticated() ? true : false,
+			user: req.isAuthenticated() ? req.user : null,
+      guild: client.guilds.get(req.params.guildID),
+      inv: inv
+     });
+    });
+  });
 
 	app.get('/legal', function (req, res) {
 
