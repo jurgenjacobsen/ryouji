@@ -242,11 +242,7 @@ db.fetch(`userBackground_${usuário.id}`).then(back => {
   
 });
 
-app.get('/user', (req, res) => {
-  res.redirect('/')
-});
-
-app.get('/user/', (req, res) => {
+app.get('/user' && '/user/', (req, res) => {
   res.redirect('/')
 });
 
@@ -300,6 +296,7 @@ app.get('/user/', (req, res) => {
    db.fetch(`guildSettings_${guild.id}_serverList`).then(serverList => {
    db.fetch(`guildItens_${guild.id}_premium`).then(premium => {
    db.fetch(`guildSettings_${guild.id}_invite`).then(invite => {
+   db.fetch(`guildSettings_${guild.id}_upvotes`).then(upvotes => {
     res.render(path.resolve(`${templateDir}${path.sep}guild.ejs`), {
       bot: client,
       auth: req.isAuthenticated() ? true : false,
@@ -308,11 +305,13 @@ app.get('/user/', (req, res) => {
       moment: moment,
       serverList: serverList,
       premium: premium,
-      invite: invite
-     });
+      invite: invite,
+      upvotes: upvotes
      });
     });
-   });
+    });
+    });
+    });
   });
 
   app.get('/support', (req, res) => {
@@ -320,6 +319,14 @@ app.get('/user/', (req, res) => {
     res.redirect(invite.url)
    });
   });
+
+  app.get('/brt', (req, res) => {
+   client.channels.get('442071980813058053').createInvite().then(invite => {
+    res.redirect(invite.url)
+   });
+  });
+
+   
 
   app.get('/servers/:guildID/extra', (req, res) => {
    const guild = client.guilds.get(req.params.guildID)
@@ -436,15 +443,28 @@ app.get('/user/', (req, res) => {
 
   app.get('/invite/:guildID', (req, res) => {
     db.fetch(`guildSettings_${req.params.guildID}_invite`).then(inv => {
-     res.render(path.resolve(`${templateDir}${path.sep}guild-invite.ejs`), {
-			bot: client,
-			auth: req.isAuthenticated() ? true : false,
-			user: req.isAuthenticated() ? req.user : null,
-      guild: client.guilds.get(req.params.guildID),
-      inv: inv
+     db.fetch(`guildSettings_${req.params.guildID}_invGuildBanner`).then(guildBanner => {
+      res.render(path.resolve(`${templateDir}${path.sep}guild-invite.ejs`), {
+			 bot: client,
+			 auth: req.isAuthenticated() ? true : false,
+			 user: req.isAuthenticated() ? req.user : null,
+       guild: client.guilds.get(req.params.guildID),
+       inv: inv,
+       guildBanner: guildBanner
+      });
      });
     });
   });
+
+ app.get('/servers/:guildID/upvote', (req, res) => {
+  let id = client.guilds.get(req.params.guildID).id;
+  if(id) {
+       db.add(`guildSettings_${id}_upvotes`, 1);
+   	res.send(`<link href="/public/theme-dark.css" rel="stylesheet" id="theme"> <h1> Você deu <b> Upvote </b>.</h1> <script>setTimeout(function () { window.location = "/servers/${id}"; }, 1000);</script><noscript><meta http-equiv="refresh" content="1; url=/servers/${id}" /></noscript>`);
+  } else {
+   res.redirect('/');
+  }
+ });
 
 	app.get('/legal', function (req, res) {
 

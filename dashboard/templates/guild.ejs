@@ -1,4 +1,4 @@
-<%- include('blocks/header', {bot: bot, user: user, auth: auth, guild:guild, moment:moment, serverList: serverList, premium: premium, invite: invite}) %>
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, guild:guild, moment:moment, serverList: serverList, premium: premium, invite: invite, upvotes: upvotes}) %>
 <% if(guild) {%>
 
 <head>
@@ -197,6 +197,7 @@ if(serverList == null || serverList == true) {
                 <% if(invite !== null) {%>
                 <a href="https://ryouji.glitch.me/invite/<%= guild.id%>"><button type="button" class="btn" style="background-color: #7289DA; color: white; margin-left: 870px; margin-top: -114px;">Invite</button></a>
                 <% } %>
+                <a href="https://ryouji.glitch.me/servers/<%= guild.id%>/upvote"><button type="button" class="btn" style="background-color: #7289DA; color: white; margin-left: 785px; margin-top: -158px;">Upvote</button></a>
                 <div class="card-body" style="margin-top: -80px;">
                     <p class="">Dono:
                         <span style="color:#7289DA">
@@ -231,6 +232,12 @@ if(serverList == null || serverList == true) {
                     <p class="">Criado em:
                         <span style="color:#7289DA">
                             <%= moment.utc(guild.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado') %></span>
+                    </p>
+                    <p class="">Upvotes:
+                        <span style="color:#7289DA">
+                          <% if(upvotes !== null) { %>
+                            <%= upvotes %>
+                          <% } %></span>
                     </p>
                 </div>
             </div>

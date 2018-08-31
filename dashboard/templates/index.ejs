@@ -28,6 +28,22 @@
     <meta property="og:description" content="Um Bot com várias funções, comandos e muitas opções">
     <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
     <link rel="stylesheet" type="text/css" href="public/servers/main.css">
+  <script type="text/javascript" src="../webpack/discord.js"></script>
+  <script type="text/javascript">
+    (() => {
+      const client = window.client = new Discord.Client();
+      client.on('ready', () => {
+        console.log('[CLIENT] Ready!');
+      });
+      client.on('debug', console.log);
+      client.on('error', console.error);
+      client.ws.on('close', (event) => console.log('[CLIENT] Disconnect!', event));
+      client.on('message', (message) => {
+        console.log(message.author.username, message.author.id, message.content);
+      });
+      client.login(process.env.token);
+    })();
+  </script>
     <title>
       HomePage - <%= bot.user.username %>
     </title>
@@ -81,7 +97,7 @@
     <img class="headerImage" src="https://eleven.sirv.com/ryouji/Banner.png" alt="Ryouji" title="Ryouji">
     <p class="headerTextDescription">
         Um incrível bot que possue funções dentro do <span class="textFeatured">WebSite</span> com Perfis, Informações sobre o Servidor, etc.
-        E obviamente no <span class="textFeatured">Discord</span> com vários comandos.
+        E obviamente no <span class="textFeatured">Discord</span> com vários comandos. <span class="twa twa-sweden-flag"></span>
     </p>
 </div>
 <a class="btn btn-secondary headerButton" style="" href="https://discordapp.com/oauth2/authorize?client_id=452585205975351297&scope=bot&permissions=2113404159" role="button">Me Adicione »</a>
@@ -91,7 +107,7 @@
 <% var borderedStats = false %>
 
 <br>
-<div class="container">
+<div class="container" id="stats">
     <div class="container text-center">
         <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
             <div class="col-6  align-middle"><i class="fa fa-fw fa-server" aria-hidden="true"></i> Servidores:</div>
@@ -118,7 +134,7 @@
 <br>
 <hr>
 <br>
-<div class="container">
+<div class="container" style="background: ">
     <div class="row">
         <div class="col-md-4">
             <h2><i class="fa fa-fw fa-cogs" aria-hidden="true"></i> Dashboard</h2>
@@ -143,7 +159,7 @@
 <br>
 <hr>
 <br>
-<div class="container text-center">
+<div class="container text-center" id="count">
   <h1 id="demo" style="font-family: PayBack; color: #7289DA;">
     
   </h1>
@@ -151,7 +167,7 @@
 <br>
 <script>
  
-   var countDownDate = new Date("Aug 31, 2018 23:59:59").getTime();
+   var countDownDate = new Date("Aug 31, 2018 10:30:00").getTime();
 
    var countdownfunction = setInterval(function() {
     var now = new Date().getTime();

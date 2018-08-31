@@ -66,7 +66,8 @@
     "discord-emoji": "^1.1.1",
     "discord-bot-list": "^1.0.1",
     "youtube-info": "^1.2.0",
-    "got": "^9.0.0"
+    "got": "^9.0.0",
+    "botlist.space": "^1.0.7"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

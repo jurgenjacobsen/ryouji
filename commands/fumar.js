@@ -1,5 +1,5 @@
 exports.run = async (client, message, args) => { 
-  message.channel.send('**Acendendo Cigarro*').then(async msg => {
+  message.channel.send('*Acendendo Cigarro*').then(async msg => {
   setTimeout(() => {
     msg.edit('🚬');
   }, 500);

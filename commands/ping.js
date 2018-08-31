@@ -5,8 +5,7 @@ exports.run = (client, message, args, level) => {
   .setTitle('Ping')
   .setColor(client.color)
   .setDescription(`:ping_pong: Meu Ping\ **${Date.now() - message.createdTimestamp}**ms , Discord API Ping **${Math.round(client.ping)}**ms`)
-  .setFooter(message.author.tag, message.author.displayAvatarURL)
-   message.channel.send(`${message.author} ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ`, embed)
+   message.channel.send(message.author, embed);
 };
 
 exports.conf = {
