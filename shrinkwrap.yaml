@@ -1,5 +1,6 @@
 dependencies:
   array-sort: 1.0.0
+  botlist.space: 1.0.7
   bufferutil: 4.0.0
   canvas: 1.6.11
   cheerio: 0.22.0
@@ -400,6 +401,12 @@ packages:
       node: '>=0.10.40'
     resolution:
       integrity: sha1-OciRjO/1eZ+D+UkqhI9iWt0Mdm8=
+  /botlist.space/1.0.7:
+    dependencies:
+      snekfetch: 3.6.4
+    dev: false
+    resolution:
+      integrity: sha512-i7qFiVWqlnKGQhE3r3lVQnu8tse7s6BiH6XQ+oaJtZRv3Ean95Shls1U/2QC6+phHzMaJqRSTZ1iKpp2MjuH7w==
   /brace-expansion/1.1.11:
     dependencies:
       balanced-match: 1.0.0
@@ -4290,10 +4297,11 @@ packages:
       tarball: 'https://codeload.github.com/makr28/jpgjs/tar.gz/c83f107ad725b476a3441d20680a02590d8752cc'
     version: 1.0.0
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 8
+shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   array-sort: ^1.0.0
+  botlist.space: ^1.0.7
   bufferutil: ^4.0.0
   canvas: ^1.6.11
   cheerio: ^0.22.0

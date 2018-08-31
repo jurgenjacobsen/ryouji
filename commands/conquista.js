@@ -2,6 +2,7 @@ const snekfetch = require('snekfetch');
 
 exports.run = (client, message, args) => {
   let [title, contents] = args.join(" ").split("|");
+  if(!args[0]) return message.reply('Você deve colocar alguma conquista né ?! Algo como **r!achievement Comer Chocolate**');
   if(!contents) {
     [title, contents] = ["Achievement Get!", title];
   }

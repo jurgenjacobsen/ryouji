@@ -34,19 +34,7 @@ module.exports = async client => {
 				type: 0
 			}
 		});
-
 	}, 15000);
-
-	setInterval(function() {
-
-    let chatVoiceCh = client.channels.get('470353627291189260');
-    let vespertineDevsCh = client.channels.get('472872764961718272');
-
-    chatVoiceCh.join();
-    vespertineDevsCh.join();
-    
-
-	}, 10000)
 
 	const Discord = require('discord.js');
 
@@ -66,7 +54,21 @@ setInterval(function(){
  snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
     .set('Authorization', key)
     .send({server_count: client.guilds.size, shard_count: client.config.shards})
-    .then(() => console.log(`Posted to dbl.`))
+    .then(() => console.log(`https://discordbots.org - Postado Guild Count`))
     .catch((e) => console.error(e));
-  }, 60000);
- }
+
+  const Botlist_space = require('botlist.space');
+  const botlist_space_post = new Botlist_space(client.user.id, process.env.BOTSLIST_SPACE_TOKEN);
+
+  botlist_space_post.postServerCount(client.guilds.size).then(() => {
+   console.log('https://botlist.space - Postado Guild Count');
+  });
+  
+  snekfetch.put("https://bots.perfectdreams.net/api/v1/bot/"+ client.user.id +"/stats")
+  .set("Authorization", process.env.VESPERTINE_BOTLIST_TOKEN)
+  .send({guildCount: client.guilds.size})
+  .then(() => console.log("https://bots.perfectdreams.net - Deu certo meu patral!"))
+  .catch(e => console.log("Não deu certo meu patral!\n" + e));
+
+ }, 60000);
+}

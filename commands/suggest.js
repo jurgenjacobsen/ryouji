@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 exports.run = async (client, message, args) => { 
  let suggestmessage = args.join(" ");
- let suggestchannel = client.channels.get('470351855218851840')
+ let suggestchannel = client.channels.get('')
 
  if (!suggestmessage) {
     return message.reply("Por favor dê uma sugestão para mim!")
