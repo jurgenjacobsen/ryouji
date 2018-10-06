@@ -24,6 +24,9 @@ require('moment-duration-format');
 
 module.exports = (client) => {
 
+  const DBL = require("dblapi.js");
+  const dbl = new DBL(process.env.DBLTOKEN, client);
+
 	if (client.config.dashboard.enabled !== 'true') return client.log('log', 'Dashboard está desligado', 'INFO');
 
 	const dataDir = path.resolve(`${process.cwd()}${path.sep}dashboard`);
@@ -32,7 +35,7 @@ module.exports = (client) => {
 
 	app.set('trust proxy', 5);
 
-	app.use('/public', express.static(path.resolve(`${dataDir}${path.sep}public`), { maxAge: '10d' }));
+	app.use('/public', express.static(path.resolve(`${dataDir}${path.sep}public`), { maxAge: '10h' }));
 	app.use(morgan('combined'));
 
 	passport.serializeUser((user, done) => {
@@ -141,52 +144,31 @@ app.use(session({
  // Página de índice. Se o usuário for autenticado, ele mostrará suas informações
  // no canto superior direito da tela.
 
+  app.get('/stats', (req, res) => {
+   res.render(path.resolve(`${dataDir}${path.sep}/public/stats.json`), {
+    guilds: client.guilds.size
+   });
+  })  
 
 	app.get('/', (req, res) => {
-    const duration = moment.duration(client.uptime).format(' D[d], H[h], m[m], s[s]');
-		const members = client.users.size
-		const textChannels = client.channels.filter(c => c.type === 'text').size;
-		const voiceChannels = client.channels.filter(c => c.type === 'voice').size;
-		const guilds = client.guilds.size;
-    const user = req.user;
-		if (req.isAuthenticated()) {
-			res.render(path.resolve(`${templateDir}${path.sep}index.ejs`), {
-			 bot: client,
-			 auth: true,
-			 user: user,
-       stats: {
-				 servers: guilds,
-				 members: members,
-				 text: textChannels,
-				 voice: voiceChannels,
-			 	 uptime: duration,
-			 	 commands: client.commandsNumber,
-				 memoryUsage: (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2),
-				 dVersion: Discord.version,
-				 nVersion: process.version,
-				 bVersion: client.config.version,
-		 	  },
+    dbl.getBot(client.user.id).then(bot => {
+     res.render(path.resolve(`${templateDir}${path.sep}index.ejs`), {
+			bot: client,
+			auth: req.isAuthenticated() ? true : false,
+			user: req.isAuthenticated() ? req.user : null,
+      stats: {
+			 members: client.users.size,
+       guilds: client.guilds.size,
+			 uptime:  moment.duration(client.uptime).format(' D[d], H[h], m[m], s[s]'),
+			 commands: client.commandsNumber,
+       channels: client.channels.size
+		 	},
+      dbl: bot,
      });
-		} else {
-			res.render(path.resolve(`${templateDir}${path.sep}index.ejs`), {
-				bot: client,
-				auth: false,
-				user: null,
-        stats: {
-				 servers: guilds,
-				 members: members,
-				 text: textChannels,
-				 voice: voiceChannels,
-			 	 uptime: duration,
-			 	 commands: client.commandsNumber,
-				 memoryUsage: (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2),
-				 dVersion: Discord.version,
-				 nVersion: process.version,
-				 bVersion: client.config.version,
-			 }
-			});
-		}
+   });
 	});
+
+
 
 app.get('/user/:userID', (req, res) => {
 
@@ -281,15 +263,15 @@ app.get('/user' && '/user/', (req, res) => {
 		})
   });
 
-  app.get('/servers', (req, res) => {
-		res.render(path.resolve(`${templateDir}${path.sep}servers.ejs`), {
+  app.get('/guilds', (req, res) => {
+		res.render(path.resolve(`${templateDir}${path.sep}guilds.ejs`), {
 			bot: client,
 			auth: req.isAuthenticated() ? true : false,
 			user: req.isAuthenticated() ? req.user : null,
 		 });
 		});
 
-  app.get('/servers/:guildID', (req, res) => {
+  app.get('/guild/:guildID', (req, res) => {
    const moment = require('moment');
    let serverList;
    const guild = client.guilds.get(req.params.guildID);
@@ -306,7 +288,8 @@ app.get('/user' && '/user/', (req, res) => {
       serverList: serverList,
       premium: premium,
       invite: invite,
-      upvotes: upvotes
+      upvotes: upvotes,
+      createdAt: moment.utc(client.guilds.get(req.params.guildID).createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado')
      });
     });
     });
@@ -319,30 +302,6 @@ app.get('/user' && '/user/', (req, res) => {
     res.redirect(invite.url)
    });
   });
-
-  app.get('/brt', (req, res) => {
-   client.channels.get('442071980813058053').createInvite().then(invite => {
-    res.redirect(invite.url)
-   });
-  });
-
-   
-
-  app.get('/servers/:guildID/extra', (req, res) => {
-   const guild = client.guilds.get(req.params.guildID)
-  guild.fetchBans().then(bans => {
-   guild.fetchInvites().then(invites => {
-    res.render(path.resolve(`${templateDir}${path.sep}guild-extra.ejs`), {
-      bot: client,
-      auth: req.isAuthenticated() ? true : false,
-      user: req.isAuthenticated() ? req.user : null,
-      guild: guild,
-      bans: bans,
-      invites: invites
-     });
-    });
-   });
-  }); 
 
 	app.get('/login', (req, res, next) => {
 		if (req.session.backURL) {
@@ -382,33 +341,11 @@ app.get('/user' && '/user/', (req, res) => {
 		app.get('/dashboard', checkAuth, (req, res) => {
 		const perms = Discord.EvaluatedPermissions;
     const user = req.user;
-    db.fetch(`userBackground_${user.id}`).then(back => {
-     db.fetch(`userItems_${user.id}_background1`).then(bg => {
-      db.fetch(`userBalance2.0_${user.id}`).then(cB => {
-      const coins = cF.format(cB, { code: 'BRL' })
-       db.fetch(`userRep1_${user.id}`).then(r => {
-        db.fetch(`userItems_${user.id}_premium1`).then(p => {
-        db.fetch(`userItems_${user.id}_badge1`).then(b => {
 		res.render(path.resolve(`${templateDir}${path.sep}dashboard.ejs`), {
 			perms: perms,
 			bot: client,
 			user: user,
 			auth: true,
-      ms: ms,
-      db: db,
-      badge: b,
-      premium: p,
-      reps: r,
-      cB: coins,
-      bg: bg,
-      back: back,
-      moment: moment
-		});
-        });
-        });
-       });
-      });
-     });
     });
 	});
 
@@ -422,6 +359,39 @@ app.get('/user' && '/user/', (req, res) => {
 			res.redirect(inviteURL);
 		}
 	});
+
+	app.post('/manage/:guildID', checkAuth, (req, res) => {
+		const guild = client.guilds.get(req.params.guildID);
+		if (!guild) return res.status(404);
+		const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
+		if (req.user.id === client.config.ownerID) {} else if (!isManaged) {
+			res.redirect('/');
+		}
+		const guildSettings = {
+     welcomeChannel: req.body.welcomeChannel,
+     welcomeMessage: req.body.welcomeMessage,
+     welcomeAutoRole: req.body.welcomeAutoRole,
+    };
+		res.redirect(`/manage/${req.params.guildID}`);
+	});
+
+	app.get('/manage/:guildID', checkAuth, (req, res) => {
+		const guild = client.guilds.get(req.params.guildID);
+		if (!guild) return res.status(404);
+		const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
+		if (req.user.id === client.config.ownerID) {
+			console.log(`Admin bypass for managing server: ${req.params.guildID}`);
+		} else if (!isManaged) {
+			res.redirect('/dashboard');
+		}
+		res.render(path.resolve(`${templateDir}${path.sep}manage.ejs`), {
+			bot: client,
+			guild: guild,
+			user: req.user,
+			auth: true
+		});
+	});
+
 
 	app.get('/commands', (req, res) => {
 		if (req.isAuthenticated()) {
@@ -442,29 +412,13 @@ app.get('/user' && '/user/', (req, res) => {
 	});
 
   app.get('/invite/:guildID', (req, res) => {
-    db.fetch(`guildSettings_${req.params.guildID}_invite`).then(inv => {
-     db.fetch(`guildSettings_${req.params.guildID}_invGuildBanner`).then(guildBanner => {
-      res.render(path.resolve(`${templateDir}${path.sep}guild-invite.ejs`), {
-			 bot: client,
-			 auth: req.isAuthenticated() ? true : false,
-			 user: req.isAuthenticated() ? req.user : null,
-       guild: client.guilds.get(req.params.guildID),
-       inv: inv,
-       guildBanner: guildBanner
-      });
-     });
-    });
+    let guild = client.guilds.get(req.params.guildID);
+    guild.fetchInvites().then(invites => {
+     var ryoujiInvite = invites.filter(inv => inv.inviter.id == client.user.id)
+     if(ryoujiInvite.size < 1) guild.channels.random().createInvite().then(a => res.redirect(a.toString()))
+     else res.redirect(ryoujiInvite.first().toString())
+    })
   });
-
- app.get('/servers/:guildID/upvote', (req, res) => {
-  let id = client.guilds.get(req.params.guildID).id;
-  if(id) {
-       db.add(`guildSettings_${id}_upvotes`, 1);
-   	res.send(`<link href="/public/theme-dark.css" rel="stylesheet" id="theme"> <h1> Você deu <b> Upvote </b>.</h1> <script>setTimeout(function () { window.location = "/servers/${id}"; }, 1000);</script><noscript><meta http-equiv="refresh" content="1; url=/servers/${id}" /></noscript>`);
-  } else {
-   res.redirect('/');
-  }
- });
 
 	app.get('/legal', function (req, res) {
 
@@ -494,25 +448,6 @@ app.get('/user' && '/user/', (req, res) => {
 		res.redirect('/');
 	});
 
-	app.get('/changelog', (req, res) => {
-  
-		if (req.isAuthenticated()) {
-			res.render(path.resolve(`${templateDir}${path.sep}changelog.ejs`), {
-			 bot: client,
-			 auth: true,
-			 user: req.user,
-       version: client.config.version,
-			});
-		} else {
-			res.render(path.resolve(`${templateDir}${path.sep}changelog.ejs`), {
-				bot: client,
-				auth: false,
-				user: null,
-        version: client.config.version,
-			});
-		}
-	});
-
   app.get('/contributors', (req, res) => {
     res.render(path.resolve(`${templateDir}${path.sep}contributors.ejs`), {
 			bot: client,
@@ -521,21 +456,6 @@ app.get('/user' && '/user/', (req, res) => {
     });
   });
   
-  app.get('/extras', (req, res) => {
-   if (req.isAuthenticated()) {
-    res.render(path.resolve(`${templateDir}${path.sep}extras.ejs`), {
-    		bot: client,
-				auth: true,
-				user: req.user
-    });
-   } else {
-    res.render(path.resolve(`${templateDir}${path.sep}extras.ejs`), {
-				bot: client,
-				auth: false,
-				user: null,
-			});
-   } 
-  });
 
 	app.get('*', function(req, res) { // Catch-all 404
 		res.send('		<link href="/public/theme-dark.css" rel="stylesheet" id="theme"> <h1 style="font-family: "Pacifico", cursive; text-transform: none;"> 404 Página não encontrado. Por favor, espere...</h1> <script>setTimeout(function () { window.location = "/"; }, 1000);</script><noscript><meta http-equiv="refresh" content="1; url=/" /></noscript>');

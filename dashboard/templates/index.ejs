@@ -1,25 +1,4 @@
-<style>
-    a:link {
-        color: #7289DA;
-    }
-
-    /* visited link */
-    a:visited {
-        color: #7289DA;
-    }
-
-    /* mouse over link */
-    a:hover {
-        color: #7289DA;
-    }
-
-    /* selected link */
-    a:active {
-        color: #7289DA;
-    }
-</style>
-
-<%- include('blocks/header', {bot: bot, user: user, auth: auth, stats: stats}) %>
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, stats: stats, dbl: dbl}) %>
 
 <head>
     <meta name="theme-color" content="#23272A">
@@ -28,172 +7,210 @@
     <meta property="og:description" content="Um Bot com várias funções, comandos e muitas opções">
     <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
     <link rel="stylesheet" type="text/css" href="public/servers/main.css">
-  <script type="text/javascript" src="../webpack/discord.js"></script>
-  <script type="text/javascript">
-    (() => {
-      const client = window.client = new Discord.Client();
-      client.on('ready', () => {
-        console.log('[CLIENT] Ready!');
-      });
-      client.on('debug', console.log);
-      client.on('error', console.error);
-      client.ws.on('close', (event) => console.log('[CLIENT] Disconnect!', event));
-      client.on('message', (message) => {
-        console.log(message.author.username, message.author.id, message.content);
-      });
-      client.login(process.env.token);
-    })();
-  </script>
     <title>
-      HomePage - <%= bot.user.username %>
+      WebSite in Tests - <%= bot.user.username %>
     </title>
-    <style>
-        .jumbotron {
-            background-color: #222222;
-        }
+<style>
 
-        .headerDiv {
-            background-color: #18191C;
-            width: 100%;
-            height: 400px;
-            margin-top: -40px;
-            border-style: solid;
-            border-width: 0px 0px 0.1px 0px;
-            border-color: 7289DA;
-        }
+  .it-in-mov {
+    position: relative;
+    -webkit-animation-name: moviment; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: 1; /* Safari 4.0 - 8.0 */
+    animation-duration: 9s;
+    animation-iteration-count: infinite;
+}
 
-        .headerImage {
-            margin-left: 50px;
-        }
+  .body-header-block {
+   background: #18191C;
+   margin-top: -21px;
+   padding: 17%;
+   border-style: solid;
+   border-color: #7289da;
+   border-width: 0px 0px 1px 0px
+  }
 
-        .headerTextDescription {
-            color: white;
-            width: 640px;
-            margin-left: 200px;
-            margin-top: -40px;
-            font-size: 17px;
-            word-break: normal;
-        }
+  .body-header-text-title {
+   font-family: 'Arial';
+   font-size: 67px;
+   color: white;
+   margin-left: -135px;
+  }
 
-        .headerButton {
-            border-radius: 5px;
-            padding: 10px;
-            margin-left: 500px;
-            width: 150px;
-            margin-top: 20px;
-            background-color: #18191C;
-        }
+  .body-header-text-paragraph {
+   font-family: 'Arial';
+   font-size: 17px;
+   color: white;
+   margin-left: -155px;
+  }
 
-        .textFeatured {
-            color: 7289DA;
-        }
+  .feat {
+   font-family: 'Arial';
+   font-size: 17px;
+   color: #7289da;
+  }
 
-        .line {
-            margin-left: 30px;
-        }
-    </style>
+  .body-header-text-block {
+   margin-top: -200px;
+  }
+
+  .headerButton {
+   color: #7289da;
+   background-color: #222;
+  }
+
+  .headerButton:hover {
+   background-color: #191919;
+  }
+
+  .column {
+   float: left;
+   width: 25%;
+   padding: 0 5px;
+  } 
+
+  .row {margin: 0 -5px;}
+  /* Clear floats after the columns */
+  .row:after {
+   content: "";
+   display: table;
+   clear: both;
+  }
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #18191C;
+  color: white;
+  transition: transform .4s;
+}
+
+.card:hover {
+  margin: auto;
+  max-width: 315px;
+  transform: scale(1.09);
+  box-shadow: 0 4px 8px 1px rgba(255, 255, 255, 0.02);
+}
+
+.card p {
+ color: white;
+}
+
+.card h3 {
+ color: #7289da;
+}
+
+.fa {font-size:50px;}
+
+.content {
+    margin: auto;
+}
+
+</style>
 </head>
-<div class="headerDiv">
-    <img class="headerImage" src="https://eleven.sirv.com/ryouji/Banner.png" alt="Ryouji" title="Ryouji">
-    <p class="headerTextDescription">
-        Um incrível bot que possue funções dentro do <span class="textFeatured">WebSite</span> com Perfis, Informações sobre o Servidor, etc.
-        E obviamente no <span class="textFeatured">Discord</span> com vários comandos. <span class="twa twa-sweden-flag"></span>
-    </p>
-</div>
-<a class="btn btn-secondary headerButton" style="" href="https://discordapp.com/oauth2/authorize?client_id=452585205975351297&scope=bot&permissions=2113404159" role="button">Me Adicione »</a>
-<a class="btn btn-secondary headerButton" style="margin-left: -00px;" href="https://www.patreon.com/ryouji" role="button">Patrocinar »</a>
-<br>
 
-<% var borderedStats = false %>
-
+<body style="background-color: #202226">
+  <div class="body-header-block">
+   <div class="body-header-text-block">
+     <h1 id="demo" class="body-header-text-title"></h1>
+     <p class="body-header-text-paragraph">
+        <span style="color: #18191C;">_</span>Um incrível bot que possue funções dentro do <span class="feat">WebSite</span> com Perfis, Informações sobre o Servidor, etc.
+        E obviamente no <span class="feat">Discord</span> com vários comandos de música, roleplay, economia e cosméticos.
+     </p>
+   </div>
+   <a class="btn btn-secondary headerButton it-in-mov" style="" href="https://discordapp.com/oauth2/authorize?client_id=452585205975351297&scope=bot&permissions=2113404159" target="_blank" role="button">Me Adicione »</a>
+   <a class="btn btn-secondary headerButton it-in-mov" sytle="" href="https://www.patreon.com/ryouji" target="_blank" role="button">Patrocinar »</a>
+   <a class="btn btn-secondary headerButton it-in-mov" sytle="" href="https://discordbots.org/bot/<%= bot.user.id %>/vote" target="_blank" role="button">UpVote DiscordBotsList »</a>
+   <a class="btn btn-secondary headerButton it-in-mov" sytle="" href="https://bots.perfectdreams.net/bot/<%= bot.user.id %>/vote" target="_blank" role="button">UpVote PerfectDreams»</a>
+  </div>
 <br>
-<div class="container" id="stats">
-    <div class="container text-center">
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-            <div class="col-6  align-middle"><i class="fa fa-fw fa-server" aria-hidden="true"></i> Servidores:</div>
-            <div class="col-6  align-middle"><strong><span style="color:#7289DA">
-                        <%= stats.servers %></span></strong></div>
-        </div>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-            <div class="col-6  align-middle"><i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Uptime:</div>
-            <div class="col-6  align-middle"><strong><span style="color:#7289DA">
-                        <%= stats.uptime %></span></strong></div>
-        </div>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-            <div class="col-6  align-middle"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Usuários:</div>
-            <div class="col-6  align-middle"><strong><span style="color:#7289DA">
-                        <%= bot.users.size %></span></strong></div>
-        </div>
-        <div class="row justify-content-md-center <% if (borderedStats) { %> table-bordered <% } %>">
-            <div class="col-6  align-middle"><i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> Canais:</div>
-            <div class="col-6  align-middle"><strong><span style="color:#7289DA">
-                        <%= bot.channels.size %></span></strong></div>
-        </div>
+  <div class="row content container">
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-male"></i> <i class="fa fa-female"></i></p>
+      <h3><%= stats.members%></h3>
+      <p>Usuários</p>
     </div>
-</div>
-<br>
-<hr>
-<br>
-<div class="container" style="background: ">
-    <div class="row">
-        <div class="col-md-4">
-            <h2><i class="fa fa-fw fa-cogs" aria-hidden="true"></i> Dashboard</h2>
-            <p>Yeah, um painel de controle para você administrar algumas configurações do Ryouji!</p>
-            <p><a class="btn btn-secondary" href="/login" role="button">Login »</a></p>
-        </div>
-        <div class="col-md-4">
+   </div>
 
-        </div>
-        <div class="col-md-4">
-            <h2><i class="fa fa-fw fa-address-card" aria-hidden="true"></i> Perfil</h2>
-            <p>Agora o <b>Ryouji</b> tem um perfil para cada usuário dele, com possibilidade de customizar customizá-lo. Se você quiser entrar em seu perfil você pode
-                usar <b>r!profile</b> ou clicando aqui embaixo: (SE, você estiver logado no site)</p>
-            <% if(auth) {%>
-            <p><a class="btn btn-secondary nav-link " href="/user/<%= user.id %>" role="button">Entrar »</a></p>
-            <% } else { %>
-            <p><a class="btn btn-secondary nav-link" href="/login" onclick="myFunction()" role="button">Entrar »</a></p>
-            <% } %>
-        </div>
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-server"></i></p>
+      <h3><%= stats.guilds %></h3>
+      <p>Servidores</p>
     </div>
-</div>
+   </div>
+  
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-clock"></i></p>
+      <h3><%= stats.uptime %></h3>
+      <p>Tempo Acordado</p>
+    </div>
+   </div>
+  
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-comment-alt"></i></p>
+      <h3><%= stats.commands %></h3>
+      <p>Comandos</p>
+    </div>
+   </div>
+  </div>
 <br>
-<hr>
-<br>
-<div class="container text-center" id="count">
-  <h1 id="demo" style="font-family: PayBack; color: #7289DA;">
-    
-  </h1>
-</div>
-<br>
+  <div class="row content container">
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-angle-up"></i></p>
+      <h3><%= dbl.points %></h3>
+      <p>UpVotes</p>
+    </div>
+   </div>
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-angle-double-up"></i></p>
+      <h3><%= dbl.monthlyPoints %></h3>
+      <p>UpVotes Mensais</p>
+    </div>
+   </div>
+   <div class="column">
+    <div class="card">
+      <p><i class="fa fa-list"></i></p>
+      <h3><%= stats.channels %></h3>
+      <p>Canais</p>
+    </div>
+   </div>
+ </div>
+ <br>
+</body>
+
 <script>
- 
-   var countDownDate = new Date("Aug 31, 2018 10:30:00").getTime();
 
-   var countdownfunction = setInterval(function() {
-    var now = new Date().getTime();
-    
-    var distance = countDownDate - now;
-    
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
+var i = 0;
+var txt = "Bem-Vindo! - Estamos em Construção!";
+var speed = 75;
 
-    if (distance < 0) {
-        clearInterval(countdownfunction);
-        document.getElementById("demo").innerHTML = "EXPIRADO";
-    }
-}, 900);
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("demo").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
 
+  $(window).on('load', function() {
+	typeWriter()
+  });
 
-    function myFunction() {
-        alert('Você não está logado')
-    }
-
-    function myFunction1() {
-        alert('Esta função não está disponível')
-    }
 </script>

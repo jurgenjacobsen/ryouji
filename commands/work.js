@@ -81,7 +81,7 @@ try {
         db.add(`userBalance2.0_${message.author.id}`, amount).then(i => { // MODIFY - This updates your account to add the amount earned
             var discord = require('discord.js')
             let dailyEmbed = new discord.RichEmbed()
-            .setAuthor(`${message.author.tag} Terminou de trabalho como segurança e cuidou de muitas pessoas!`, message.author.displayAvatarURL)
+            .setAuthor(`${message.author.tag} Terminou de trabalhou como segurança e cuidou de muitas pessoas!`, message.author.displayAvatarURL)
             .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)
@@ -91,7 +91,7 @@ try {
         db.add(`userBalance2.0_${message.author.id}`, amount).then(i => { // MODIFY - This updates your account to add the amount earned
             var discord = require('discord.js')
             let dailyEmbed = new discord.RichEmbed()
-            .setAuthor(`${message.author.tag} Você trabalho como Técnico de informática esmagando alguns erros de codificação`, message.author.displayAvatarURL)
+            .setAuthor(`${message.author.tag} Você trabalhou como Técnico de informática esmagando alguns erros de codificação`, message.author.displayAvatarURL)
             .setColor(client.color)
             .addField(`Você foi pago pelo seu turno,`, `O gerente pagou a você: ${currencyFormatter.format(amount, { code: 'BRL' })}`)
             message.channel.send(dailyEmbed)

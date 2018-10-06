@@ -7,7 +7,7 @@ const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 const fs = require("fs");
 
-const client = new Discord.Client();
+const client = new Discord.Client({fetchAllMembers: true});
 
 try {
 	client.config = require('./config.js');
