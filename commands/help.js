@@ -76,7 +76,7 @@ exports.run = (client, message, args, level) => {
 				.addField('Permissões', command.conf.permLevel)
 				.setFooter(`Ping: ${Date.now() - time}ms`);
 
-			if (message.channel.type === 'dm' || client.settings.get(message.guild.id).sendHelp === 'channel') {
+			if (message.channel.type === 'dm') {
 				message.author.send({
 					embed: hEmbed
 				});

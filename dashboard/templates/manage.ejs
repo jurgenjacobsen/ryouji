@@ -1,4 +1,4 @@
-<%- include('blocks/header', {bot:bot, user: user, auth: auth, moment: moment}) %>
+<%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
 
 	<head>
 		<title>
@@ -12,6 +12,7 @@
 		<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
 	</head>
 	<h1 class="display-4">Informações</h1>
+<div class="container">
 	<div class="card" style="width: 100%">
 		<% if (guild.icon) { %>
 			<img class="card-img-top" style="width: 25%; border-radius: 0px 0px 8px 0px; border : solid #7289DA" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=512` %>"
@@ -21,17 +22,11 @@
 				<% } %>
 					<hr>
 					<div class="card-body">
-						<% if(guild.id == ['391269244274212866']) { %>
-							<h4 class="card-title">
-								<%= guild.name %>
-							</h4>
-							<% } else { %>
 								<h4 class="card-title">
 									<%= guild.name %>
 								</h4>
-								<% } %>
 									<p class="card-text" id="guildCreate">
-										<%= moment.utc(guild.createdAt).format('LLLL') %>
+										<%= guild.createdAt %>
 									</p>
 									<ul class="list-group list-group-flush" style="width: 100%">
 										<li class="list-group-item" style="width: 100%"><strong>Dono(a)</strong> : <i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i> <%= guild.owner.username %>
@@ -56,7 +51,7 @@
 		<h1 class="display-4">Opções</h1>
 		<div class="col col-8">
 			<form method="post">
-				<% const settings = bot.settings.get(guild.id); %>
+				<% const settings = bot.guilds.get(guild.id).options; %>
 					<% for (const key in settings) { %>
 						<div class="form-group">
 							<label for="<%= key %>"><%= key %></label>
@@ -81,7 +76,7 @@
 				</div>
 				<div class="modal-body">
 					<p>
-						Você tem certeza que deseja retirar <a href="">Meramente Ilustrativo</a> do seu servidor?
+						Você tem certeza que deseja retirar <a href=""><%= bot.user.username %></a> do seu servidor?
 					</p>
 				</div>
 				<div class="modal-footer">
