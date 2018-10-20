@@ -8,18 +8,9 @@
     <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
     <link rel="stylesheet" type="text/css" href="public/servers/main.css">
     <title>
-      WebSite in Tests - <%= bot.user.username %>
+      <%= bot.user.username %>
     </title>
 <style>
-
-  .it-in-mov {
-    position: relative;
-    -webkit-animation-name: moviment; /* Safari 4.0 - 8.0 */
-    -webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
-    -webkit-animation-iteration-count: 1; /* Safari 4.0 - 8.0 */
-    animation-duration: 9s;
-    animation-iteration-count: infinite;
-}
 
   .body-header-block {
    background: #18191C;
@@ -69,6 +60,12 @@
    padding: 0 5px;
   } 
 
+  .column2 {
+   float: left;
+   width: 14%;
+   padding: 0 5px;
+  } 
+
   .row {margin: 0 -5px;}
   /* Clear floats after the columns */
   .row:after {
@@ -80,6 +77,14 @@
 /* Responsive columns */
 @media screen and (max-width: 600px) {
   .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .column2 {
     width: 100%;
     display: block;
     margin-bottom: 10px;
@@ -117,6 +122,34 @@
     margin: auto;
 }
 
+.body-title {
+ border-style: solid;
+ border-width: 0px 0px 0px 5px;
+ border-color: WHITE;
+ text-align: center;
+}
+
+.jumbotron {
+ color: white;
+ background-color: #18191C;
+}
+
+.partner-icon {
+ border-radius: 50%;
+ width: 100px;
+ height: 100px;
+}
+
+.list-users-status {
+ width: 35px;
+ height: 35px;
+ border-radius: 50%;
+ border-style: solid;
+ border-width: 3px;
+ border-color: #18191C;
+ margin-top: 80px;
+ margin-left: -40px;
+}
 </style>
 </head>
 
@@ -129,12 +162,15 @@
         E obviamente no <span class="feat">Discord</span> com vários comandos de música, roleplay, economia e cosméticos.
      </p>
    </div>
-   <a class="btn btn-secondary headerButton it-in-mov" style="" href="https://discordapp.com/oauth2/authorize?client_id=452585205975351297&scope=bot&permissions=2113404159" target="_blank" role="button">Me Adicione »</a>
-   <a class="btn btn-secondary headerButton it-in-mov" sytle="" href="https://www.patreon.com/ryouji" target="_blank" role="button">Patrocinar »</a>
-   <a class="btn btn-secondary headerButton it-in-mov" sytle="" href="https://discordbots.org/bot/<%= bot.user.id %>/vote" target="_blank" role="button">UpVote DiscordBotsList »</a>
-   <a class="btn btn-secondary headerButton it-in-mov" sytle="" href="https://bots.perfectdreams.net/bot/<%= bot.user.id %>/vote" target="_blank" role="button">UpVote PerfectDreams»</a>
+   <a class="btn btn-secondary headerButton" style="" href="https://discordapp.com/oauth2/authorize?client_id=452585205975351297&scope=bot&permissions=2113404159" target="_blank" role="button">Me Adicione »</a>
+   <a class="btn btn-secondary headerButton" sytle="" href="https://www.patreon.com/join/ryouji?" target="_blank" role="button">Patrocinar »</a>
+   <a class="btn btn-secondary headerButton" sytle="" href="https://discordbots.org/bot/<%= bot.user.id %>/vote" target="_blank" role="button">UpVote DiscordBotsList »</a>
+   <a class="btn btn-secondary headerButton" sytle="" href="https://bots.perfectdreams.net/bot/<%= bot.user.id %>/vote" target="_blank" role="button">UpVote PerfectDreams»</a>
   </div>
 <br>
+   <h1 class="body-title">
+     Estatísticas
+    </h1>
   <div class="row content container">
    <div class="column">
     <div class="card">
@@ -193,12 +229,40 @@
    </div>
  </div>
  <br>
+   <h1 class="body-title">
+     Parceiros
+   </h1>
+ <div class="container">
+  <div class="jumbotron" id="#">
+   <div class="row" style="text-align: center;" id="#partners">
+   <% var partners = ['442136873318744066', '363489659067564033', '265126328263639040']%> 
+   <% partners.forEach(userID => {%>
+     <% var partner = bot.users.get(userID); %>
+    <div class="column2" style=" margin: auto;">
+      <a href="/user/<%= partner.id %>"><img class="partner-icon" src="<%= partner.displayAvatarURL%>" alt="<%= partner.username %>" title="<%= partner.username %>"></a>
+     <% if(partner.presence.status == 'online') { %>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-online.png" title="Online">
+            <% } else if(partner.presence.status == 'idle'){ %>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-idle.png" title="Ausente">
+            <% } else if(partner.presence.status == 'dnd') {%>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-dnd.png" title="Não Perturbe">
+            <% } else { %>
+            <img class="list-users-status" src="https://cdn.glitch.com/ba84bf22-2085-4b44-8650-b0acc3879203%2Fstatus-offline.png" title="Offline">
+      <% } %>
+    </div>
+   <% }); %>
+   </div>
+   <p>
+     
+    </p>
+  </div>  
+ </div>
 </body>
 
 <script>
 
 var i = 0;
-var txt = "Bem-Vindo! - Estamos em Construção!";
+var txt = "Bem-Vindo!";
 var speed = 75;
 
 function typeWriter() {
@@ -208,9 +272,7 @@ function typeWriter() {
     setTimeout(typeWriter, speed);
   }
 }
-
-  $(window).on('load', function() {
-	typeWriter()
-  });
+  
+typeWriter()
 
 </script>

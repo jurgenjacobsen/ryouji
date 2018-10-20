@@ -83,7 +83,6 @@ switch (args[0]) {
   db.fetch(`guildSettings_${guild.id}_welcomeMessage`).then(welcomeMessage => {
   db.fetch(`guildSettings_${guild.id}_byeMessage`).then(byeMessage => {
   db.fetch(`guildSettings_${guild.id}_welcomeAutoRole`).then(welcomeAutoRole => {
-  db.fetch(`guildSettings_${guild.id}_showInServersList`).then(showInServersList => {
     
   const guildSettings = {
    welcomeChannel: welcomeChannel,
@@ -91,7 +90,6 @@ switch (args[0]) {
    welcomeMessage: welcomeMessage,
    byeMessage: byeMessage,
    welcomeAutoRole: welcomeAutoRole,
-   showInServersList: showInServersList,
   };
 
   client.guilds.get(guild.id).options =  guildSettings;
@@ -101,8 +99,6 @@ switch (args[0]) {
   });
   });
   });
-  });
-
 };
 
 exports.conf = {

@@ -69,7 +69,7 @@ module.exports = (client) => {
 		clientID: client.appInfo.id,
 		clientSecret: client.config.dashboard.oauthSecret,
 		callbackURL: client.callbackURL,
-		scope: ['identify', 'guilds', 'email', 'guilds.join']
+		scope: ['identify', 'guilds', 'email', 'connections']
 	},
 	(accessToken, refreshToken, profile, done) => {
 		process.nextTick(() => done(null, profile));
@@ -303,7 +303,7 @@ app.get('/user' && '/user/', (req, res) => {
    });
   });
 
-	app.get('/login', (req, res, next) => {
+	app.get('/login/Discord', (req, res, next) => {
 		if (req.session.backURL) {
 			req.session.backURL = req.session.backURL;
 		} else if (req.headers.referer) {
@@ -317,6 +317,14 @@ app.get('/user' && '/user/', (req, res) => {
 		next();
 	},
 	passport.authenticate('discord'));
+
+  app.get('/login', (req, res) => {
+   res.render(path.resolve(`${templateDir}${path.sep}login.ejs`), {
+	  bot: client,
+    auth: req.isAuthenticated() ? true : false,
+    user: req.isAuthenticated() ? req.user : null,
+	 });
+  });
 
   
 	app.get('/callback', passport.authenticate('discord', {
@@ -341,11 +349,13 @@ app.get('/user' && '/user/', (req, res) => {
 		app.get('/dashboard', checkAuth, (req, res) => {
 		const perms = Discord.EvaluatedPermissions;
     const user = req.user;
+    
 		res.render(path.resolve(`${templateDir}${path.sep}dashboard.ejs`), {
 			perms: perms,
 			bot: client,
 			user: user,
 			auth: true,
+      moment: moment
     });
 	});
 
@@ -367,28 +377,38 @@ app.get('/user' && '/user/', (req, res) => {
 		if (req.user.id === client.config.ownerID) {} else if (!isManaged) {
 			res.redirect('/');
 		}
-		const guildSettings = {
-     welcomeChannel: req.body.welcomeChannel,
-     welcomeMessage: req.body.welcomeMessage,
-     welcomeAutoRole: req.body.welcomeAutoRole,
-    };
+   const guildSettings = {
+      welcomeChannel: req.body.welcomeChannel,
+      byeChannel: req.body.byeChannel,
+      welcomeMessage: req.body.welcomeMessage,
+      byeMessage: req.body.byeMessage,
+      welcomeAutoRole: req.body.welcomeAutoRole,
+   };
+
+   client.guilds.get(guild.id).options = guildSettings;
+
 		res.redirect(`/manage/${req.params.guildID}`);
 	});
 
 	app.get('/manage/:guildID', checkAuth, (req, res) => {
 		const guild = client.guilds.get(req.params.guildID);
 		if (!guild) return res.status(404);
+    
 		const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has('MANAGE_GUILD') : false;
 		if (req.user.id === client.config.ownerID) {
-			console.log(`Admin bypass for managing server: ${req.params.guildID}`);
+			console.log(``);
 		} else if (!isManaged) {
 			res.redirect('/dashboard');
-		}
+		};
 		res.render(path.resolve(`${templateDir}${path.sep}manage.ejs`), {
 			bot: client,
 			guild: guild,
 			user: req.user,
-			auth: true
+			auth: true,
+      packs: {
+       moment: moment,
+       db: db
+      },
 		});
 	});
 
@@ -456,6 +476,38 @@ app.get('/user' && '/user/', (req, res) => {
     });
   });
   
+  app.get('/add', (req, res) => {
+   res.redirect('https://discordapp.com/oauth2/authorize?client_id=452585205975351297&scope=bot&permissions=2113404159');
+  });
+ 
+  app.get('/edit', checkAuth, (req, res) => {
+    res.render(path.resolve(`${templateDir}${path.sep}userEdit.ejs`), {
+   		bot: client,
+			user: req.user,
+			auth: true,
+    });
+  });
+
+  app.post('/edit', checkAuth, (req, res) => {
+   const userSettings = {
+    description: req.body.description
+   };
+  
+   db.set(`userDesc_${req.user.id}`, req.body.description);
+    
+   client.users.get(req.user.id).options = userSettings;
+
+   res.redirect('/edit')
+  });
+
+  app.get('/watch/:videoID', (req, res) => {
+     res.render(path.resolve(`${templateDir}${path.sep}video.ejs`), {
+			bot: client,
+			auth: req.isAuthenticated() ? true : false,
+			user: req.isAuthenticated() ? req.user : null,
+      videoID: req.params.videoID
+   });
+  });
 
 	app.get('*', function(req, res) { // Catch-all 404
 		res.send('		<link href="/public/theme-dark.css" rel="stylesheet" id="theme"> <h1 style="font-family: "Pacifico", cursive; text-transform: none;"> 404 Página não encontrado. Por favor, espere...</h1> <script>setTimeout(function () { window.location = "/"; }, 1000);</script><noscript><meta http-equiv="refresh" content="1; url=/" /></noscript>');

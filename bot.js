@@ -9,6 +9,8 @@ const fs = require("fs");
 
 const client = new Discord.Client({fetchAllMembers: true});
 
+client.moment = require('moment');
+
 try {
 	client.config = require('./config.js');
   client.itens = require('./itens.json');
@@ -23,6 +25,7 @@ require('./modules/music.js')(client);
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
+client.codes = new Discord.Collection();
 
 client.talkedRecently = new Set();
 

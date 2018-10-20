@@ -14,7 +14,7 @@ const db = require('quick.db');
       if (typeof evaled !== "string")
       evaled = require("util").inspect(evaled);      
       const embed = new Discord.RichEmbed()
-      .setTitle("<:yep:416325498130399234> Executado!")
+      .setTitle(":white_check_mark: Executado!")
       .setColor(client.color)
       .addField(`:inbox_tray: Input`, '```' + (code) + '```')
       .addField(`:outbox_tray: Output:`, '```' + clean(evaled) + '```')
@@ -23,7 +23,7 @@ const db = require('quick.db');
     } catch (err) {
       var code = args.join(' ')
       const embed = new Discord.RichEmbed()
-      .setTitle("<:nop:416325498231324682> Error")
+      .setTitle(":negative_squared_cross_mark: Error")
       .setColor("#ff0000")
       .addField(`:inbox_tray: Input`, '```' + (code) + '```')
       .addField(`:outbox_tray: Output:`, '```' + clean(err) + '```')

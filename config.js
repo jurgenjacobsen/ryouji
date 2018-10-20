@@ -8,7 +8,6 @@ var config = {
     debug: 'false',
     color: '#7289DA', //#36393F
     playingGame: 'felicidade e amor para todos os meus usuários | 🔨 Criado por: Eleven#001',
-    purgeLogFormat: '\n ID da Mensagem: {{mID}} | Hora: {{mTS}} | Conteúdo: {{mC}} \n',
     eightBallResponses: ['Sim', 'Não', 'Certamente', 'Minhas fontes dizem sim', 'Tente mais tarde...', 'Sem dúvida', 'É melhor não contar agora'],
     googleAPIToken: vault.GOOGLEAPITOKEN,
     logTimeFormat: 'LLLL',

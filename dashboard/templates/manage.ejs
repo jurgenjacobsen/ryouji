@@ -1,4 +1,4 @@
-<%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
+<%- include('blocks/header', {bot:bot, user: user, auth: auth, packs: packs}) %>
 
 	<head>
 		<title>
@@ -11,101 +11,59 @@
 		<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
 		<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
 	</head>
-	<h1 class="display-4">Informações</h1>
+<style>
+
+  .card-img-top {
+        position: relative;
+        margin: auto;
+        vertical-align: middle;
+  }
+
+  .col {
+   margin: auto;
+  }
+
+  .btn-primary {
+   float: right;
+   background-color: #7289da;
+  }
+
+</style>
 <div class="container">
-	<div class="card" style="width: 100%">
+	<div class="card" style="width: 100%"><br>
 		<% if (guild.icon) { %>
-			<img class="card-img-top" style="width: 25%; border-radius: 0px 0px 8px 0px; border : solid #7289DA" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=512` %>"
-			 alt="<%= guild.name %>">
+			<img class="card-img-top" style="width: 20%; border-radius: 50%; border : solid #7289DA; text-align: center;" src="<%=`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=512`%> "alt="<%= guild.name %>">
 			<% } else { %>
-				<img class="card-img-top" style="widget: 25%; border-radius: 0px 0px 0px 0px; border: solid #7289DA" src="" />
+				<img class="card-img-top" style="widget: 20%; border-radius: 50%; border: solid #7289DA; text-align: center;" src="" />
 				<% } %>
-					<hr>
-					<div class="card-body">
-								<h4 class="card-title">
+					<div class="card-body" style="">
+								<h4 class="card-title" style="">
 									<%= guild.name %>
 								</h4>
 									<p class="card-text" id="guildCreate">
-										<%= guild.createdAt %>
+										<%= packs.moment.utc(guild.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado')%>
 									</p>
-									<ul class="list-group list-group-flush" style="width: 100%">
-										<li class="list-group-item" style="width: 100%"><strong>Dono(a)</strong> : <i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i> <%= guild.owner.username %>
-										</li>
-										<li class="list-group-item"><strong>Membros</strong> : <i class="fa fa-fw fa-users" aria-hidden="true"></i> <%= `${guild.memberCount}` %> (<i class="fa fa-fw fa-android" aria-hidden="true"></i>
-												<%= `${guild.members.filter(m => m.user.bot).size}` %> Bots )
-										</li>
-										<li class="list-group-item"><strong>Cargos</strong> : <i class="fa fa-fw fa-users" aria-hidden="true"></i> <%= guild.roles.size %>
-										</li>
-										<li class="list-group-item"><strong>Canais</strong> : <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> <%= `${guild.channels.filter(c => c.type === 'text').size}`%> <i class="fa fa-fw fa-microphone" aria-hidden="true"></i>
-												<%= `${guild.channels.filter(c => c.type === 'voice').size}`%>
-										</li>
-									</ul>
-									<br>
-									<a class="btn btn-danger" data-toggle="modal" data-target="#serverLeaveModal" role="button">Sair <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i></a>
 					</div>
 	</div>
 	<div class="col-sm-8 mx-auto" style="margin-top: 15px;">
 	</div>
 	<hr>
 	<div class="card" style="width: 100%;">
-		<h1 class="display-4">Opções</h1>
+
 		<div class="col col-8">
+     <br>
 			<form method="post">
 				<% const settings = bot.guilds.get(guild.id).options; %>
 					<% for (const key in settings) { %>
 						<div class="form-group">
-							<label for="<%= key %>"><%= key %></label>
-							<input type="text" class="form-control" id="<%= key %>" name="<%= key %>" placeholder="Indique <%= key %>" value="<%= settings[key] %>">
+							<label for="<%= key %>"><%= key.replace('welcomeChannel', 'Canal de Boas-Vindas').replace('byeChannel', 'Canal de Despedidas').replace('welcomeMessage', 'Mensagem de Bem-Vindo').replace('byeMessage', 'Mensagem de Despedidas').replace('welcomeAutoRole', 'Cargo Automático') %></label>
+							<input type="text" class="form-control" id="<%= key %>" name="<%= key %>" placeholder="<%= key.replace('welcomeChannel', 'ID do Canal').replace('byeChannel', 'ID do Canal').replace('welcomeMessage', 'Mensagem de Boas-Vindas - {user} = Marcar o Membro │ {guild} = Nome do Servidor').replace('byeMessage', 'Mensagem de Despedidas - {user} = Nome do Usuário │ {guild} = Nome do Servidor').replace('welcomeAutoRole', 'ID do Cargo') %>" value="<%= settings[key] %>">
 						</div>
 						<% } %>
-							<button type="submit" class="btn btn-primary">Confirmar</button>
-							<a class="btn btn-secondary" data-toggle="modal" data-target="#settingsResetModal" role="button">Restabelecer <i class="fa fa-cogs" aria-hidden="true"></i></a>
+							<button type="submit" onclick="window.location.href='/manage/<%= guild.id %>'" class="btn btn-primary">Confirmar</button>
+       <br>
 			</form>
 			<br>
-		</div>
-	</div>
-	<!-- Manage Page Modals -->
-	<div class="modal fade" id="serverLeaveModal" tabindex="-1" role="dialog" aria-labelledby="serverLeaveModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="serverLeaveModalLabel">Sair do Servidor?</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>
-						Você tem certeza que deseja retirar <a href=""><%= bot.user.username %></a> do seu servidor?
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-					<a class="btn btn-primary" href="/leave/<%= guild.id %>" role="button">Sair</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Manage Page Modals -->
-	<div class="modal fade" id="settingsResetModal" tabindex="-1" role="dialog" aria-labelledby="settingsResetModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="settingsResetModalLabel">Restabelecer Opções ?</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>
-						Tem certeza de que deseja redefinir as configurações padrão?
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-					<a class="btn btn-primary" href="/reset/<%= guild.id %>" role="button">Confirmar</a>
-				</div>
-			</div>
 		</div>
 	</div>
 	<% include ./blocks/footer %>
