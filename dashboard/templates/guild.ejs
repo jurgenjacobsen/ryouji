@@ -129,8 +129,8 @@ let region = {
 }[guild.region];
 %>
 <body>
-  <div class="body-header-block" style="margin-top: -22px;">
-    <button class="server-back" onclick="window.location.href='/servers'"><i class="fa fa-arrow-circle-left" style="color: white;"></i></button>
+  <div class="body-header-block" style="">
+    <button class="server-back" onclick="window.location.href='/guilds'"><i class="fa fa-arrow-circle-left" style="color: white;"></i></button>
    <% if(guild.iconURL) { %>
     <img class="server-icon-img" src="<%= guild.iconURL.replace('jpg', 'png') %>?size=512"><span class="server-name"><%= guild.name %></span>
    <% } else { %>
@@ -138,6 +138,14 @@ let region = {
    <% } %>
   </div>
   <button onclick="window.location.href='/invite/<%= guild.id %>'" class="btn body-button" style="margin-left: 400px;">Entrar</button>
+<% 
+  if(auth) {
+		const isManaged = guild && !!guild.member(user.id) ? guild.member(user.id).permissions.has('MANAGE_GUILD') : false;
+    if(isManaged) { %>
+    <button onclick="window.location.href='/manage/<%= guild.id %>'" class="btn body-button" style="">Gerenciar</button>
+<%    }
+  };
+%>
   <div class="container" style="border: 1px solid #23272A;">
     <span style="font-size: 24px;">Membros</span>
     <p class="nav-link disable">

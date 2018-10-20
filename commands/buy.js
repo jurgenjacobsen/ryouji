@@ -117,7 +117,7 @@ exports.conf = {
     guildOnly: false,
     aliases: ['comprar', 'buy'],
     permLevel: 0,
-    manu: false
+    manu: true
 };
 
 exports.help = {

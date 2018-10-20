@@ -1,4 +1,5 @@
 exports.run = async (client, message, args, level) => {
+  message.delete(10000);
 	if (client.config.musicEnabled !== 'true') return message.channel.send('Comandos de música desativados');
 	const searchString = args.join(' ');
 	const url = args[0] ? args[0].replace(/<(.+)>/g, '$1') : '';

@@ -2,7 +2,6 @@
     <%= usuário.username%>
 </title>
 <%- include('blocks/header', {bot: bot, user: user, auth: auth, usuário: usuário, badge: badge,  premium: premium, reps: reps, cB: cB, bg: bg, back: back, desc: desc}) %>
-
 <head>
     <meta name="theme-color" content="#23272A">
     <meta property="og:title" content="Ryouji Website">
@@ -61,6 +60,10 @@
 
     .headerimagee {
         z-index: 1;
+        max-width: auto;
+        position: relative;
+        margin: auto;
+        vertical-align: middle;
     }
 
     .pfp {
@@ -94,11 +97,9 @@
 
     .nameunder {
         position: absolute;
-        top: 140px;
-        margin: auto;
-        margin-left: 180px;
+        margin-top: -90px;
+        margin-left: 210px;
         z-index: 1;
-
         -webkit-transition: all 0.4s;
         transition: all 0.4s;
         padding: 2px 5px;
@@ -136,24 +137,21 @@
         border-color: #23272A;
     }
 </style>
-
+<% if(bg >= 1 && back !== null) { %>
+<div class="headerimage" style="height:300px;z-index: 0; background-image:url('<%= back %>');"></div>
+<% } else { %>
+<div class="headerimage" style="height:200px;z-index: -0;background-image:url('');"></div>
+<% } %>
 <div class="container">
-    <% if(bg >= 1 && back !== null) { %>
-    <div class="headerimage" style="width: 125%; height:300px;z-index: 0;  border-style: solid;   border-width: 0px 0px 5px 0px;   border-color: #7289DA;margin-left: -150;background-image:url('<%= back %>');"></div>
-    <% } else { %>
-    <div class="headerimage" style="width: 100%;height:200px;z-index: -0;background-image:url('');"></div>
-    <% } %>
     <div style="width:100%;  height: -30px; margin: auto; margin-left: -150px; margin-top: -100px;">
-        <%  if(bg >= 1 && back !== null) {%>
         <h1 class="nametitle">
             <%= usuário.username%>
         </h1>
-        <% } else {%>
-        <h1 class="nametitle">
-            <%= usuário.username%>
-        </h1>
-        <% } %>
-
+<% if(user) {%>
+   <% if(usuário.id == user.id) { %>
+        <a class="btn nameunder" role="button" href="/edit">Editar</a>
+   <% }; %>
+<% }; %>
         <br>
 
         <% if(premium == 1){%>
@@ -218,7 +216,7 @@
             <p class="item">Pontos de Reputação: <span style="color:#7289DA">Esse usuário não possui reputação</span></p>
             <% } else { %>
             <p class"item">Pontos de Reputação: <span style="color:#7289DA">
-                <%= reps %></span>
+                    <%= reps %></span>
             </p>
             <% } %>
             <% if(cB == null) {%>

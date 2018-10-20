@@ -61,7 +61,7 @@
       let href, text, target;
       if(bot.guilds.get(guild.id)) {
         text = guild.owner.user.tag;
-        href = `/servers/${guild.id}`
+        href = `/guild/${guild.id}`
         target = `_blank`
       } else {
         href = `/add/${guild.id}`;

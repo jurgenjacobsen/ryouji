@@ -52,8 +52,8 @@ exports.run = async (client, message, args, level) => {
 			`:busts_in_silhouette: Pessoas: ${guild.members.filter(member => !member.user.bot).size} | <:bot:454695663742222348> Bots: ${guild.members.filter(member => member.user.bot).size} \n<:online:454695663549022220> **${guild.members.filter(o => o.presence.status === 'online').size}** Online <:idle:454695663532507157> **${guild.members.filter(i => i.presence.status === 'idle').size}** Ausente <:donotdisturb:454695663352152076> **${guild.members.filter(dnd => dnd.presence.status === 'dnd').size}** Ocupado <:offline:454695663582576642> **${guild.members.filter(off => off.presence.status === 'offline').size}** Offline`
 		)
 		.addField(':map: Região', `${serverRegion}`)
-		.addField(':incoming_envelope: Convite:', `${invite}`)
-		.addField(':desktop: Página:', `https://ryouji.glitch.me/guild/${guild.id}`)
+		.addField(':incoming_envelope: Convite:', `[Entrar](${invite})`)
+		.addField(':desktop: Página:', `[Acessar](https://ryouji.glitch.me/guild/${guild.id})`)
     .setFooter(message.author.tag, message.author.displayAvatarURL)
 	msg.channel.send({
 		embed

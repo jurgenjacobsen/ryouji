@@ -76,6 +76,6 @@ module.exports = (client, message) => {
     .setTitle(':notes: Música')
     .setColor(client.color)
     .setDescription(`Começando a tocar: **${song.title}**`);
-		serverQueue.textChannel.send(Embed);
+		serverQueue.textChannel.send(Embed).then(msg => msg.delete(10000))
 	}
 };

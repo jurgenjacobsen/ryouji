@@ -73,7 +73,6 @@ setInterval(function(){
   db.fetch(`guildSettings_${guild.id}_welcomeMessage`).then(welcomeMessage => {
   db.fetch(`guildSettings_${guild.id}_byeMessage`).then(byeMessage => {
   db.fetch(`guildSettings_${guild.id}_welcomeAutoRole`).then(welcomeAutoRole => {
-  db.fetch(`guildSettings_${guild.id}_showInServersList`).then(showInServersList => {
     
   const guildSettings = {
    welcomeChannel: welcomeChannel,
@@ -81,7 +80,6 @@ setInterval(function(){
    welcomeMessage: welcomeMessage,
    byeMessage: byeMessage,
    welcomeAutoRole: welcomeAutoRole,
-   showInServersList: showInServersList,
   };
 
   client.guilds.get(guild.id).options =  guildSettings;
@@ -91,6 +89,15 @@ setInterval(function(){
   });
   });
   });
+ });
+
+ client.users.forEach(user => {
+  db.fetch(`userDesc_${user.id}`).then(description => {
+   const userSettings = {
+    description: description
+   };
+
+   client.users.get(user.id).options = userSettings;
   });
  });
 
