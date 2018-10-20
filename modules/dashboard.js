@@ -36,6 +36,7 @@ module.exports = (client) => {
 	app.set('trust proxy', 5);
 
 	app.use('/public', express.static(path.resolve(`${dataDir}${path.sep}public`), { maxAge: '10h' }));
+  app.use('/video', express.static(path.resolve(`${dataDir}${path.sep}video`), { maxAge: '10h' }));
 	app.use(morgan('combined'));
 
 	passport.serializeUser((user, done) => {
