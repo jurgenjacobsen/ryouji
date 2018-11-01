@@ -1,10 +1,6 @@
 <%- include('blocks/header', {bot:bot, user: user, auth: auth, packs: packs}) %>
 
 	<head>
-		<title>
-			DashBoard -
-			<%= guild.name %>
-		</title>
 		<meta name="theme-color" content="#23272A">
 		<meta property="og:title" content="Ryouji Bot">
 		<meta property="og:url" content="https://ryouji.glitch.me">
@@ -56,8 +52,10 @@
 				<% const settings = bot.guilds.get(guild.id).options; %>
 					<% for (const key in settings) { %>
 						<div class="form-group">
-							<label for="<%= key %>"><%= key.replace('welcomeChannel', 'Canal de Boas-Vindas').replace('byeChannel', 'Canal de Despedidas').replace('welcomeMessage', 'Mensagem de Bem-Vindo').replace('byeMessage', 'Mensagem de Despedidas').replace('welcomeAutoRole', 'Cargo Automático') %></label>
-							<input type="text" class="form-control" id="<%= key %>" name="<%= key %>" placeholder="<%= key.replace('welcomeChannel', 'ID do Canal').replace('byeChannel', 'ID do Canal').replace('welcomeMessage', 'Mensagem de Boas-Vindas - {user} = Marcar o Membro │ {guild} = Nome do Servidor').replace('byeMessage', 'Mensagem de Despedidas - {user} = Nome do Usuário │ {guild} = Nome do Servidor').replace('welcomeAutoRole', 'ID do Cargo') %>" value="<%= settings[key] %>">
+             <% if(key !== 'serverList') { %>
+							<label for="<%= key %>"><%= key.replace('welcomeChannel', 'Canal de Boas-Vindas').replace('byeChannel', 'Canal de Despedidas').replace('welcomeMessage', 'Mensagem de Bem-Vindo').replace('byeMessage', 'Mensagem de Despedidas').replace('welcomeAutoRole', 'Cargo Automático').replace('invite', 'Convite') %></label>
+							<input type="text" class="form-control" id="<%= key %>" name="<%= key %>" placeholder="<%= key.replace('welcomeChannel', 'ID do Canal').replace('byeChannel', 'ID do Canal').replace('welcomeMessage', 'Mensagem de Boas-Vindas - {user} = Marcar o Membro │ {guild} = Nome do Servidor').replace('byeMessage', 'Mensagem de Despedidas - {user} = Nome do Usuário │ {guild} = Nome do Servidor').replace('welcomeAutoRole', 'ID do Cargo').replace('invite', 'Convite que você gostaria de utilizar na página do servidor') %>" value="<%= settings[key] %>">
+             <% } %>
 						</div>
 						<% } %>
 							<button type="submit" onclick="window.location.href='/manage/<%= guild.id %>'" class="btn btn-primary">Confirmar</button>

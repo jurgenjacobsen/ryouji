@@ -1,8 +1,7 @@
-<%- include('blocks/header', {bot: bot, user: user, auth: auth, guild:guild, moment:moment, serverList: serverList, premium: premium, invite: invite, upvotes: upvotes, createdAt: createdAt}) %>
+<%- include('blocks/header', {bot: bot, user: user, auth: auth, guild:guild, moment:moment, serverList: serverList, invite: invite, createdAt: createdAt}) %>
 <% if(guild) {%>
 
 <head>
-    <title><%= guild.name%> - <%= bot.user.username %></title>
     <meta name="theme-color" content="#23272A">
     <meta property="og:title" content="Ryouji WebSite">
     <meta property="og:url" content="https://ryouji.glitch.me/guild/<%= guild.id %>">
@@ -137,7 +136,7 @@ let region = {
     <img class="server-icon-img" src="https://cdn.glitch.com/97e329a7-3259-4653-b072-c322be28bd14%2FUnknowicon.png"><span class="server-name"><%= guild.name %></span>
    <% } %>
   </div>
-  <button onclick="window.location.href='/invite/<%= guild.id %>'" class="btn body-button" style="margin-left: 400px;">Entrar</button>
+  <button onclick="window.location.href='/i/<%= guild.id %>'" class="btn body-button" style="margin-left: 400px;">Entrar</button>
 <% 
   if(auth) {
 		const isManaged = guild && !!guild.member(user.id) ? guild.member(user.id).permissions.has('MANAGE_GUILD') : false;

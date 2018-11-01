@@ -7,9 +7,6 @@
     <meta property="og:description" content="Um Bot com várias funções, comandos e muitas opções">
     <meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
     <link rel="stylesheet" type="text/css" href="public/servers/main.css">
-    <title>
-      <%= bot.user.username %>
-    </title>
 <style>
 
   .body-header-block {
@@ -48,10 +45,12 @@
   .headerButton {
    color: #7289da;
    background-color: #222;
+   width: 135px;
   }
 
   .headerButton:hover {
-   background-color: #191919;
+   background-color: #191818;
+   box-shadow: 0 12px 26px 0 rgba(0,0,0,0.15), 0 17px 50px 0 rgba(0,0,0,0.10);
   }
 
   .column {
@@ -104,7 +103,6 @@
 .card:hover {
   margin: auto;
   max-width: 315px;
-  transform: scale(1.09);
   box-shadow: 0 4px 8px 1px rgba(255, 255, 255, 0.02);
 }
 
@@ -163,9 +161,8 @@
      </p>
    </div>
    <a class="btn btn-secondary headerButton" style="" href="https://discordapp.com/oauth2/authorize?client_id=452585205975351297&scope=bot&permissions=2113404159" target="_blank" role="button">Me Adicione »</a>
-   <a class="btn btn-secondary headerButton" sytle="" href="https://www.patreon.com/join/ryouji?" target="_blank" role="button">Patrocinar »</a>
-   <a class="btn btn-secondary headerButton" sytle="" href="https://discordbots.org/bot/<%= bot.user.id %>/vote" target="_blank" role="button">UpVote DiscordBotsList »</a>
-   <a class="btn btn-secondary headerButton" sytle="" href="https://bots.perfectdreams.net/bot/<%= bot.user.id %>/vote" target="_blank" role="button">UpVote PerfectDreams»</a>
+   <a class="btn btn-secondary headerButton" sytle="" href="https://www.patreon.com/join/ryouji" target="_blank" role="button">Patrocinar »</a>
+   <a class="btn btn-secondary headerButton" sytle="" href="https://twitter.com/ElevenDL" target="_blank" role="button">Twitter »</a>
   </div>
 <br>
    <h1 class="body-title">

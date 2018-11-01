@@ -33,7 +33,6 @@ module.exports = async client => {
 				type: 0
 			}
 		});
-    client.log('EVENT', status, 'ALTERAÇÃO DE STATUS');
 	}, 15000);
 
 
@@ -73,6 +72,8 @@ setInterval(function(){
   db.fetch(`guildSettings_${guild.id}_welcomeMessage`).then(welcomeMessage => {
   db.fetch(`guildSettings_${guild.id}_byeMessage`).then(byeMessage => {
   db.fetch(`guildSettings_${guild.id}_welcomeAutoRole`).then(welcomeAutoRole => {
+  db.fetch(`guildSettings_${guild.id}_serverList`).then(serverList => {
+  db.fetch(`guildSettings_${guild.id}_invite`).then(invite => {
     
   const guildSettings = {
    welcomeChannel: welcomeChannel,
@@ -80,10 +81,14 @@ setInterval(function(){
    welcomeMessage: welcomeMessage,
    byeMessage: byeMessage,
    welcomeAutoRole: welcomeAutoRole,
+   serverList: serverList,
+   invite: invite,
   };
 
   client.guilds.get(guild.id).options =  guildSettings;
-
+    
+  }); 
+  });
   });
   });
   });
@@ -91,14 +96,21 @@ setInterval(function(){
   });
  });
 
+ console.log(`[LOG] Carregando Opções de Servidores [CARREGAMENTO]`);
+
  client.users.forEach(user => {
   db.fetch(`userDesc_${user.id}`).then(description => {
+  db.fetch(`userToken_{user.id}`).then(token => {
    const userSettings = {
-    description: description
+    description: description,
+    token: token,
    };
 
    client.users.get(user.id).options = userSettings;
   });
+  });
  });
+
+ console.log(`[LOG] Carregando Opções de Usuários [CARREGAMENTO]`);
 
 }

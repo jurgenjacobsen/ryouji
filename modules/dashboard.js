@@ -24,10 +24,12 @@ require('moment-duration-format');
 
 module.exports = (client) => {
 
+  client.db = require('quick.db');
+
   const DBL = require("dblapi.js");
   const dbl = new DBL(process.env.DBLTOKEN, client);
 
-	if (client.config.dashboard.enabled !== 'true') return client.log('log', 'Dashboard está desligado', 'INFO');
+	if (client.config.dashboard.enabled !== 'true') return client.log('LOG', 'Dashboard está desativada', 'INFO');
 
 	const dataDir = path.resolve(`${process.cwd()}${path.sep}dashboard`);
 
@@ -36,7 +38,7 @@ module.exports = (client) => {
 	app.set('trust proxy', 5);
 
 	app.use('/public', express.static(path.resolve(`${dataDir}${path.sep}public`), { maxAge: '10h' }));
-  app.use('/video', express.static(path.resolve(`${dataDir}${path.sep}video`), { maxAge: '10h' }));
+  app.use('/content', express.static(path.resolve(`${dataDir}${path.sep}content`), { maxAge: '10h' }));
 	app.use(morgan('combined'));
 
 	passport.serializeUser((user, done) => {
@@ -144,12 +146,6 @@ app.use(session({
 
  // Página de índice. Se o usuário for autenticado, ele mostrará suas informações
  // no canto superior direito da tela.
-
-  app.get('/stats', (req, res) => {
-   res.render(path.resolve(`${dataDir}${path.sep}/public/stats.json`), {
-    guilds: client.guilds.size
-   });
-  })  
 
 	app.get('/', (req, res) => {
     dbl.getBot(client.user.id).then(bot => {
@@ -270,32 +266,28 @@ app.get('/user' && '/user/', (req, res) => {
 			auth: req.isAuthenticated() ? true : false,
 			user: req.isAuthenticated() ? req.user : null,
 		 });
-		});
+	});
+
+   app.get('/users', (req, res) => {
+		res.render(path.resolve(`${templateDir}${path.sep}users.ejs`), {
+			bot: client,
+			auth: req.isAuthenticated() ? true : false,
+			user: req.isAuthenticated() ? req.user : null,
+		 });
+	});
 
   app.get('/guild/:guildID', (req, res) => {
-   const moment = require('moment');
-   let serverList;
    const guild = client.guilds.get(req.params.guildID);
-   db.fetch(`guildSettings_${guild.id}_serverList`).then(serverList => {
-   db.fetch(`guildItens_${guild.id}_premium`).then(premium => {
-   db.fetch(`guildSettings_${guild.id}_invite`).then(invite => {
-   db.fetch(`guildSettings_${guild.id}_upvotes`).then(upvotes => {
     res.render(path.resolve(`${templateDir}${path.sep}guild.ejs`), {
       bot: client,
       auth: req.isAuthenticated() ? true : false,
       user: req.isAuthenticated() ? req.user : null,
       guild: guild,
       moment: moment,
-      serverList: serverList,
-      premium: premium,
-      invite: invite,
-      upvotes: upvotes,
+      serverList:guild.options.serverList,
+      invite: guild.options.invite,
       createdAt: moment.utc(client.guilds.get(req.params.guildID).createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado')
      });
-    });
-    });
-    });
-    });
   });
 
   app.get('/support', (req, res) => {
@@ -313,7 +305,7 @@ app.get('/user' && '/user/', (req, res) => {
 				req.session.backURL = parsed.path;
 			}
 		} else {
-			req.session.backURL = '/dashboard';
+			req.session.backURL = '/me';
 		}
 		next();
 	},
@@ -325,6 +317,18 @@ app.get('/user' && '/user/', (req, res) => {
     auth: req.isAuthenticated() ? true : false,
     user: req.isAuthenticated() ? req.user : null,
 	 });
+  });
+
+  app.get('/login/default', (req, res) => {
+   res.render(path.resolve(`${templateDir}${path.sep}loginDefault.ejs`), {
+	  bot: client,
+    auth: req.isAuthenticated() ? true : false,
+    user: req.isAuthenticated() ? req.user : null,
+	 });
+  });
+
+  app.post('/login/default', (req, res) => {
+
   });
 
   
@@ -347,7 +351,7 @@ app.get('/user' && '/user/', (req, res) => {
 		});
 	});
 
-		app.get('/dashboard', checkAuth, (req, res) => {
+		app.get('/me', checkAuth, (req, res) => {
 		const perms = Discord.EvaluatedPermissions;
     const user = req.user;
     
@@ -361,11 +365,11 @@ app.get('/user' && '/user/', (req, res) => {
 	});
 
 	app.get('/add/:guildID', checkAuth, (req, res) => {
-		req.session.backURL = '/dashboard';
+		req.session.backURL = '/me';
 		var invitePerm = client.config.dashboard.invitePerm;
 		var inviteURL = `https://discordapp.com/oauth2/authorize?client_id=${client.appInfo.id}&scope=bot&guild_id=${req.params.guildID}&response_type=code&redirect_uri=${encodeURIComponent(`${client.callbackURL}`)}&permissions=${invitePerm}`;
 		if (client.guilds.has(req.params.guildID)) {
-			res.send('<p>Ryouji já está neste servidor <script>setTimeout(function () { window.location="/dashboard"; }, 1000);</script><noscript><meta http-equiv="refresh" content="1; url=/dashboard" /></noscript>');
+			res.send('<p>Ryouji já está neste servidor <script>setTimeout(function () { window.location="/me"; }, 1000);</script><noscript><meta http-equiv="refresh" content="1; url=/dashboard" /></noscript>');
 		} else {
 			res.redirect(inviteURL);
 		}
@@ -384,9 +388,17 @@ app.get('/user' && '/user/', (req, res) => {
       welcomeMessage: req.body.welcomeMessage,
       byeMessage: req.body.byeMessage,
       welcomeAutoRole: req.body.welcomeAutoRole,
+      invite: req.body.invite,
    };
 
    client.guilds.get(guild.id).options = guildSettings;
+
+   db.set(`guildSettings_${guild.id}_welcomeChannel`, req.body.welcomeChannel);
+   db.set(`guildSettings_${guild.id}_byeChannel`, req.body.byeChannel);
+   db.set(`guildSettings_${guild.id}_welcomeMessage`, req.body.welcomeMessage);
+   db.set(`guildSettings_${guild.id}_byeMessage`, req.body.byeMessage);
+   db.set(`guildSettings_${guild.id}_welcomeAutoRole`, req.body.welcomeAutoRole);
+   db.set(`guildSettings_${guild.id}_invite`, req.body.invite);
 
 		res.redirect(`/manage/${req.params.guildID}`);
 	});
@@ -399,7 +411,7 @@ app.get('/user' && '/user/', (req, res) => {
 		if (req.user.id === client.config.ownerID) {
 			console.log(``);
 		} else if (!isManaged) {
-			res.redirect('/dashboard');
+			res.redirect('/me');
 		};
 		res.render(path.resolve(`${templateDir}${path.sep}manage.ejs`), {
 			bot: client,
@@ -432,7 +444,7 @@ app.get('/user' && '/user/', (req, res) => {
 		}
 	});
 
-  app.get('/invite/:guildID', (req, res) => {
+  app.get('/i/:guildID', (req, res) => {
     let guild = client.guilds.get(req.params.guildID);
     guild.fetchInvites().then(invites => {
      var ryoujiInvite = invites.filter(inv => inv.inviter.id == client.user.id)
@@ -489,6 +501,23 @@ app.get('/user' && '/user/', (req, res) => {
     });
   });
 
+  app.get('/generateToken', checkAuth, (req, res ) => {
+   function generateToken() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-";
+
+    for (var i = 0; i < 10; i++)
+     text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+   }
+  
+    var token = generateToken()
+    client.db.set(`userToken_${req.user.id}`, token);
+    client.users.get(req.user.id).options.token = token;
+    
+   res.redirect('/edit');
+  });
+
   app.post('/edit', checkAuth, (req, res) => {
    const userSettings = {
     description: req.body.description
@@ -507,6 +536,15 @@ app.get('/user' && '/user/', (req, res) => {
 			auth: req.isAuthenticated() ? true : false,
 			user: req.isAuthenticated() ? req.user : null,
       videoID: req.params.videoID
+   });
+  });
+
+  app.get('/clip/:clipID', (req, res) => {
+     res.render(path.resolve(`${templateDir}${path.sep}clip.ejs`), {
+			bot: client,
+			auth: req.isAuthenticated() ? true : false,
+			user: req.isAuthenticated() ? req.user : null,
+      clipID: req.params.clipID
    });
   });
 
