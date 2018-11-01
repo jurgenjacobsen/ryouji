@@ -1,0 +1,26 @@
+{
+  "name": "Ryouji™",
+  "short_name": "Ryouji",
+  "start_url": "/?home=true",
+    "icons": [
+    {
+      "src": "https://eleven.sirv.com/ryouji/Ryouji.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "https://eleven.sirv.com/ryouji/Ryouji.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "https://eleven.sirv.com/ryouji/Ryouji.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "theme_color": "#7289da",
+  "background_color": "#222222",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -1,4 +1,4 @@
-<%- include('blocks/header', {bot: bot, user: user, auth: auth}) %><title><%= bot.user.username %> - Edit </title>
+<%- include('blocks/header', {bot: bot, user: user, auth: auth}) %>
 
 		<meta name="theme-color" content="#23272A">
 		<meta property="og:title" content="Ryouji Bot">
@@ -43,6 +43,7 @@
 										<%= bot.moment.utc(user.createdAt).format('LLLL').replace('January', 'Janeiro').replace('February', 'Fevereiro').replace('March', 'Março').replace('April', 'Abril').replace('May', 'Maio').replace('June', 'Junho').replace('July', 'Julho').replace('August', 'Agosto').replace('September', 'Setembro').replace('October', 'Outubro').replace('November', 'Novembro').replace('December', 'Dezembro').replace('Sunday', 'Domingo').replace('Monday', 'Segunda-Feira').replace('Tuesday', 'Terça-Feira').replace('Wednesday', 'Quarta-Feira').replace('Thursday', 'Quinta-Feira').replace('Friday', 'Sexta-Feira').replace('Saturday', 'Sábado')%>
 									</p>
 					</div>
+   <a href="/generateToken" class="btn">Gerar Token</a>
 	</div>
 	<div class="col-sm-8 mx-auto" style="margin-top: 15px;">
 	</div>
@@ -55,8 +56,10 @@
 				<% const settings = bot.users.get(user.id).options; %>
 					<% for (const key in settings) { %>
 						<div class="form-group">
+             <% if(key !== 'token') { %>
 							<label for="<%= key %>"><%= key.replace('description', 'Descrição do seu Perfil') %></label>
-							<input type="text" style="width: 800px; margin-left: -45px;" class="form-control" id="<%= key %>" name="<%= key %>" placeholder="<%= key %>" value="<%= settings[key] %>">
+							<input type="text" style="width: 800px; margin-left: -45px;" class="form-control" id="<%= key %>" name="<%= key %>" placeholder="<%= key.replace('description', 'Descrição') %>" value="<%= settings[key] %>">
+             <% }; %>
 						</div>
 						<% } %>
 							<button type="submit" onclick="setTimeout(function() {alert('F5')}, 1000)" class="btn btn-primary">Confirmar</button>

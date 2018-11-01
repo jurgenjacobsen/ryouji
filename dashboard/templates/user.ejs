@@ -1,6 +1,4 @@
-<title>Ryouji -
-    <%= usuário.username%>
-</title>
+
 <%- include('blocks/header', {bot: bot, user: user, auth: auth, usuário: usuário, badge: badge,  premium: premium, reps: reps, cB: cB, bg: bg, back: back, desc: desc}) %>
 <head>
     <meta name="theme-color" content="#23272A">
@@ -209,7 +207,7 @@
                 Descrição: <span style="color:#7289DA">
                     <%= desc %></span>
                 <% } else { %>
-                Descrição: <span style="color:#7289DA">Este usuário não possui descrição ! Lembrando que você pode usar r!user set desc {textinho}</span>
+                Descrição: <span style="color:#7289DA">Este usuário não possui descrição ! Caso queira editar isto, entre: <a href="/edit">Aqui</a></span>
                 <% } %>
             </p>
             <% if(reps == null) {%>

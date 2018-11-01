@@ -7,7 +7,6 @@
 	<meta property="og:url" content="https://ryouji.glitch.me">
 	<meta property="og:description" content="Um Bot para administrar seu servidor e divertir seus membros com vários comandos e opções.">
 	<meta property="og:image" content="<%= bot.user.avatarURL %>?size=128">
-  <title><%= bot.user.username %></title>
 </head>
 
 <style>
@@ -76,14 +75,23 @@
     max-width: 75%;
     margin: auto;
 }
+  
+ .nameunder {
+  z-index: 1;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  padding: 2px 4px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, .8);
+  line-height: 1.3;
+ }
 </style>
 
 <body style="background-color: #303030;">
   <header>
    <div class="user-banner"></div>
-    <% console.log(user )%>
-     <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>?size=512" class="user-img">
-     <p class="user-name"><%= user.username %></p>
+     <a href="/user/<%= user.id %>"><img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>?size=512" class="user-img"></a>
+     <p class="user-name"><%= user.username %> <a class="btn nameunder" role="button" href="/edit">Editar</a></p>
   </header>
   <info>
   </info>

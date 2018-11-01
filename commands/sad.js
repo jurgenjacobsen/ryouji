@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
       
         image.greyscale()
 
-        let outputfile = "./output/" + Math.random().toString(36).substr(2, 5) + "sad." + image.getExtension(); // create a random name for the output file
+        let outputfile = "./output_img/" + Math.random().toString(36).substr(2, 5) + "sad." + image.getExtension(); // create a random name for the output file
         image.write(outputfile, function () {
           message.channel.send({file: outputfile}).then(function () {
             fs.unlink(outputfile);

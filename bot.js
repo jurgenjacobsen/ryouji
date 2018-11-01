@@ -8,8 +8,17 @@ const ytdl = require('ytdl-core');
 const fs = require("fs");
 
 const client = new Discord.Client({fetchAllMembers: true});
+const client2 = new Discord.Client({fetchAllMembers: true});
+
+client2.on('ready', () => {
+ console.log(`[LOG] ${client2.user.username} Logado com Sucesso!`)
+});
+
+client2.login(process.env.TOKEN2);
 
 client.moment = require('moment');
+
+client.premium = client2;
 
 try {
 	client.config = require('./config.js');
@@ -25,7 +34,6 @@ require('./modules/music.js')(client);
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
-client.codes = new Discord.Collection();
 
 client.talkedRecently = new Set();
 
